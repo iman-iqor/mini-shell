@@ -4,7 +4,7 @@ A tiny yet powerful shell project created as part of the 42 Network curriculum. 
 ***********************************************************************************************************************************************************************************************************************************
 👥 Team Members
 
-👩‍💻 Imane Iqor 
+👩‍💻 Iman Iqor 
 
 👨‍💻 Mohamed Benjbara
 
@@ -125,7 +125,7 @@ You'll see your custom prompt appear. From here, you can start typing commands l
 
 💬 Contact
 
-    👩‍💻  Imane Iqor          🔗https://www.linkedin.com/in/imane-iqor-b5075b323/        📩iqorimane85@gmail.com
+    👩‍💻  Iman Iqor          🔗https://www.linkedin.com/in/imane-iqor-b5075b323/        📩iqorimane85@gmail.com
 
     👨‍💻  Mohamed Benjbara    🔗https://www.linkedin.com/in/mohamed-benjbara-204886248/   📩mohamed.benjbara@um6p.ma
 
