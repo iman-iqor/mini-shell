@@ -12,7 +12,7 @@ all: ${NAME}
 
 ${NAME}: ${SRC}
 	make -C ./libft/
-	${CC} ${CFLAGS} ${LFLAGS} ${SRC} ./libft/libft.a -o ${NAME}
+	${CC} ${CFLAGS}  ${SRC} ./libft/libft.a ${LFLAGS} -o ${NAME}
 
 clean:
 	make -C ./libft/ clean
