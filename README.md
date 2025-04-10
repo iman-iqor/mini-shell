@@ -69,14 +69,22 @@ minishell/
 
 This compiles the shell and its dependencies (including libft).
 
+
 🔧 To clean the object files:
     make clean
+
+
 🔧 To remove everything including the executable:
     make fclean
+
+
 🔧  To recompile everything:
     make re
+
+
 ▶️   How to Run
     ./minishell
+    
 
 You'll see your custom prompt appear. From here, you can start typing commands like ls, pwd, or built-ins like export VAR=value.
 
