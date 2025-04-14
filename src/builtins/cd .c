@@ -38,4 +38,4 @@
 // 	}
 // 	g_global_var.exit_status = 0;
 // }
-j
+
