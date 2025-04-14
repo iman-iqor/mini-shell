@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:21:19 by imiqor            #+#    #+#             */
-/*   Updated: 2025/04/10 17:38:34 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/04/14 10:57:17 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int main()
 {
-      char *input;
+    char    *input;
+    char    **arguments;
+    int     num_arg;
     while (1)
     {
         input = readline("minishell> ");
@@ -22,7 +24,8 @@ int main()
             break;
         if (*input)
             add_history(input);
-        printf("You entered: %s\n", input);
+        arguments = ft_split(input, ' ');
+        num_arg = count_words(input, ' ');
         free(input);
     }
     return 0;
