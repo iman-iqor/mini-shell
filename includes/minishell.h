@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/04/14 10:59:32 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/04/14 15:57:37 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 #include <time.h>
 #include "../libft/libft.h"
 
+typedef struct s_var
+{
+	int i;
+}				t_var;
 
 typedef struct s_list
 {
@@ -34,6 +38,6 @@ int		ft_strcmp(char *s1, char *s2);
 void	exec_builtin(t_list *list);
 void	echo(char **list);
 int		is_flag(char *str);
-int		ft_countword(const char *str, char c)
+int	ft_countword(const char *str, char c);
 
 #endif

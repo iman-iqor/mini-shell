@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LFLAGS = -lreadline -lhistory
 RM  = rm -f
-SRC = src/main.c src/builtins/echo.c src/executor/exec1.c src/utils/ft_strcmp.c 
+SRC = src/main.c src/builtins/echo.c src/executor/exec1.c src/utils/ft_strcmp.c  src/utils/count_words.c 
 
 
 
