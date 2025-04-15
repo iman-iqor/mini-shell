@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/04/14 18:29:38 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/04/15 21:07:38 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,27 @@
 #include <time.h>
 #include "../libft/libft.h"
 
-typedef struct s_global
-{
-	int					exit_status;
-	int					i;
-	int					in;
-	pid_t				pid;
-	int					out;
-	t_envp				*env;
-	t_collector			*garbage;
-	t_collector			*files;
-	int					stop;
-}						t_global;
+// typedef struct s_global
+// {
+// 	int					exit_status;
+// 	int					i;
+// 	int					in;
+// 	pid_t				pid;
+// 	int					out;
+// 	t_envp				*env;
+// 	t_collector			*garbage;
+// 	t_collector			*files;
+// 	int					stop;
+// }						t_global;
 
-t_global	g_global_var;
+// t_global	g_global_var;
 
-typedef struct s_collector
+typedef struct s_gc
 {
-	void				*memory;
-	struct s_collector	*next;
-}						t_collector;
+	void			*ptr;
+	struct s_gc		*next;
+}	t_gc;
+
 typedef struct s_envp
 {
 	char			*key;
