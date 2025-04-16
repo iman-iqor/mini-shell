@@ -6,11 +6,11 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 21:03:58 by imiqor            #+#    #+#             */
-/*   Updated: 2025/04/15 21:36:07 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/04/15 21:55:27 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "iman_sb3a.h"
+#include "../includes/minishell.h"
 
 void	add(t_gc **gc, t_gc *new)
 {
