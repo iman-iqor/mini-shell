@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   gc.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 21:03:58 by imiqor            #+#    #+#             */
-/*   Updated: 2025/04/15 21:55:27 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/04/17 15:54:19 by macbookair       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	add(t_gc **gc, t_gc *new)
 {
@@ -62,7 +62,7 @@ void	fr_ee(t_gc *gc)
 	}
 }
 
-void	*ft_gc(size_t n, char flag)
+void	* ft_gc(size_t n, char flag)
 {
 	static t_gc	*gc;
 	void		*ptr;
