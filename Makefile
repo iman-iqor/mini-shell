@@ -5,7 +5,7 @@ LFLAGS = -lreadline #-lhistory
 RM  = rm -f
 SRC = main.c no_int_main/src/builtins/echo.c no_int_main/src/executor/exec1.c \
 no_int_main/src/utils/ft_strcmp.c  no_int_main/src/utils/count_words.c \
-no_int_main/src/gc/gc.c 
+no_int_main/src/gc/gc.c no_int_main/src/utils/ft_strcpy.c  no_int_main/src/utils/ft_strcat.c
 
 
 

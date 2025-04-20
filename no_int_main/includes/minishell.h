@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/04/17 22:09:30 by macbookair       ###   ########.fr       */
+/*   Updated: 2025/04/20 21:22:47 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ typedef struct s_list
 int		ft_strcmp(char *s1, char *s2); // compare two string :)
 int	ft_countword(const char *str, char c);	// simo who did this func
 char* ft_strndup(char* str,int n);
+char *ft_strcat(char *dest,char *src);
+char *ft_strcpy(char *dest, char *src);
 
 
 //builtins
