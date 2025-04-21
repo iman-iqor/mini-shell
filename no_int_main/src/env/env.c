@@ -1,5 +1,6 @@
 #include"../../includes/minishell.h"
 
+#include "../../includes/minishell.h"
 
 t_env	*ft_create_env_node(char *env)
 {
