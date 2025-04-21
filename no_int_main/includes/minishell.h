@@ -111,11 +111,20 @@ typedef enum s_token_type
 	TOKEN_SEMICOLON,
 }						t_token_type;
 
+// this one is for the type of quote, whether it is '' or "" or none
+typedef enum s_quote_type
+{
+	NONE,
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE,
+}						t_quote_type;
+
 // it will store value of each token itself, and pointer for the next one, and the type of it
 typedef struct s_token
 {
 	t_token_type		type;
 	char				*value;
+	t_quote_type		quote_type;
 	struct s_token		*next;
 }						t_token;
 
@@ -123,4 +132,5 @@ typedef struct s_token
 
 void	parse_cmd(char *input);
 void    init_env(char **env);
+t_token *tokenize_input(char *input);
 #endif

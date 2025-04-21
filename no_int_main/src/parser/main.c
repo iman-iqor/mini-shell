@@ -24,13 +24,6 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		input = readline("minishell$ ");
-		if ((input == NULL || !ft_strncmp(input, "exit", 4))
-		&& (ft_strlen(input) == 4))
-	    {
-		    printf("exit\n");
-		    free(input);
-		    exit(0);
-	    }
 		if (ft_strlen(input) > 0)
 			add_history(input);
 		parse_cmd(input);
