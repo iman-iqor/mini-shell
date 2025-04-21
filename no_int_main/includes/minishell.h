@@ -49,9 +49,9 @@ typedef struct s_general
 	int					in;
 	pid_t				pid;
 	int					out;
-	t_env			*env;
-	t_gc		*garbage;
-	t_gc			*files;//i need to create this part
+	t_env				*env;
+	t_gc				*garbage;
+	t_gc				*files;//i need to create this part
 	int					stop;
 }						t_general;
 
@@ -82,10 +82,9 @@ typedef struct s_list
 
 //utils
 int		ft_strcmp(char *s1, char *s2); // compare two string :)
-int	ft_countword(const char *str, char c);	// simo who did this func
-char* ft_strndup(char* str,int n);
-char *ft_strcat(char *dest,char *src);
-char *ft_strcpy(char *dest, char *src);
+char 	*ft_strcat(char *dest,char *src);
+char 	*ft_strcpy(char *dest, char *src);
+int		ft_strlen(const char *s);
 
 
 //builtins
@@ -99,4 +98,29 @@ void	fr_ee(t_gc *gc);
 t_gc	*create(void *ptr);
 void	add(t_gc **gc, t_gc *new);
 //************************************************* */
+
+//after tokenizing we should know what is the type of each token we have these are the types
+typedef enum s_token_type
+{
+	TOKEN_WORD,
+	TOKEN_PIPE,
+	TOKEN_REDIRECT_IN,
+	TOKEN_REDIRECT_OUT,
+	TOKEN_APPEND,
+	TOKEN_HEREDOC,
+	TOKEN_SEMICOLON,
+}						t_token_type;
+
+// it will store value of each token itself, and pointer for the next one, and the type of it
+typedef struct s_token
+{
+	t_token_type		type;
+	char				*value;
+	struct s_token		*next;
+}						t_token;
+
+//This the parser functions declarations
+
+void	parse_cmd(char *input);
+void    init_env(char **env);
 #endif

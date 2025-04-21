@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 19:20:35 by macbookair        #+#    #+#             */
-/*   Updated: 2025/04/17 15:57:46 by macbookair       ###   ########.fr       */
+/*   Created: 2025-04-21 10:29:09 by mbenjbar          #+#    #+#             */
+/*   Updated: 2025-04-21 10:29:09 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
 int	ft_strlen(const char *s)
 {

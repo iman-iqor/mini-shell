@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbenjbar <mbenjbar@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-21 11:03:25 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025-04-21 11:03:25 by mbenjbar         ###   ########.fr       */
+/*   Created: 2025-04-21 10:43:25 by mbenjbar          #+#    #+#             */
+/*   Updated: 2025-04-21 10:43:25 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void    init_env(char **env)
+t_token *tokenize_input(char *input)
 {
-
+    t_token *tokens = NULL;
+    int i = 0;
+    while (input[i] != '\0')
+    {
+        while (input[i] <= 32)
+            i++;
+        if (input[i] == '\0')
+	    		break ;
+    }
+    return(tokens);
 }
-//next time  i will learn more about enivironment then i will init
+
+void    parse_cmd(char *input)
+{
+    t_token *tokens;
+    tokens = tokenize_input(input);
+}
