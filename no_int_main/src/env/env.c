@@ -46,6 +46,7 @@ t_env	*init_env_list(char **env)
 		last = node;
 		i++;
 	}
+	g_general.env_list = head;
 	return (head);
 }
 
@@ -76,10 +77,12 @@ char	*ft_join_key_value(char *key, char *value)
 	ft_strcat(joined, value);
 	return (joined);
 }
-char	**env_list_to_envp(t_env *env_list, int count)
+char	**env_list_to_array(t_env *env_list)
 {
 	char	**envp;
 	int		i;
+	int count;
+	count = env_len(env_list);
 
 	envp = ft_gc(sizeof(char *) * (count + 1), 'm');
 	i = 0;
@@ -92,6 +95,8 @@ char	**env_list_to_envp(t_env *env_list, int count)
 		env_list = env_list->next;
 	}
 	envp[i] = NULL;
+
+	g_general.env_array = envp;
 	return (envp);
 }
 

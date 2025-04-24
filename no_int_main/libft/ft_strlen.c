@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          #+#  +:+       +#+        */
+/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-21 10:29:09 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025-04-21 10:29:09 by mbenjbar         ###   ########.fr       */
+/*   Created: 2024/10/25 22:27:40 by macbookair        #+#    #+#             */
+/*   Updated: 2025/04/22 21:54:43 by macbookair       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "libft.h"
 
-int	ft_strlen(const char *s)
+int ft_strlen(const char* str)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] != 0)
-	{
-		i++;
-	}
-	return (i);
+    int i;
+    i = 0;
+    while(str[i])
+    {
+        i++;
+    }
+    return i;
 }

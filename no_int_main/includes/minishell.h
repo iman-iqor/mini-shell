@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/04/21 18:31:24 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/04/24 20:13:01 by macbookair       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ typedef struct s_general
 	int					in;
 	pid_t				pid;
 	int					out;
-	t_env				*env;
+	t_env				*env_list;
+	char**              env_array;
 	t_gc				*garbage;
 	t_gc				*files;//i need to create this part
 	int					stop;
@@ -85,19 +86,25 @@ int		ft_strcmp(char *s1, char *s2); // compare two string :)
 char 	*ft_strcat(char *dest,char *src);
 char 	*ft_strcpy(char *dest, char *src);
 int		ft_strlen(const char *s);
+char	*ft_strndup(char *str, int n);
 
 
 //builtins
 void	exec_builtin(t_list *list);  //here where i check the args and see if there is anything matchs a builtin function name
 void	echo(char **list);   // echo builtin 
 int		is_flag(char *str);   //helper for echo
+//cd
+void	cd_error(int code);
+t_env	*get_envar(char *key);
+
+
 
 //env ==> my_env
 t_env	*ft_create_env_node(char *env);
 t_env	*init_env_list(char **env);
 int	env_len(t_env *env);
 char	*ft_join_key_value(char *key, char *value);
-char	**env_list_to_envp(t_env *env_list, int count);
+char	**env_list_to_array(t_env *env_list);
 
 //garbage collector
 void	*ft_gc(size_t n, char flag);
@@ -141,3 +148,4 @@ void	parse_cmd(char *input);
 void    init_env(char **env);
 t_token *tokenize_input(char *input);
 #endif
+
