@@ -137,7 +137,9 @@ typedef struct s_token
 
 //This the parser functions declarations
 
-void	parse_cmd(char *input);
-void    init_env(char **env);
+void    parse_cmd(char *input, t_env *env);
+t_env	*init_env(char **env);
 t_token *tokenize_input(char *input);
+char	*get_env_value(t_env *env, char *key);
+void	expand_variables(t_token *tokens, t_env *env);
 #endif
