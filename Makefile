@@ -32,6 +32,9 @@ ${NAME}: ${SRC}
 	make -C ./no_int_main/libft/
 	${CC} ${CFLAGS}  ${SRC}  -I./no_int_main/includes ./no_int_main//libft/libft.a ${LFLAGS} -o ${NAME}
 
+val:${NAME}
+	 valgrind --leak-check=full --show-leak-kinds=all --suppressions=ll.sup ./minishell
+
 clean:
 	make -C ./no_int_main/libft/ clean
 

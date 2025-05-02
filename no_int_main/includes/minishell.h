@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/02 14:59:42 by macbookair       ###   ########.fr       */
+/*   Updated: 2025/05/02 15:53:02 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ typedef enum s_token_type
 	TOKEN_HEREDOC,
 	TOKEN_SEMICOLON,
 }						t_token_type;
+
 
 // this one is for the type of quote, whether it is '' or "" or none
 typedef enum s_quote_type
