@@ -45,5 +45,6 @@ void	echo(char **list)
 	}
 	if (!flag)
 		write(1, "\n", 1);
-	//need to handle the exit status
+	g_general.exit_status = 0;
+
 }

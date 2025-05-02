@@ -6,7 +6,7 @@
 /*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/04/24 20:13:01 by macbookair       ###   ########.fr       */
+/*   Updated: 2025/05/01 18:14:29 by macbookair       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+
 #include <time.h>
 #include "../libft/libft.h"
 
@@ -37,6 +38,7 @@ typedef struct s_env
 	char* key;
 	char * value;
 	struct s_env *next;
+	struct s_env	*prev;
 } t_env;
 
 
@@ -87,6 +89,8 @@ char 	*ft_strcat(char *dest,char *src);
 char 	*ft_strcpy(char *dest, char *src);
 int		ft_strlen(const char *s);
 char	*ft_strndup(char *str, int n);
+void	ft_putstr(char *text);
+void	graceful_exit(void);
 
 
 //builtins
@@ -96,6 +100,44 @@ int		is_flag(char *str);   //helper for echo
 //cd
 void	cd_error(int code);
 t_env	*get_envar(char *key);
+void	cd(char **path);
+int if_else_of_cd(char **path, t_env *home, char **p);
+void update_pwd();
+//pwd
+void	pwd(void);
+//env
+void	env(void);
+//export
+t_env *last_envar(t_env *env_list);
+void addback(t_env *new_node);
+char **get_env_keys(t_env *env_list);
+int is_valid(char *str);
+t_env *get_envar_with_passing_env_list(t_env *env, char *key);
+int get_key_and_value(char *str, char **key, char **value);
+t_env *add_env_var(char *key, char *value, t_env *prev);
+void export_logique(char **list);
+void print_env_var(t_env *env);
+void sort_ascii(char **arr);
+void print_export_sorted(char **keys, t_env *env_list);
+void export_no_args(void);
+void export(char **list);
+void handle_exit_status(int flag);
+//unset
+int is_valid_unset(char *str);
+void	unset_var(char *key);
+void	handle_unset_error(char *arg);
+void	unset(char **list);
+//exit
+ int	is_numeric_argument(const char *arg);
+ void	exit_error_numeric(char *arg);
+ void	exit_error_too_many_args(void);
+void	cleanup_and_exit(int status);
+void	ft_exit(char **args);
+
+
+
+
+
 
 
 
