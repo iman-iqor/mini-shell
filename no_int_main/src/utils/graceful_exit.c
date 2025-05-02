@@ -1,6 +1,6 @@
 
 #include "../../includes/minishell.h"
-void rl_clear_history();
+
 void	graceful_exit(void)
 {
 	ft_gc(0, 'f');              // Free all allocated memory

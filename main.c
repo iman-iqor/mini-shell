@@ -27,6 +27,7 @@ int main(int argc,char** argv,char** env)
 
      free(input);
     }
+    void	graceful_exit(void);
 
     return (0);
 }
