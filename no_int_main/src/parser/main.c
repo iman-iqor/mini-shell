@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:31:40 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/05/05 22:52:04 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/05/06 18:25:43 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,12 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	if (argc != 1)
 		printf("Error: try only 1 argument");
-	env = init_env(envp);
+	env = init_env(envp); // it is working properly
+	// while (env != NULL)
+	// {
+	// 	printf("%s=%s\n", env->key, env->value);
+	// 	env = env->next;
+	// }
 	while (1)
 	{
 		input = readline("\033[1;92m➜  \033[1;36mminishell\033[0m ");
@@ -47,7 +52,7 @@ int	main(int argc, char **argv, char **envp)
 		if (check_spaces(input) == 0)
 		{
 			free(input);
-			continue;
+			break ;
 		}
 		parse_cmd(input, env);
 		free(input);

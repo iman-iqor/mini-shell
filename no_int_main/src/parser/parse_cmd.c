@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:43:25 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/05/05 23:00:41 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:20:06 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void    parse_cmd(char *input, t_env *env)
 {
     t_token *tokens;
-    // char    *value_env;
+    t_list *cmds;
+    // t_token *tmp;
     if ((input == NULL || !ft_strncmp(input, "exit", 4))
 	&& (ft_strlen(input) == 4))
     {
@@ -25,12 +26,19 @@ void    parse_cmd(char *input, t_env *env)
     }
     // split the cmd to tokens
     tokens = tokenize_input(input);
-    // command that looks for the value of the key of the env you give it
-    // value_env = get_env_value(env, input);
-	// if (value_env)
-	// 	printf("The value is: %s\n", value_env);
-	// else
-	// 	printf("we couldn't find the value of this key\n");
-    // expand the env variables
+    // tmp = tokens;
+    // while (tmp)
+	// {
+	// 	printf("TOKEN: [%s] Type: %d Quote: %d\n", tmp->value, tmp->type, tmp->quote_type);
+	// 	tmp = tmp->next;
+	// }
+    // expand the env variables //it is working properly
 	expand_variables(tokens, env);
+    // tmp = tokens;
+    // while (tmp)
+	// {
+	// 	printf("TOKEN: [%s] Type: %d Quote: %d\n", tmp->value, tmp->type, tmp->quote_type);
+	// 	tmp = tmp->next;
+	// }
+    cmds = parse_tokens(tokens);
 }

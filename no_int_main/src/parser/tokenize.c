@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:11:48 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/05/05 22:34:05 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/05/06 18:34:32 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static char	*get_operator(char *input, int *i)
 	else
 	{
 		operator= ft_substr(input, *i, 1);
-		*i = (*i) + 2;
+		*i = (*i) + 1;
 	}
 	return (operator);
 }

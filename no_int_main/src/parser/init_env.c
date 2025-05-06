@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 12:54:28 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/05/05 22:44:58 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/05/06 18:02:37 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ t_env	*init_env(char **env)
 	i = 0;
 	while (env[i])
 	{
-		node = ft_create_simo_node(env[i]);
-		
+		node = ft_create_simo_node(env[i]);	
 		if (last == NULL)
 			head = node;
 		else

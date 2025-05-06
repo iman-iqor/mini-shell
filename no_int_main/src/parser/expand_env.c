@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          #+#  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-24 17:18:27 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025-04-24 17:18:27 by mbenjbar         ###   ########.fr       */
+/*   Created: 2025/04/24 17:18:27 by mbenjbar          #+#    #+#             */
+/*   Updated: 2025/05/06 18:46:38 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static char	*expand_value(char *word, t_env *env)
 				var_value = ft_strdup("");
 			tmp = ft_strjoin(result, var_value);
 			free(result);
+			free(var_value);
 			result = tmp;
 			free(key);
 		}

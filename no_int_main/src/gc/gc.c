@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 21:03:58 by imiqor            #+#    #+#             */
-/*   Updated: 2025/04/17 15:54:19 by macbookair       ###   ########.fr       */
+/*   Updated: 2025/05/06 18:08:26 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	fr_ee(t_gc *gc)
 	}
 }
 
-void	* ft_gc(size_t n, char flag)
+void	*ft_gc(size_t n, char flag)
 {
 	static t_gc	*gc;
 	void		*ptr;

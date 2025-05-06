@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/05 22:39:36 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/05/06 19:14:01 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,13 @@ typedef struct s_general
 extern t_general g_general;
 
 
-
-
-
-//this is for variables that we will need ,this way is better than declaring everytime a variable and breacking the norminette rule
-typedef struct s_var
+// this one is for the type of quote, whether it is '' or "" or none
+typedef enum s_quote_type
 {
-	int i;
-	
-}				t_var;
-
-
-
+	NONE,
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE,
+}						t_quote_type;
 
 //this is for the things that u will parse for example the argumment variables means the return of the split or the args that the user will insert
 typedef struct s_list
@@ -83,9 +78,18 @@ typedef struct s_list
 	char				**output_file;
 	int					append;
 	int					heredoc;
+	t_quote_type		quote_type;
 	struct s_list		*next;
 }						t_list;
 //**************************************************************************************************************************************************** */
+
+//this is for variables that we will need ,this way is better than declaring everytime a variable and breacking the norminette rule
+typedef struct s_var
+{
+	int i;
+	
+}				t_var;
+
 
 //utils
 int		ft_strcmp(char *s1, char *s2); // compare two string :)
@@ -172,13 +176,6 @@ typedef enum s_token_type
 }						t_token_type;
 
 
-// this one is for the type of quote, whether it is '' or "" or none
-typedef enum s_quote_type
-{
-	NONE,
-	SINGLE_QUOTE,
-	DOUBLE_QUOTE,
-}						t_quote_type;
 
 // it will store value of each token itself, and pointer for the next one, and the type of it
 typedef struct s_token
@@ -189,6 +186,10 @@ typedef struct s_token
 	struct s_token		*next;
 }						t_token;
 
+
+
+
+
 //This the parser functions declarations
 
 void    parse_cmd(char *input, t_env *env);
@@ -196,5 +197,7 @@ t_env	*init_env(char **env);
 t_token *tokenize_input(char *input);
 char	*get_env_value(t_env *env, char *key);
 void	expand_variables(t_token *tokens, t_env *env);
+t_list	*parse_tokens(t_token *tokens);
+char	**ft_realloc_array(char **arr, char *new_str);
 #endif
 

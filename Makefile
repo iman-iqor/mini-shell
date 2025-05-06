@@ -28,7 +28,8 @@ no_int_main/src/parser/expand_env.c\
 no_int_main/src/parser/init_env.c\
 no_int_main/src/parser/tokenize.c\
 no_int_main/src/parser/parse_cmd.c\
-
+no_int_main/src/parser/generate_cmds.c\
+no_int_main/src/parser/ft_realloc_array.c\
 
 
 all: ${NAME} 
