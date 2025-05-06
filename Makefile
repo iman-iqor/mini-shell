@@ -1,9 +1,11 @@
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fPIC
 LFLAGS = -lreadline #-lhistory
 RM  = rm -f
-SRC = main.c \
+
+
+SRC =	no_int_main/src/parser/main.c\
 no_int_main/src/builtins/echo.c \
 no_int_main/src/builtins/pwd.c \
 no_int_main/src/builtins/cd.c\
@@ -22,7 +24,10 @@ no_int_main/src/utils/ft_strcpy.c \
 no_int_main/src/utils/ft_strcat.c\
 no_int_main/src/utils/ft_strndup.c \
 no_int_main/src/env/env.c\
-
+no_int_main/src/parser/expand_env.c\
+no_int_main/src/parser/init_env.c\
+no_int_main/src/parser/tokenize.c\
+no_int_main/src/parser/parse_cmd.c\
 
 
 
@@ -33,7 +38,7 @@ ${NAME}: ${SRC}
 	${CC} ${CFLAGS}  ${SRC}  -I./no_int_main/includes ./no_int_main//libft/libft.a ${LFLAGS} -o ${NAME}
 
 val:${NAME}
-	 valgrind --leak-check=full --show-leak-kinds=all --suppressions=ll.sup ./minishell
+	valgrind --leak-check=full --show-leak-kinds=all --suppressions=ll.sup ./minishell
 
 clean:
 	make -C ./no_int_main/libft/ clean

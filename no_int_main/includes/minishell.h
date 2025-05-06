@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/02 15:53:02 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/05/05 22:39:36 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,12 @@ typedef struct s_var
 //this is for the things that u will parse for example the argumment variables means the return of the split or the args that the user will insert
 typedef struct s_list
 {
-	char				**argument; //those are the args that the user will insert for example >> " echo -n patati"
-	
+	char				**argument;
+	char				**input_file;
+	char				**output_file;
+	int					append;
+	int					heredoc;
+	struct s_list		*next;
 }						t_list;
 //**************************************************************************************************************************************************** */
 

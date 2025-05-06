@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          #+#  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-04-24 12:54:28 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025-04-24 12:54:28 by mbenjbar         ###   ########.fr       */
+/*   Created: 2025/04/24 12:54:28 by mbenjbar          #+#    #+#             */
+/*   Updated: 2025/05/05 22:44:58 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_env_value(t_env *env, char *key)
 	return (NULL);
 }
 
-static t_env	*ft_create_env_node(char *env)
+static t_env	*ft_create_simo_node(char *env)
 {
 	t_env	*node;
 	char	*equal;
@@ -58,7 +58,7 @@ t_env	*init_env(char **env)
 	i = 0;
 	while (env[i])
 	{
-		node = ft_create_env_node(env[i]);
+		node = ft_create_simo_node(env[i]);
 		
 		if (last == NULL)
 			head = node;
