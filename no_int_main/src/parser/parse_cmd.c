@@ -16,7 +16,6 @@ void    parse_cmd(char *input, t_env *env)
 {
     t_token *tokens;
     t_list *cmds;
-    // t_token *tmp;
     if ((input == NULL || !ft_strncmp(input, "exit", 4))
 	&& (ft_strlen(input) == 4))
     {
@@ -26,7 +25,7 @@ void    parse_cmd(char *input, t_env *env)
     }
     // split the cmd to tokens
     tokens = tokenize_input(input);
-    // tmp = tokens;
+    // t_token *tmp = tokens;
     // while (tmp)
 	// {
 	// 	printf("TOKEN: [%s] Type: %d Quote: %d\n", tmp->value, tmp->type, tmp->quote_type);
@@ -41,4 +40,33 @@ void    parse_cmd(char *input, t_env *env)
 	// 	tmp = tmp->next;
 	// }
     cmds = parse_tokens(tokens);
+    free_tokens(tokens);
+    while (cmds)
+        cmds = cmds->next;
+//     t_list *tmp1 = cmds;
+//     while (tmp1)
+//     {   
+//         char **args = tmp1->argument;
+//         while (args && *args)
+//         {
+//             printf("arguments: %s", *args);
+//             args++;
+//         }
+//         printf("\n");
+//         char **output = tmp1->output_file;
+//         while (output && *output)
+//         {
+//             printf("wa hada l output file:%s", *output);
+//             output++;
+//         }
+//         printf("\n");
+//         char **input = tmp1->input_file;
+//         while (input && *input)
+//         {
+//             printf("input files:%s", *input);
+//             input++;
+//         }
+//         printf("\n");
+//         tmp1 = tmp1->next;
+//     }
 }

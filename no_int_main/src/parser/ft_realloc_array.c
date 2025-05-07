@@ -23,7 +23,7 @@ char	**ft_realloc_array(char **arr, char *new_str)
 	if (arr)
 		while (arr[len])
 			len++;
-	new_arr = ft_gc(sizeof(char *) * (len + 2), 1);
+	new_arr = ft_gc(sizeof(char *) * (len + 2), 'm');
 	if (!new_arr)
 		return (NULL);
 	i = 0;

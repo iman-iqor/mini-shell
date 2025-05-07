@@ -30,6 +30,7 @@ no_int_main/src/parser/tokenize.c\
 no_int_main/src/parser/parse_cmd.c\
 no_int_main/src/parser/generate_cmds.c\
 no_int_main/src/parser/ft_realloc_array.c\
+no_int_main/src/parser/free_tokens.c\
 
 
 all: ${NAME} 

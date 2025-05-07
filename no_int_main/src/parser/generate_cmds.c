@@ -23,9 +23,9 @@ t_list	*parse_tokens(t_token *tokens)
 	while (tokens)
 	{
 		// if we found a new command or | pipe
-		if (!current_cmd || tokens->type == TOKEN_PIPE)
+		if (current_cmd == NULL || tokens->type == TOKEN_PIPE)
 		{
-			current_cmd = ft_gc(sizeof(t_list), 1);
+			current_cmd = ft_gc(sizeof(t_list), 'm');
 			if (!current_cmd)
 				return (NULL);
 			ft_bzero(current_cmd, sizeof(t_list));

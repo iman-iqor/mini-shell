@@ -199,5 +199,6 @@ char	*get_env_value(t_env *env, char *key);
 void	expand_variables(t_token *tokens, t_env *env);
 t_list	*parse_tokens(t_token *tokens);
 char	**ft_realloc_array(char **arr, char *new_str);
+void	free_tokens(t_token *tokens);
 #endif
 
