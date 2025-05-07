@@ -39,6 +39,9 @@ void    parse_cmd(char *input, t_env *env)
 	// 	printf("TOKEN: [%s] Type: %d Quote: %d\n", tmp->value, tmp->type, tmp->quote_type);
 	// 	tmp = tmp->next;
 	// }
+
+
+    //this one will be used for the execution part 
     cmds = parse_tokens(tokens);
     free_tokens(tokens);
     while (cmds)
