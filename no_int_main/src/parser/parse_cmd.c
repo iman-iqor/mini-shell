@@ -39,37 +39,34 @@ void    parse_cmd(char *input, t_env *env)
 	// 	printf("TOKEN: [%s] Type: %d Quote: %d\n", tmp->value, tmp->type, tmp->quote_type);
 	// 	tmp = tmp->next;
 	// }
-
-
     //this one will be used for the execution part 
     cmds = parse_tokens(tokens);
     free_tokens(tokens);
-    while (cmds)
-        cmds = cmds->next;
-//     t_list *tmp1 = cmds;
-//     while (tmp1)
-//     {   
-//         char **args = tmp1->argument;
-//         while (args && *args)
-//         {
-//             printf("arguments: %s", *args);
-//             args++;
-//         }
-//         printf("\n");
-//         char **output = tmp1->output_file;
-//         while (output && *output)
-//         {
-//             printf("wa hada l output file:%s", *output);
-//             output++;
-//         }
-//         printf("\n");
-//         char **input = tmp1->input_file;
-//         while (input && *input)
-//         {
-//             printf("input files:%s", *input);
-//             input++;
-//         }
-//         printf("\n");
-//         tmp1 = tmp1->next;
-//     }
+    t_list *tmp1 = cmds;
+    while (tmp1)
+    {   
+        char **args = tmp1->argument;
+        printf("arguments: ");
+        while (args && *args)
+        {
+            printf("%s", *args);
+            args++;
+        }
+        printf("\n");
+        char **output = tmp1->output_file;
+        while (output && *output)
+        {
+            printf("wa hada l output file:%s", *output);
+            output++;
+        }
+        printf("\n");
+        char **input = tmp1->input_file;
+        while (input && *input)
+        {
+            printf("input files:%s", *input);
+            input++;
+        }
+        printf("\n");
+        tmp1 = tmp1->next;
+    }
 }
