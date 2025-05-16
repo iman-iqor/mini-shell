@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:31:40 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/05/16 15:11:10 by macbookair       ###   ########.fr       */
+/*   Updated: 2025/05/16 20:33:30 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,32 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		}
 		cmds = parse_cmd(input, env);
+		// while (cmds)
+		// {
+		// 	char **args = cmds->argument;
+		// 	if (args && *args)
+		// 		printf("this is the command and argumets: ");
+		// 	while (args && *args)
+		// 	{
+		// 		printf("%s ", *args);
+		// 		args++;
+		// 	}
+		// 	printf("\n");
+		// 	t_file *in = cmds->input_file;
+		// 	while (in)
+		// 	{
+		// 		printf("input file name is: %s and its flag is: %d\n", in->file_name, in->flag);
+		// 		in = in->next;
+		// 	}
+		// 	t_file *out = cmds->output_file;
+		// 	while (out)
+        // 	{
+		// 	    printf("output file name is: %s and its flag is: %d\n", out->file_name, out->flag);
+		// 	    out = out->next;
+	    // 	}
+		// 		cmds = cmds->next;
+		// }
+		free(cmds);
 		free(input);
 	}
 	clear_history();

@@ -7,7 +7,7 @@ t_list	*ft_add_file(t_list *cmds, char *new_str, int flag, char c)
 	t_file	*tmp;
 
 	new = ft_gc(sizeof(t_file), 'm');
-	new->file_name = new_str;
+	new->file_name = ft_strdup(new_str);
 	new->flag = flag;
 	new->next = NULL;
 	if (c == 'i')
