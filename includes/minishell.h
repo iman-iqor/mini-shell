@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/16 15:11:45 by macbookair       ###   ########.fr       */
+/*   Updated: 2025/05/16 18:57:26 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,19 @@ typedef enum s_quote_type
 	DOUBLE_QUOTE,
 }						t_quote_type;
 
+typedef struct s_file
+{
+	char	*file_name;
+	int		flag;
+	struct s_file *next;
+}	t_file;
+
 //this is for the things that u will parse for example the argumment variables means the return of the split or the args that the user will insert
 typedef struct s_list
 {
 	char				**argument;
-	char				**input_file;
-	char				**output_file;
-	int					append;
-	int					heredoc;
+	t_file				*input_file;
+	t_file				*output_file;
 	t_quote_type		quote_type;
 	struct s_list		*next;
 }						t_list;
@@ -207,5 +212,6 @@ void	expand_variables(t_token *tokens, t_env *env);
 t_list	*parse_tokens(t_token *tokens);
 char	**ft_realloc_array(char **arr, char *new_str);
 void	free_tokens(t_token *tokens);
+t_list	*ft_add_file(t_list *cmds, char *new_str, int flag, char c);
 #endif
 

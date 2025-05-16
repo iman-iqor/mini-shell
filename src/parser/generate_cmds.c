@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 21:58:06 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/05/06 19:17:32 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/05/16 18:56:59 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,21 @@ t_list	*parse_tokens(t_token *tokens)
 			// move to the next token
 			tokens = tokens->next;
 			if (tokens)
-				current_cmd->input_file = ft_realloc_array(current_cmd->input_file,
-						tokens->value);
+			{
+				current_cmd = ft_add_file(current_cmd, tokens->value, 0, 'i');
+			}
 		}
 		else if (tokens->type == TOKEN_REDIRECT_OUT)
 		{
 			tokens = tokens->next;
 			if (tokens)
-				current_cmd->output_file = ft_realloc_array(current_cmd->output_file,
-						tokens->value);
-			// apped = 0 because when we use redirect out (>) we using over write
-			current_cmd->append = 0;
+				current_cmd = ft_add_file(current_cmd, tokens->value, 0, 'o');
 		}
 		else if (tokens->type == TOKEN_APPEND)
 		{
 			tokens = tokens->next;
 			if (tokens)
-				current_cmd->output_file = ft_realloc_array(current_cmd->output_file,
-						tokens->value);
-			// apped = 1 because when we use append (>>) we using append
-			current_cmd->append = 1;
+				current_cmd = ft_add_file(current_cmd, tokens->value, 1, 'o');
 		}
 		// condition of heredoc
 		else if (tokens->type == TOKEN_HEREDOC)
@@ -76,12 +71,9 @@ t_list	*parse_tokens(t_token *tokens)
 			tokens = tokens->next;
 			if (tokens)
 			{
-				current_cmd->input_file = ft_realloc_array(current_cmd->input_file,
-						tokens->value);
+				current_cmd = ft_add_file(current_cmd, tokens->value, 1, 'i');
 				current_cmd->quote_type = tokens->quote_type;
 			}
-			// heredoc = 1 because when we use heredoc (<<) we using heredoc
-			current_cmd->heredoc = 1;
 		}
 		tokens = tokens->next;
 	}

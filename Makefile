@@ -6,7 +6,7 @@ LFLAGS = -lreadline #-lhistory
 RM  = rm -f
 
 
-SRC =	main.c\
+SRC =	src/parser/main.c\
 src/builtins/echo.c \
 src/builtins/pwd.c \
 src/builtins/cd.c\
@@ -33,6 +33,7 @@ src/parser/parse_cmd.c\
 src/parser/generate_cmds.c\
 src/parser/ft_realloc_array.c\
 src/parser/free_tokens.c\
+src/parser/t_file.c\
 
 
 all: ${NAME} 
