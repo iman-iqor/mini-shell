@@ -60,13 +60,18 @@ void execone(t_list *list)
 
 int	ft_exec_single_command(t_list *list)
 {
-
-	if (list && list->argument && list->next == NULL)
+	
+	if (list && !list->next)
 	{
 		if(is_builtin(list->argument[0]))
+		{
+			printf("enetered is_builtins w rah dakhl l exec builtin\n");
 			exec_builtin(list);
+
+		}
 		else
 		{
+			printf("entered execone\n");
 			execone(list);
 		}
 		return 1;
@@ -78,7 +83,7 @@ int	ft_exec_single_command(t_list *list)
 
 void	ft_exec(t_list *list)
 {
-
+	printf("entered ft_exec at least!\n");
 	if (ft_exec_single_command(list))
 		return ;
 	// if (ft_exec2(list))

@@ -6,7 +6,7 @@
 /*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/16 14:04:41 by macbookair       ###   ########.fr       */
+/*   Updated: 2025/05/16 15:11:45 by macbookair       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ typedef struct s_token
 
 //This the parser functions declarations
 
-t_list*    parse_cmd(char *input, t_env *env);
+t_list    *parse_cmd(char *input, t_env *env);
 t_env	*init_env(char **env);
 t_token *tokenize_input(char *input);
 char	*get_env_value(t_env *env, char *key);

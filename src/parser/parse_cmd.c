@@ -6,13 +6,13 @@
 /*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:43:25 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/05/16 14:04:10 by macbookair       ###   ########.fr       */
+/*   Updated: 2025/05/16 15:10:38 by macbookair       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_list*    parse_cmd(char *input, t_env *env)
+t_list    *parse_cmd(char *input, t_env *env)
 {
     t_token *tokens;
     t_list *cmds;
@@ -42,7 +42,6 @@ t_list*    parse_cmd(char *input, t_env *env)
     //this one will be used for the execution part 
     cmds = parse_tokens(tokens);
     free_tokens(tokens);
-    (void)cmds;
     // t_list *tmp1 = cmds;
     // while (tmp1)
     // {   
@@ -70,5 +69,5 @@ t_list*    parse_cmd(char *input, t_env *env)
     //     printf("\n");
     //     tmp1 = tmp1->next;
     // }
-    return cmds;
+    return (cmds);
 }

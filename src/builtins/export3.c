@@ -38,19 +38,29 @@ t_env *get_envar_with_passing_env_list(t_env *env, char *key)
 
 int get_key_and_value(char *str, char **key, char **value)
 {
-    char *equal_sign = ft_strchr(str, '=');
-    if (equal_sign)
+    char *plus_equal = ft_strnstr(str, "+=", ft_strlen(str));
+    char *equal = ft_strchr(str, '=');
+
+    if (plus_equal)
     {
-        *key = ft_substr(str, 0, equal_sign - str);  // Simplify using ft_substr
-        *value = ft_strdup(equal_sign + 1);
+        *key = ft_substr(str, 0, plus_equal - str);
+        *value = ft_strdup(plus_equal + 2); // skip +=
+        return 2;  // Special code to indicate append
+    }
+    else if (equal)
+    {
+        *key = ft_substr(str, 0, equal - str);
+        *value = ft_strdup(equal + 1);
+        return 1;  // Normal assignment
     }
     else
     {
         *key = ft_strdup(str);
         *value = NULL;
+        return 0;  // No value, just export key
     }
-    return (*key != NULL);
 }
+
 
 t_env *add_env_var(char *key, char *value, t_env *prev)
 {

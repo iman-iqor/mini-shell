@@ -5,23 +5,33 @@ void export_logique(char **list)
 {
     t_env *node;
     char *key, *value;
+    int mode = get_key_and_value(list[0], &key, &value);
 
-    if (!get_key_and_value(list[0], &key, &value))
-        return ;
+    if (!key)
+        return;
 
     node = get_envar_with_passing_env_list(g_general.env_list, key);
     if (node)
     {
         if (value)
-            node->value = value;
+        {
+            if (mode == 2) // append mode
+            {
+                char *joined = ft_strjoin(node->value ? node->value : "", value);
+                node->value = joined;
+            }
+            else  // normal assignment
+                node->value = value;
+        }
     }
     else
     {
-        node = add_env_var(key, value, last_envar(g_general.env_list));
-        if (node)
-            addback(node);
+        t_env *new_node = add_env_var(key, value, last_envar(g_general.env_list));
+        if (new_node)
+            addback(new_node);
     }
 }
+
 
 void print_env_var(t_env *env)
 {
