@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/06 19:14:01 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:04:41 by macbookair       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,16 @@ char	*ft_strndup(char *str, int n);
 void	ft_putstr(char *text);
 void	graceful_exit(void);
 
-
-//builtins
+//execution
 void	exec_builtin(t_list *list);  //here where i check the args and see if there is anything matchs a builtin function name
+int	is_builtin(char *cmd);//hna rr kancompari chnu eandi mea l builtins names if true 1 sinon 0
+void execone(t_list *list);//ila makanch builtin ra kanmchi n executih ela dak l assas hna
+int	ft_exec_single_command(t_list *list);
+void	ft_exec(t_list *list);
+//heredoc
+int	heredoc(t_list *list);
+void	child_heredoc(char *delim);
+//builtins
 void	echo(char **list);   // echo builtin 
 int		is_flag(char *str);   //helper for echo
 //cd
@@ -192,7 +199,7 @@ typedef struct s_token
 
 //This the parser functions declarations
 
-void    parse_cmd(char *input, t_env *env);
+t_list*    parse_cmd(char *input, t_env *env);
 t_env	*init_env(char **env);
 t_token *tokenize_input(char *input);
 char	*get_env_value(t_env *env, char *key);

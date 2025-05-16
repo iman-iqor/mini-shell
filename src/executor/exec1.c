@@ -39,14 +39,28 @@ int	is_builtin(char *cmd)
 
 void execone(t_list *list)
 {
-	if(list->input_file)
+	if(list->input_file && !list->heredoc)
 	{
+		//hna ghandir khdma dyal nakhod fd dyal dak l input file wnqra mnou
+	}
+	else if(list->input_file && list->heredoc)
+	{
+		//hna fin ghandir l heredoc wnqra mn tmp file 
+		int fd_input_file;
+		fd_input_file = heredoc(list);
+		printf("%d\n",fd_input_file);
 
+
+	}
+	else if(!list->input_file && !list->heredoc)
+	{
+		//hna ghadi n executi 3adi
 	}
 }
 
 int	ft_exec_single_command(t_list *list)
 {
+
 	if (list && list->argument && list->next == NULL)
 	{
 		if(is_builtin(list->argument[0]))
