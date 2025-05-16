@@ -1,4 +1,4 @@
-#include"./no_int_main/includes/minishell.h"
+#include"./includes/minishell.h"
 
 t_general	g_general;
 
@@ -24,6 +24,7 @@ int main(int argc,char** argv,char** env)
          add_history(input);
      list.argument = ft_split(input, ' ');
         exec_builtin(&list);
+        printf("%s\n",list.argument[0]);
 
      free(input);
     }
