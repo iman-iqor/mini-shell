@@ -4,7 +4,7 @@ t_general	g_general;
 
 int	main(int argc, char **argv, char **env)
 {
-	t_list	list;
+	t_list	*list;
 	t_env	*my_env_list;
 	char	*input;
 
@@ -21,11 +21,11 @@ int	main(int argc, char **argv, char **env)
 			break ;
 		if (*input)
 			add_history(input);
+        printf("a\n");
 		list = parse_cmd(input, my_env_list);
-
-        printf("%s\n",list.input_file[0]);
-        printf("%d\n",list.heredoc);
-        ft_exec(&list);
+        // printf("%s\n",list->input_file[0]);
+        // printf("%d\n",list->heredoc);
+        ft_exec(list);
         
 		free(input);
 	}

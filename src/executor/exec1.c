@@ -61,9 +61,9 @@ void execone(t_list *list)
 int	ft_exec_single_command(t_list *list)
 {
 	
-	if (list && !list->next)
+	if (list && list->next==NULL)
 	{
-		if(is_builtin(list->argument[0]))
+		if(list->argument != NULL && is_builtin(list->argument[0]))
 		{
 			printf("enetered is_builtins w rah dakhl l exec builtin\n");
 			exec_builtin(list);

@@ -1,6 +1,7 @@
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fPIC
+# CFLAGS = -Wall -Wextra -Werror -fPIC
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 LFLAGS = -lreadline #-lhistory
 RM  = rm -f
 
