@@ -6,83 +6,71 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:11:48 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/05/06 18:34:32 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/05/17 20:18:33 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*get_quote_value(char *input, int *i, t_quote_type *quote_type)
-{
-	char	quote;
-	int		start;
-	char	*value;
-
-	quote = input[*i];
-	(*i)++;
-	start = (*i);
-	while (input[*i] && input[*i] != quote)
-		(*i)++;
-	value = ft_substr(input, start, *i - start);
-	if (input[*i] == quote)
-		(*i)++;
-	if (quote == '\'')
-	    *quote_type = SINGLE_QUOTE;
-	else
-		*quote_type = DOUBLE_QUOTE;
-	return (value);
-}
-
-static char	*get_operator(char *input, int *i)
+char	*get_operator(char *input, int *i, t_quote_type *quote_type)
 {
 	char	*operator;
 
 	if (!ft_strncmp(input + *i, ">>", 2) || !ft_strncmp(input + *i, "<<", 2))
 	{
-		operator= ft_substr(input, *i, 2);
-		*i = (*i) + 2;
+		operator = ft_substr(input, *i, 2);
+		*i += 2;
+		if (input[*i] == '>' || input[*i] == '<')
+			return (NULL);
 	}
 	else
 	{
-		operator= ft_substr(input, *i, 1);
-		*i = (*i) + 1;
+		operator = ft_substr(input, *i, 1);
+		*i += 1;
+		if (input[*i] == '|' || input[0] == '|' || input[*i] == '>'
+			|| input[*i] == '<')
+			return (NULL);
 	}
+	if (input[*i] == '\'')
+		*quote_type = SINGLE_QUOTE;
+	else if (input[*i] == '"')
+		*quote_type = DOUBLE_QUOTE;
 	return (operator);
 }
 
-static char	*get_word(char *input, int *i)
+char	*get_word(char *input, int *i, t_quote_type *quote_type)
 {
-	int     start;
-    char    *value;
+	int		start;
+	char	quote;
 
 	start = *i;
 	while (input[*i] && (input[*i] != '|' && input[*i] != '>'
 			&& input[*i] != '<') && input[*i] > 32)
+	{
+		if (input[*i] == '"' || input[*i] == '\'')
+		{
+			quote = input[*i];
+			(*i)++;
+			while (input[*i] && input[*i] != quote)
+				(*i)++;
+			if (input[*i] != quote)
+				return (NULL);
+			if (quote == '\'')
+				*quote_type = SINGLE_QUOTE;
+			else if (quote == '"')
+				*quote_type = DOUBLE_QUOTE;
+		}
 		(*i)++;
-    value = ft_substr(input, start, *i - start);
-	return (value);
+	}
+	return (ft_substr(input, start, *i - start));
 }
 
-static t_token_type	get_token_type(char *value)
-{
-	if (!ft_strncmp(value, ">>", 2))
-		return (TOKEN_APPEND);
-	else if (!ft_strncmp(value, "<<", 2))
-		return (TOKEN_HEREDOC);
-	else if (!ft_strncmp(value, "|", 1))
-		return (TOKEN_PIPE);
-	else if (!ft_strncmp(value, ">", 1))
-		return (TOKEN_REDIRECT_OUT);
-	else if (!ft_strncmp(value, "<", 1))
-		return (TOKEN_REDIRECT_IN);
-	return (TOKEN_WORD);
-}
-
-static t_token	*new_token(char *value, t_token_type type, t_quote_type quote_type)
+static t_token	*new_token(char *value, t_token_type type,
+		t_quote_type quote_type)
 {
 	t_token	*new_token;
 
-	new_token = malloc(sizeof(t_token));
+	new_token = ft_gc(sizeof(t_token), 'm');
 	if (!new_token)
 		return (NULL);
 	new_token->value = value;
@@ -96,7 +84,7 @@ static void	add_token(t_token **head, t_token *new_token)
 {
 	t_token	*tmp;
 
-	if (*head == NULL)
+	if (!*head)
 		*head = new_token;
 	else
 	{
@@ -107,34 +95,31 @@ static void	add_token(t_token **head, t_token *new_token)
 	}
 }
 
-t_token *tokenize_input(char *input)
+t_token	*tokenize_input(char *input)
 {
-    t_token         *tokens = NULL;
-    t_token_type	type;
-    t_quote_type	quote_type;
-    char            *value;
-    int             i = 0;
+	t_token			*tokens;
+	int				i;
+	char			*value;
+	t_token_type	type;
+	t_quote_type	quote_type;
 
-    while (input[i] != '\0')
-    {
-        while (input[i] <= 32)
-            i++;
-        if (input[i] == '\0')
-	    		break ;
-       quote_type = NONE;
-       // handle the single and double quote and get the what between the quotes
-		if (input[i] == '\'' || input[i] == '"')
-			value = get_quote_value(input, &i, &quote_type);
-        // get the opearator | , > , < , << , or >>
-		else if (input[i] == '|' || input[i] == '>' || input[i] == '<')
-			value = get_operator(input, &i);
-        // get the word if there is no quotes and no pipes etc...
-		else
-			value = get_word(input, &i);
-        // add a type of token (PIPE, WORD, ...)
-		type = get_token_type(value);
-        // add the new token to the list of tokens
-		add_token(&tokens, new_token(value, type, quote_type));
-    }
-    return(tokens);
+	tokens = NULL;
+	i = 0;
+	quote_type = NONE;
+	while (input[i])
+	{
+		while (input[i] && input[i] <= 32)
+			i++;
+		if (!input[i])
+			break ;
+		value = process_input(input, &i, &quote_type);
+		if (!value)
+			return (NULL);
+		if (value && value[0] > 32 && ft_strlen(value) >= 1)
+		{
+			type = get_token_type(value);
+			add_token(&tokens, new_token(value, type, quote_type));
+		}
+	}
+	return (tokens);
 }

@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/16 18:57:26 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/05/17 20:24:40 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,8 +207,21 @@ typedef struct s_token
 t_list    *parse_cmd(char *input, t_env *env);
 t_env	*init_env(char **env);
 t_token *tokenize_input(char *input);
+char	*process_input(char *input, int *i, t_quote_type *quote_type);
+char	*get_operator(char *input, int *i, t_quote_type *quote_type);
+char	*get_word(char *input, int *i, t_quote_type *quote_type);
+t_token_type	get_token_type(char *value);
 char	*get_env_value(t_env *env, char *key);
 void	expand_variables(t_token *tokens, t_env *env);
+char	*case_of_squote(char *word, int *i, char *result);
+char	*case_of_dquote(char *word, int *i, char *result, t_env *env);
+char	*case_of_normal_var(char *word, int *i, char *result, t_env *env);
+char	*case_of_var_with_next_char_squote(char *word, int *i, char *result);
+char	*case_of_var_with_next_char_dquote(char *word, int *i, char *result);
+char	*case_of_var_with_next_char_digit(char *word, int *i, char *result);
+char	*case_of_var_with_exit_status(int *i, char *result);
+char	*case_of_word(char *word, int *i, char *result);
+char	*ft_strjoin_char(char *str, char c);
 t_list	*parse_tokens(t_token *tokens);
 char	**ft_realloc_array(char **arr, char *new_str);
 void	free_tokens(t_token *tokens);
