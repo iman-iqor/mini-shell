@@ -27,8 +27,11 @@ src/utils/ft_strcat.c\
 src/utils/ft_strndup.c \
 src/env/env.c\
 src/parser/expand_env.c\
+src/parser/expand_1.c\
+src/parser/expand_2.c\
 src/parser/init_env.c\
 src/parser/tokenize.c\
+src/parser/tokenize_help.c\
 src/parser/parse_cmd.c\
 src/parser/generate_cmds.c\
 src/parser/ft_realloc_array.c\
