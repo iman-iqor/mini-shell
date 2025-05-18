@@ -37,24 +37,24 @@ int	is_builtin(char *cmd)
 }
 
 
+
+
 void execone(t_list *list)
 {
-	if(list->input_file && !list->heredoc)
+	if(list->input_file && !list->input_file->flag)
 	{
-		//hna ghandir khdma dyal nakhod fd dyal dak l input file wnqra mnou
+		//here i ll need to open that file and get it fd to make my input for my command
 	}
-	else if(list->input_file && list->heredoc)
+	else if(list->input_file && list->input_file->flag)
 	{
-		//hna fin ghandir l heredoc wnqra mn tmp file 
-		int fd_input_file;
-		fd_input_file = heredoc(list);
-		printf("%d\n",fd_input_file);
-
+		//here i know that i have a heredoc or multiple heredocs or i dont help
+		
+		int heredoc(t_list *list);
 
 	}
-	else if(!list->input_file && !list->heredoc)
+	else if(!list->input_file && !list->input_file->flag)
 	{
-		//hna ghadi n executi 3adi
+		//here i dont have any input file i will execute normal
 	}
 }
 
@@ -65,13 +65,10 @@ int	ft_exec_single_command(t_list *list)
 	{
 		if(list->argument != NULL && is_builtin(list->argument[0]))
 		{
-			printf("enetered is_builtins w rah dakhl l exec builtin\n");
 			exec_builtin(list);
-
 		}
 		else
 		{
-			printf("entered execone\n");
 			execone(list);
 		}
 		return 1;
@@ -83,7 +80,6 @@ int	ft_exec_single_command(t_list *list)
 
 void	ft_exec(t_list *list)
 {
-	printf("entered ft_exec at least!\n");
 	if (ft_exec_single_command(list))
 		return ;
 	// if (ft_exec2(list))

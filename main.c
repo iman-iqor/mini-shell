@@ -21,12 +21,14 @@ int	main(int argc, char **argv, char **env)
 			break ;
 		if (*input)
 			add_history(input);
-        printf("a\n");
 		list = parse_cmd(input, my_env_list);
-        // printf("%s\n",list->input_file[0]);
-        // printf("%d\n",list->heredoc);
-        ft_exec(list);
         
+        ft_exec(list);
+        // printf("%s \n",list->argument[0]);
+		// printf("%c %d\n",list->input_file->file_name[0],list->input_file->flag);
+		// printf("%c\n",list->input_file->next->file_name[0]);
+		// printf("%c\n",list->input_file->next->next->file_name[0]);
+
 		free(input);
 	}
 	void graceful_exit(void);

@@ -6,7 +6,7 @@ LFLAGS = -lreadline #-lhistory
 RM  = rm -f
 
 
-SRC =	src/parser/main.c\
+SRC = main.c\
 src/builtins/echo.c \
 src/builtins/pwd.c \
 src/builtins/cd.c\

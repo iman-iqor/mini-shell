@@ -30,14 +30,21 @@ int is_valid(char *str)
 {
     int i = 0;
 
+    // Skip leading whitespace
     while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
         i++;
 
-    if (!((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || str[i] == '_'))
+    // First character must be alphabetic or '_'
+    if (!((str[i] >= 'a' && str[i] <= 'z') ||
+          (str[i] >= 'A' && str[i] <= 'Z') ||
+          str[i] == '_'))
         return (0);
 
+    // Loop until = or end of key
     while (str[i] && str[i] != '=')
     {
+        if (str[i] == '+' && str[i + 1] == '=')
+            break;
         if (!((str[i] >= 'a' && str[i] <= 'z') ||
               (str[i] >= 'A' && str[i] <= 'Z') ||
               (str[i] >= '0' && str[i] <= '9') ||
@@ -45,8 +52,19 @@ int is_valid(char *str)
             return (0);
         i++;
     }
+    
+
+    // Allow key+=value as valid syntax
+    if (str[i] == '+' && str[i + 1] == '=')
+        i += 2;
+    else if (str[i] == '=')
+        i += 1;
+
+    // Valid if we handled key correctly
     return (1);
 }
+
+
 void handle_exit_status(int flag)
 {
 	if(flag)
