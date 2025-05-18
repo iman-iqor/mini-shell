@@ -51,21 +51,20 @@ void	execone(t_list *list)
 				perror(list->input_file->file_name);
 				return ;
 			}
-			dup2(fd, STDIN_FILENO);
-			close(fd);
+			// dup2(fd, STDIN_FILENO);
+			// close(fd);
 		}
 		else if (list->input_file && list->input_file->flag)
 		{
 			// here i know that i have a heredoc or multiple heredocs or i dont help
 			if (heredoc(list) == -1)
 			{
-				perror("heredoc failed");
 				return ;
 			}
 			if (list->fd != -1)
 			{
-				dup2(list->fd, STDIN_FILENO);
-				close(list->fd);
+				// dup2(list->fd, STDIN_FILENO);
+				// close(list->fd);
 			}
 		}
 	}
@@ -85,6 +84,7 @@ void	execone(t_list *list)
 	{
 		//error because there is no list att all ,just for more protection
 	}
+	printf("final\n");
 }
 
 int	ft_exec_single_command(t_list *list)

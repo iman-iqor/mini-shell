@@ -6,7 +6,7 @@
 /*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/18 14:27:01 by macbookair       ###   ########.fr       */
+/*   Updated: 2025/05/18 19:11:22 by macbookair       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdlib.h>
 # include <time.h>
 # include <unistd.h>
+# include <sys/wait.h>
+
 
 // garbage collector struct
 typedef struct s_gc
