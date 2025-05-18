@@ -2,6 +2,12 @@
 
 t_general	g_general;
 
+void h(int sig)
+{
+	(void)sig;
+	printf("AWDN");
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_list	*list;
@@ -13,6 +19,8 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	(void)env;
 	my_env_list = init_env_list(env);
+	signal(SIGINT, h);
+	signal(SIGQUIT, SIG_IGN);
 	env_list_to_array(my_env_list);
 	while (1)
 	{
