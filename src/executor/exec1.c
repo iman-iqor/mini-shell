@@ -84,7 +84,6 @@ void	execone(t_list *list)
 	{
 		//error because there is no list att all ,just for more protection
 	}
-	printf("final\n");
 }
 
 int	ft_exec_single_command(t_list *list)
