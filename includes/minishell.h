@@ -84,12 +84,14 @@ typedef struct s_list
 }					t_list;
 //**************************************************************************************************************************************************** */
 
-/*                   RRANDOM VARIABLES                                      */
-typedef struct s_var
+typedef struct s_exec_data
 {
-	int				i;
-
-}					t_var;
+	int		i;
+	int		n_cmd;
+	int		prev_fd;
+	int		pipe_fd[2];
+	pid_t	*pid;
+}	t_exec_data;
 /******************************************************************************************************************************************************* */
 //                          #UTILS#
 int					ft_strcmp(char *s1, char *s2);
@@ -99,6 +101,7 @@ int					ft_strlen(const char *s);
 char				*ft_strndup(char *str, int n);
 void				ft_putstr(char *text);
 void				graceful_exit(void);
+int list_len(t_list *list);
 /***************************************************************************************************************************************************************** */
 //                        #EXECUTION#
 void exec_builtin(t_list *list);
@@ -124,6 +127,15 @@ char	*check_path(char **env, t_list *list);
 int	ft_execve(char *exact_path, t_list *list);
 char	**extract_path(char **env);
 char	*concatenate_path(char *dir, char *cmd);
+//piped commands
+void	ft_exec_piped_commands(t_list *list);
+void	init_exec_data(t_exec_data *d,t_list *list);
+void	handle_child_process(t_list *list, t_exec_data *d);
+void	close_unused_fds(t_exec_data *d);
+void	handle_parent_process(t_exec_data *d, t_list *list);
+void	wait_for_all(pid_t *pid, int n);
+void	set_signals_parent(void);
+void	set_signals_child(void);
 // signals
 void				h(int sig);
 // builtins

@@ -19,8 +19,10 @@ src/builtins/exit.c\
 src/executor/exec1.c \
 src/executor/heredoc.c \
 src/executor/execute_command.c\
+src/executor/piped_commands.c\
 src/utils/ft_strcmp.c  \
 src/utils/ft_putstr.c  \
+src/utils/list_len.c  \
 src/utils/graceful_exit.c  \
 src/gc/gc.c \
 src/utils/ft_strcpy.c \

@@ -200,18 +200,20 @@ int	ft_exec_single_command(t_list *list)
 	return (0);
 }
 
+
+
+
 void	ft_exec(t_list *list)
 {
-	
 	
 	if (list && !list->next)
 	{
 		ft_exec_single_command(list);
 		return ;
 	}
-	// if (ft_exec2(list))
-	// 	return ;
-	// ft_exec3(list);
-	// while (wait(NULL) > 0)
-	// 	;
+	else if(list && list->next)
+	{
+		ft_exec_piped_commands(list);
+		return;
+	}
 }
