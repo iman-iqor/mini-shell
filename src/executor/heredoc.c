@@ -30,13 +30,11 @@ char	*get_tmp_file(void)
 		name = ft_strjoin("heredoc_", num);
 		free(num);
 		path = ft_strjoin("/tmp/", name);
-		free(name);
 		if (access(path, F_OK) != 0) 
 			return (path);
-		free(path); 
 	}
 }
-int	do_heredoc(char *delimiter)
+int	do_heredoc(char *delimiter,t_list *list)
 {
 	pid_t	pid;
 	int		status;
@@ -59,6 +57,7 @@ int	do_heredoc(char *delimiter)
 	}
 	if (pid == 0)
 	{
+		signal(SIGINT,SIG_DFL);
 		handle_heredoc_signals();
 		while (1)
 		{
@@ -85,6 +84,8 @@ int	do_heredoc(char *delimiter)
 		close(fd);
 		return (-1);
 	}
+	free(list->input_file->file_name);
+	list->input_file->file_name=ft_strdup(file);	
 	return  (fd); // i need to return
 }
 
@@ -93,8 +94,6 @@ int	heredoc(t_list *list)
 	int		fd;
 	t_file	*tmp;
 
-	if (!list || !list->input_file)
-		return (0);
 	fd = -1;
 	tmp = list->input_file;
 	while (tmp)
@@ -106,23 +105,25 @@ int	heredoc(t_list *list)
 		}
 		if (tmp->flag == 1) 
 		{
-			fd = do_heredoc(tmp->file_name);
+			fd = do_heredoc(tmp->file_name,list);
 			if (fd == -1)
 			{
 				return (-1);
 			}
 			if (fd == -2)
 				return (-1);
+			
 		}
-		else // regular input file
-		{
-			fd = open(tmp->file_name, O_RDONLY);
-			if (fd == -1)
-			{
-				perror(tmp->file_name);
-				return (-1);
-			}
-		}
+		// else // regular input file
+		// {
+		// 	fd = open(tmp->file_name, O_RDONLY);
+		// 	if (fd == -1)
+		// 	{
+		// 		perror(tmp->file_name);
+		// 		return (-1);
+		// 	}
+			
+		// }
 		tmp = tmp->next;
 	}
 	list->fd = fd; // Store the final file descriptor in the list

@@ -18,6 +18,7 @@ src/builtins/export3.c\
 src/builtins/exit.c\
 src/executor/exec1.c \
 src/executor/heredoc.c \
+src/executor/execute_command.c\
 src/utils/ft_strcmp.c  \
 src/utils/ft_putstr.c  \
 src/utils/graceful_exit.c  \
