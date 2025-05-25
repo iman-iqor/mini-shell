@@ -180,7 +180,6 @@ int	ft_exec_single_command(t_list *list)
 {
 	if (!list || list->next)
 		return (0);
-
 	
 	if (list && list->next == NULL)
 	{

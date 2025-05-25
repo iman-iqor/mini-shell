@@ -1,6 +1,5 @@
 #include "../includes/minishell.h"
 
-
 void	set_signals_child(void)
 {
 	signal(SIGINT, SIG_DFL);
@@ -26,10 +25,7 @@ void	wait_for_all(pid_t *pid, int n)
 			g_general.exit_status = WEXITSTATUS(status);
 		i++;
 	}
-	free(pid);
 }
-
-
 
 void	handle_parent_process(t_exec_data *d, t_list *list)
 {
@@ -56,21 +52,27 @@ void	close_unused_fds(t_exec_data *d)
 void	handle_child_process(t_list *list, t_exec_data *d)
 {
 	set_signals_child();
-	if (d->prev_fd != -1)
-		dup2(d->prev_fd, 0);
-	if (list->next)
+
+	if (list->input_file)
+		input_no_output(list);  
+	else if (d->prev_fd != -1)
+		dup2(d->prev_fd, 0); 
+
+	if (list->output_file)
+		output_no_input(list);
+	else if (list->next)
 		dup2(d->pipe_fd[1], 1);
+
 	close_unused_fds(d);
 	execute_command(list);
 }
 
-void	init_exec_data(t_exec_data *d,t_list *list)
+void	init_exec_data(t_exec_data *d, t_list *list)
 {
 	d->i = 0;
 	d->n_cmd = list_len(list);
 	d->prev_fd = -1;
-	d->pid = ft_gc(d->n_cmd*sizeof(pid_t),'m');
-	
+	d->pid = ft_gc(d->n_cmd * sizeof(pid_t), 'm');
 }
 
 void	ft_exec_piped_commands(t_list *list)
@@ -78,17 +80,25 @@ void	ft_exec_piped_commands(t_list *list)
 	t_exec_data	d;
 
 	set_signals_parent();
-	init_exec_data(&d,list);
+	init_exec_data(&d, list);
 	while (list)
 	{
 		if (list->next)
-        {
-            if(pipe(d.pipe_fd) == -1)
-			    perror("pipe");
-        }
+		{
+			if (pipe(d.pipe_fd) == -1)
+			{
+				perror("pipe");
+				g_general.exit_status = 1;
+				return ;
+			}
+		}
 		d.pid[d.i] = fork();
 		if (d.pid[d.i] == -1)
+		{
 			perror("fork");
+			g_general.exit_status = 1;
+			return ;
+		}
 		if (d.pid[d.i] == 0)
 			handle_child_process(list, &d);
 		else
