@@ -49,6 +49,7 @@ void	close_unused_fds(t_exec_data *d)
 	if (d->pipe_fd[1] != -1)
 		close(d->pipe_fd[1]);
 }
+
 void	handle_child_process(t_list *list, t_exec_data *d)
 {
 	set_signals_child();
@@ -64,7 +65,10 @@ void	handle_child_process(t_list *list, t_exec_data *d)
 		dup2(d->pipe_fd[1], 1);
 
 	close_unused_fds(d);
-	execute_command(list);
+	// if (is_builtin(list->argument[0]))
+	// 	exec_builtin(list);
+	 
+		execute_command(list);
 }
 
 void	init_exec_data(t_exec_data *d, t_list *list)

@@ -1,7 +1,8 @@
 #include "../includes/minishell.h"
 
-int	ft_execve(char *exact_path, t_list *list)
+int ft_execve(char *exact_path, t_list *list)
 {
+	env_list_to_array(g_general.env_list);
 	execve(exact_path, list->argument, g_general.env_array);
 
 	// If execve fails
@@ -23,9 +24,9 @@ int	ft_execve(char *exact_path, t_list *list)
 	exit(127);
 }
 
-char	**extract_path(char **env)
+char **extract_path(char **env)
 {
-	int		i = 0;
+	int i = 0;
 
 	if (!env)
 		return (NULL);
@@ -39,10 +40,10 @@ char	**extract_path(char **env)
 	return (NULL);
 }
 
-char	*concatenate_path(char *dir, char *cmd)
+char *concatenate_path(char *dir, char *cmd)
 {
-	char	*tmp = ft_strjoin(dir, "/");
-	char	*full_path;
+	char *tmp = ft_strjoin(dir, "/");
+	char *full_path;
 
 	if (!tmp)
 		return (NULL);
@@ -51,11 +52,11 @@ char	*concatenate_path(char *dir, char *cmd)
 	return (full_path);
 }
 
-char	*check_path(char **env, t_list *list)
+char *check_path(char **env, t_list *list)
 {
-	char	**paths;
-	char	*path;
-	int		i = 0;
+	char **paths;
+	char *path;
+	int i = 0;
 
 	if (ft_strchr(list->argument[0], '/'))
 		return (ft_strdup(list->argument[0]));
@@ -81,25 +82,33 @@ char	*check_path(char **env, t_list *list)
 	return (ft_strdup(list->argument[0]));
 }
 
-int	execute_command(t_list *list)
+int execute_command(t_list *list)
 {
-	char	*exact_path;
+	char *exact_path;
 
-	if (list && list->argument &&  ft_strlen(list->argument[0])==0)
+	if (list && list->argument && ft_strlen(list->argument[0]) == 0)
 	{
 		write(2, "minishell: empty command\n", 26);
 		exit(127);
 	}
-	if (open(list->argument[0], O_DIRECTORY) != -1)
+	if (open(list->argument[0], __O_DIRECTORY) != -1)
 	{
-		
+
 		write(2, list->argument[0], strlen(list->argument[0]));
 		write(2, ": is a directory\n", 17);
 		exit(126);
 	}
+	if (is_builtin(list->argument[0]))
+	{
+		exec_builtin(list);
+		exit(g_general.exit_status); // Important to exit after builtin
+	}
+	else
+	{
+		exact_path = check_path(g_general.env_array, list);
+		ft_execve(exact_path, list);
+	}
 
-	exact_path = check_path(g_general.env_array, list);
-	ft_execve(exact_path, list);
-	free(exact_path); // Not reached, just in case
+	// free(exact_path); // Not reached, just in case
 	return (0);
 }
