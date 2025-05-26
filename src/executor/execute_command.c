@@ -66,6 +66,8 @@ char	*check_path(char **env, t_list *list)
 		write(2, "minishell: PATH not set\n", 25);
 		exit(127);
 	}
+	// if (!paths)
+	// 	return (NULL); // DON'T exit, just return NULL
 
 	while (paths[i])
 	{

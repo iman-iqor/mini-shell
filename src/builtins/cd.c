@@ -51,7 +51,9 @@ void update_pwd()
 	current_directory =  getcwd(NULL,0);
 	t_env *pwd;
 	pwd=get_envar("PWD");
-	pwd->value=ft_gc(strlen(current_directory) + 1,'m');
+	if(!pwd)
+	printf("====\n");
+	pwd->value=ft_gc(ft_strlen(current_directory) + 1,'m');
 	ft_strcpy(pwd->value, current_directory);
 }
 void	cd(char **path)
