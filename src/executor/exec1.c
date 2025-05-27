@@ -212,6 +212,7 @@ void	ft_exec(t_list *list)
 	}
 	else if(list && list->next)
 	{
+		
 		ft_exec_piped_commands(list);
 		return;
 	}

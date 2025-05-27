@@ -93,7 +93,7 @@ int heredoc(t_list *list,t_file *tmp)
 	int fd;
 
 	fd = -1;
-
+	
 	fd = do_heredoc(tmp);
 	if (fd == -1)
 	{

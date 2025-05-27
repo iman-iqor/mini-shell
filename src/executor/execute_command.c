@@ -85,13 +85,13 @@ char *check_path(char **env, t_list *list)
 int execute_command(t_list *list)
 {
 	char *exact_path;
-
+	
 	if (list && list->argument && ft_strlen(list->argument[0]) == 0)
 	{
 		write(2, "minishell: empty command\n", 26);
 		exit(127);
 	}
-	if (open(list->argument[0], O_DIRECTORY) != -1)
+	if (open(list->argument[0], __O_DIRECTORY) != -1)
 	{
 
 		write(2, list->argument[0], strlen(list->argument[0]));
