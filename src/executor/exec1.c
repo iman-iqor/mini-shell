@@ -54,9 +54,9 @@ void	input_no_output(t_list *list)
 			close(fd_in);
 		if (tmp->flag)
 		{
-			if (heredoc(list) == -1)
+			if (heredoc(list,tmp) == -1)
 				return ;
-			tmp->file_name = list->input_file->file_name;
+			// tmp->file_name = list->input_file->file_name;
 		}
 		fd_in = open(tmp->file_name, O_RDONLY);
 		if (fd_in == -1)

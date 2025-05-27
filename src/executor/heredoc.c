@@ -34,7 +34,7 @@ char *get_tmp_file(void)
 			return (path);
 	}
 }
-int do_heredoc(t_list *list)
+int do_heredoc(t_file *tmp)
 {
 	pid_t pid;
 	int status;
@@ -65,7 +65,7 @@ int do_heredoc(t_list *list)
 			{
 				exit(0);
 			}
-			if (!ft_strcmp(line, list->input_file->file_name))
+			if (!ft_strcmp(line, tmp->file_name))
 			{
 				free(line);
 				exit(0);
@@ -83,18 +83,18 @@ int do_heredoc(t_list *list)
 		close(fd);
 		return (-1);
 	}
-	free(list->input_file->file_name);
-	list->input_file->file_name = ft_strdup(file);
+	free(tmp->file_name);
+	tmp->file_name = ft_strdup(file);
 	return (fd);
 }
 
-int heredoc(t_list *list)
+int heredoc(t_list *list,t_file *tmp)
 {
 	int fd;
 
 	fd = -1;
 
-	fd = do_heredoc(list);
+	fd = do_heredoc(tmp);
 	if (fd == -1)
 	{
 		return (-1);

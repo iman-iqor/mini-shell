@@ -6,7 +6,7 @@
 /*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/23 21:47:03 by macbookair       ###   ########.fr       */
+/*   Updated: 2025/05/27 16:23:24 by macbookair       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ void	wait_and_update_status(pid_t pid);
 void exec_externals(t_list *list);
 void	ft_redirect_and_execute(t_list *list);
 // heredoc
-int					heredoc(t_list *list);
-int					do_heredoc(t_list *list);
+int					heredoc(t_list *list,t_file *tmp);
+int					do_heredoc(t_file *tmp);
 char				*get_tmp_file(void);
 void				handle_heredoc_signals(void);
 void				sigint_handler(int sig);

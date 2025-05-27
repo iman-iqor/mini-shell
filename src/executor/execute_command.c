@@ -91,7 +91,7 @@ int execute_command(t_list *list)
 		write(2, "minishell: empty command\n", 26);
 		exit(127);
 	}
-	if (open(list->argument[0], __O_DIRECTORY) != -1)
+	if (open(list->argument[0], O_DIRECTORY) != -1)
 	{
 
 		write(2, list->argument[0], strlen(list->argument[0]));
