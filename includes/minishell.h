@@ -114,7 +114,7 @@ void exec_externals(t_list *list);
 void	ft_redirect_and_execute(t_list *list);
 // heredoc
 int					heredoc(t_list *list);
-int					do_heredoc(char *delimiter,t_list *list);
+int					do_heredoc(t_list *list);
 char				*get_tmp_file(void);
 void				handle_heredoc_signals(void);
 void				sigint_handler(int sig);

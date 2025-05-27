@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-void	sigint_handler(int sig)
+void sigint_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -9,18 +9,18 @@ void	sigint_handler(int sig)
 	}
 }
 
-void	handle_heredoc_signals(void)
+void handle_heredoc_signals(void)
 {
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
 
-char	*get_tmp_file(void)
+char *get_tmp_file(void)
 {
-	static int	i = 0;
-	char		*num;
-	char		*name;
-	char		*path;
+	static int i = 0;
+	char *num;
+	char *name;
+	char *path;
 
 	while (1)
 	{
@@ -30,18 +30,17 @@ char	*get_tmp_file(void)
 		name = ft_strjoin("heredoc_", num);
 		free(num);
 		path = ft_strjoin("/tmp/", name);
-		if (access(path, F_OK) != 0) 
+		if (access(path, F_OK) != 0)
 			return (path);
 	}
 }
-int	do_heredoc(char *delimiter,t_list *list)
+int do_heredoc(t_list *list)
 {
-	pid_t	pid;
-	int		status;
-	char	*line;
-	int		fd;
-	char	*file;
-	
+	pid_t pid;
+	int status;
+	char *line;
+	int fd;
+	char *file;
 
 	file = get_tmp_file();
 	fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
@@ -57,7 +56,7 @@ int	do_heredoc(char *delimiter,t_list *list)
 	}
 	if (pid == 0)
 	{
-		signal(SIGINT,SIG_DFL);
+		signal(SIGINT, SIG_DFL);
 		handle_heredoc_signals();
 		while (1)
 		{
@@ -66,7 +65,7 @@ int	do_heredoc(char *delimiter,t_list *list)
 			{
 				exit(0);
 			}
-			if (!ft_strcmp(line, delimiter))
+			if (!ft_strcmp(line, list->input_file->file_name))
 			{
 				free(line);
 				exit(0);
@@ -85,47 +84,24 @@ int	do_heredoc(char *delimiter,t_list *list)
 		return (-1);
 	}
 	free(list->input_file->file_name);
-	list->input_file->file_name=ft_strdup(file);	
-	return  (fd); // i need to return
+	list->input_file->file_name = ft_strdup(file);
+	return (fd);
 }
 
-int	heredoc(t_list *list)
+int heredoc(t_list *list)
 {
-	int		fd;
-	t_file	*tmp;
+	int fd;
 
 	fd = -1;
-	tmp = list->input_file;
-	while (tmp)
+
+	fd = do_heredoc(list);
+	if (fd == -1)
 	{
-		if (fd != -1)
-		{
-			close(fd);
-			fd = -1;
-		}
-		if (tmp->flag == 1) 
-		{
-			fd = do_heredoc(tmp->file_name,list);
-			if (fd == -1)
-			{
-				return (-1);
-			}
-			if (fd == -2)
-				return (-1);
-			
-		}
-		// else // regular input file
-		// {
-		// 	fd = open(tmp->file_name, O_RDONLY);
-		// 	if (fd == -1)
-		// 	{
-		// 		perror(tmp->file_name);
-		// 		return (-1);
-		// 	}
-			
-		// }
-		tmp = tmp->next;
+		return (-1);
 	}
+	if (fd == -2)
+		return (-1);
+
 	list->fd = fd; // Store the final file descriptor in the list
 	return (0);
 }
