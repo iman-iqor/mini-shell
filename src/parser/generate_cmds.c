@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generate_cmds.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 21:58:06 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/05/16 18:56:59 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:45:19 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ t_list	*parse_tokens(t_token *tokens)
 				current_cmd->quote_type = tokens->quote_type;
 			}
 		}
-		tokens = tokens->next;
+		if (tokens)
+			tokens = tokens->next;
 	}
 	return (cmd_list);
 }

@@ -171,6 +171,8 @@ void	ft_redirect_and_execute(t_list *list)
 }
 void	execute_builtins_and_externals(t_list *list)
 {
+	if (list == NULL || list->argument == NULL)
+		return;
 	if (is_builtin(list->argument[0]))
 		exec_builtin(list);
 	else

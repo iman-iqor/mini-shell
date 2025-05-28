@@ -36,6 +36,7 @@ int	main(int argc, char **argv, char **env)
 			add_history(input);
 		list = parse_cmd(input, my_env_list);
 		ft_exec(list);
+		printf("%d\n",g_general.exit_status);
 		free(input);
 	}
 	void graceful_exit(void);
