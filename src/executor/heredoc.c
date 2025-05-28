@@ -89,8 +89,9 @@ int do_heredoc(t_file *tmp)
 		close(fd);
 		return (-1);
 	}
-	free(tmp->file_name);
+	// free(tmp->file_name);
 	tmp->file_name = ft_strdup(file);
+	// unlink(tmp->file_name);
 	return (fd);
 }
 

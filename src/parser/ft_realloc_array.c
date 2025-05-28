@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_realloc_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 19:13:27 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/05/06 19:14:54 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:13:58 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ char	**ft_realloc_array(char **arr, char *new_str)
 	}
 	new_arr[len] = ft_strdup(new_str);
 	new_arr[len + 1] = NULL;
-	free(arr);
+	// free(arr);
 	return (new_arr);
 }
