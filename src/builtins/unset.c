@@ -54,8 +54,7 @@ void	unset(char **list)
 
 	if (!list || !list[0])
 	{
-		write(2, "unset: not enough arguments", 28);
-		g_general.exit_status = 1;
+		g_general.exit_status = 0;//that s how the bash treats this case 
 		return ;
 	}
 	i = 0;
