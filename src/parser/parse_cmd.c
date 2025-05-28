@@ -21,7 +21,7 @@ t_list    *parse_cmd(char *input, t_env *env)
     {
 	    printf("exit\n");
 	    free(input);
-	    exit(0);
+	    aghlimi_exit(0);
     }
     // split the cmd to tokens
     tokens = tokenize_input(input);

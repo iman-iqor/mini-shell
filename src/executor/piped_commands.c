@@ -83,19 +83,19 @@ void	input_no_output_of_pipe(t_list *list)
 // 	if (list && list->argument && ft_strlen(list->argument[0]) == 0)
 // 	{
 // 		write(2, "minishell: empty command\n", 26);
-// 		exit(127);
+// 		aghlimi_exit(127);
 // 	}
 // 	if (open(list->argument[0], __O_DIRECTORY) != -1)
 // 	{
 
 // 		write(2, list->argument[0], strlen(list->argument[0]));
 // 		write(2, ": is a directory\n", 17);
-// 		exit(126);
+// 		aghlimi_exit(126);
 // 	}
 // 	if (is_builtin(list->argument[0]))
 // 	{
 // 		exec_builtin(list);
-// 		exit(g_general.exit_status); // Important to exit after builtin
+// 		aghlimi_exit(g_general.exit_status); // Important to exit after builtin
 // 	}
 // 	else
 // 	{
@@ -180,8 +180,10 @@ void	ft_exec_piped_commands(t_list *list)
 			g_general.exit_status = 1;
 			return ;
 		}
-		if (d.pid[d.i] == 0)
+		if (d.pid[d.i] == 0){
 			handle_child_process(list, &d);
+			ft_gc(0,'f');
+		}
 		else
 			handle_parent_process(&d, list);
 		list = list->next;

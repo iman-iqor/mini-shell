@@ -5,7 +5,7 @@ void sigint_handler(int sig)
 	if (sig == SIGINT)
 	{
 		write(1, "\n", 1);
-		exit(130); // i need here to free the memory and exit not just exit
+		aghlimi_exit(130); // i need here to free the memory and exit not just exit
 	}
 }
 
@@ -28,11 +28,16 @@ char *get_tmp_file(void)
 			return (NULL);
 		num = ft_itoa(i++);
 		name = ft_strjoin("heredoc_", num);
-		free(num);
+		// free(num);
 		path = ft_strjoin("/tmp/", name);
 		if (access(path, F_OK) != 0)
 			return (path);
 	}
+}
+void aghlimi_exit(int status)
+{
+	ft_gc(0,'f');
+	exit(status);
 }
 int do_heredoc(t_file *tmp)
 {
@@ -47,7 +52,7 @@ int do_heredoc(t_file *tmp)
 	if (fd == -1)
 	{
 		perror(file);
-		exit(1);
+		aghlimi_exit(1);
 	}
 	pid = fork();
 	if (pid == -1)
@@ -63,19 +68,20 @@ int do_heredoc(t_file *tmp)
 			line = readline(">");
 			if (!line)
 			{
-				exit(0);
+				aghlimi_exit(0);
 			}
 			if (!ft_strcmp(line, tmp->file_name))
 			{
 				free(line);
-				exit(0);
+				aghlimi_exit(0);
 			}
 			write(fd, line, ft_strlen(line));
 			write(fd, "\n", 1);
 			free(line);
 		}
 		// close(fd);
-		// exit(0);
+		// aghlimi_exit(0);
+		ft_gc(0,'f');
 	}
 	waitpid(pid, &status, 0);
 	if (WEXITSTATUS(status) == 130)

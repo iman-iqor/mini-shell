@@ -66,7 +66,7 @@ char	*ft_itoa(int n)
 	len = 0;
 	checksigne(&n, &len);
 	len += countlen(n);
-	str = malloc(len + 1);
+	str = ft_gc(len + 1,'m');
 	if (!str)
 		return (NULL);
 	str = implement(str, len, n);

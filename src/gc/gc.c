@@ -82,7 +82,7 @@ void	*ft_gc(size_t n, char flag)
 		add(&gc, new);
 		return (ptr);
 	}
-	else if (flag == 'f')
-		fr_ee(gc);
+	else if (flag == 'f'){
+		fr_ee(gc);gc=NULL;}
 	return (NULL);
 }

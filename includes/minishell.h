@@ -243,4 +243,8 @@ t_list				*parse_tokens(t_token *tokens);
 char				**ft_realloc_array(char **arr, char *new_str);
 void				free_tokens(t_token *tokens);
 t_list				*ft_add_file(t_list *cmds, char *new_str, int flag, char c);
+
+// exit with gc
+void aghlimi_exit(int status);
+
 #endif

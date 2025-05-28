@@ -44,7 +44,7 @@ void	cleanup_and_exit(int status)
 	// close(STDIN_FILENO);
 	// close(STDOUT_FILENO);
 	// close(STDERR_FILENO);
-	exit(status);
+	aghlimi_exit(status);
 }
 void	ft_exit(char **args)
 {

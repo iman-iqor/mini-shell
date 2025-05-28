@@ -144,6 +144,7 @@ void exec_externals(t_list *list)
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGINT, SIG_DFL);
 		execute_command(list);
+		ft_gc(0,'f');
 	}
 	else // parent process
 	{
