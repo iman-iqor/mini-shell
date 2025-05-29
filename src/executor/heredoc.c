@@ -5,6 +5,7 @@ void sigint_handler(int sig)
 	if (sig == SIGINT)
 	{
 		write(1, "\n", 1);
+		g_general.exit_status=130;
 		imane_exit(130); // i need here to free the memory and exit not just exit
 	}
 }
@@ -49,6 +50,7 @@ char *get_tmp_file(void)
 void imane_exit(int status)
 {
 	ft_gc(0,'f');
+	
 	exit(status);
 }
 int do_heredoc(t_file *tmp)
@@ -93,7 +95,7 @@ int do_heredoc(t_file *tmp)
 		}
 		// close(fd);
 		// imane_exit(0);
-		ft_gc(0,'f');
+		// ft_gc(0,'f');
 	}
 	waitpid(pid, &status, 0);
 	if (WEXITSTATUS(status) == 130)

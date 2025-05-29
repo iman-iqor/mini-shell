@@ -6,6 +6,9 @@
 	int	i;
 
 	i = 0;
+	if (arg == NULL)
+		return g_general.exit_status;
+	
 	while (arg[i] == ' ' || (arg[i] >= 9 && arg[i] <= 13))
 		i++;
 	if (arg[i] == '+' || arg[i] == '-')
@@ -39,29 +42,51 @@
 void	cleanup_and_exit(int status)
 {
 	ft_gc(0, 'f'); 
+	ft_gc(0,'p');
 	close(g_general.in);
 	close(g_general.out);
 	// close(STDIN_FILENO);
 	// close(STDOUT_FILENO);
 	// close(STDERR_FILENO);
-	imane_exit(status);
+	(void)status;
+	exit(status);
+}
+int	is_empty_or_null(char *s)
+{
+	if (!s)
+		return (1);
+	while (*s)
+	{
+		if (*s != ' ' && (*s < 9 || *s > 13)) // not whitespace
+			return (0);
+		s++;
+	}
+	return (1);
 }
 void	ft_exit(char **args)
 {
 	int	exit_code;
 
 	write(2, "exit\n", 5);
-	if (!args || !args[0]) // No arguments → use last command’s exit status
+	
+	if(!args || !args[0])
+	{
 		cleanup_and_exit(g_general.exit_status);
+	}
 	if (!is_numeric_argument(args[0]))
 		exit_error_numeric(args[0]);
 	if (args[1])
 	{
-		write(2, "exit: too many arguments\n", 26);
+		write(2, "exit: too many arguments imane\n", 32);
 		g_general.exit_status = 1;
 		return ;
 	}
-	exit_code = ft_atoi(args[0]);
-	cleanup_and_exit(exit_code);
+	if(args[0]&& args)
+	{
+		printf("there is args[0]\n");
+		exit_code = ft_atoi(args[0]);
+		cleanup_and_exit(exit_code);
+	}
+	
 }
 

@@ -63,8 +63,11 @@ void	unset(char **list)
 	{
 		if (!is_valid_unset(list[i]))
 		{
-			handle_unset_error(list[i]);
-			flag = 1;
+			if(ft_strchr(list[i],'!'))
+                write(2,"minishel:event not found\n",25);
+                
+			// handle_unset_error(list[i]);//this is how bash behave exit with 0 in this case and does not complain
+			flag = 0;
 		}
 		else
 			unset_var(list[i]);

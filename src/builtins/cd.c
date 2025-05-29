@@ -55,6 +55,7 @@ void update_pwd()
 	printf("====\n");
 	pwd->value=ft_gc(ft_strlen(current_directory) + 1,'m');
 	ft_strcpy(pwd->value, current_directory);
+	free(current_directory);
 }
 void	cd(char **path)
 {

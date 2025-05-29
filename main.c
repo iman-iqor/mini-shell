@@ -13,7 +13,15 @@ void	h(int sig)
 	rl_redisplay();
 }
 
-
+// void	graceful_exit(void)
+// {
+// 	ft_gc(0, 'f');  
+// 	ft_gc(0,'p');            // Free all allocated memory
+// 	if (g_general.in > 2)
+// 		close(g_general.in);
+// 	if (g_general.out > 2)
+// 		close(g_general.out);
+// }
 int	main(int argc, char **argv, char **env)
 {
 	t_list	*list;
@@ -29,7 +37,7 @@ int	main(int argc, char **argv, char **env)
 	env_list_to_array(my_env_list);
 	while (1)
 	{
-		input = readline("\033[1;92m➜  \033[1;36mminishell\033[0m ");
+		input = readline("minishell::::::");
 		if (input == NULL)
 			break ;
 		if (*input)
@@ -39,6 +47,6 @@ int	main(int argc, char **argv, char **env)
 		printf("%d\n",g_general.exit_status);
 		free(input);
 	}
-	void graceful_exit(void);
+	graceful_exit();
 	return (0);
 }

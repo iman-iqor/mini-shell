@@ -7,13 +7,21 @@ void exec_builtin(t_list *list)
 {
 	if (!list || !list->argument || !list->argument[0])
 		return;
-
+	printf("|%s|\n",list->argument[0]);
 	if (ft_strcmp("echo", list->argument[0]) == 0)
 		echo(list->argument + 1);
 	else if (ft_strcmp("cd", list->argument[0]) == 0)
 		cd(list->argument + 1);
 	else if (ft_strcmp("env", list->argument[0]) == 0)
+	{
+		if(list->argument[1])
+		{
+			write(2,"Minishell:options are not supported\n",37);
+			g_general.exit_status=127;
+			return;
+		}
 		env();
+	}
 	else if (ft_strcmp("exit", list->argument[0]) == 0)
 		ft_exit(list->argument + 1);
 	else if (ft_strcmp("export", list->argument[0]) == 0)
@@ -56,7 +64,6 @@ void	input_no_output(t_list *list)
 		{
 			if (heredoc(list,tmp) == -1)
 				return ;
-			// tmp->file_name = list->input_file->file_name;
 		}
 		fd_in = open(tmp->file_name, O_RDONLY);
 		if (fd_in == -1)
@@ -174,6 +181,7 @@ void	execute_builtins_and_externals(t_list *list)
 {
 	if (list == NULL || list->argument == NULL)
 		return;
+	printf("|%s|\n",list->argument[0]);
 	if (is_builtin(list->argument[0]))
 		exec_builtin(list);
 	else
@@ -186,6 +194,7 @@ int	ft_exec_single_command(t_list *list)
 	
 	if (list && list->next == NULL)
 	{
+		printf("|%s|\n",list->argument[0]);
 		int(saved_stdout), (saved_stdin);
 		saved_stdout = dup(1);
 		saved_stdin = dup(0);
@@ -207,7 +216,7 @@ int	ft_exec_single_command(t_list *list)
 
 void	ft_exec(t_list *list)
 {
-	
+	printf("|%s|\n",list->argument[0]);
 	if (list && !list->next)
 	{
 		ft_exec_single_command(list);
@@ -219,4 +228,5 @@ void	ft_exec(t_list *list)
 		ft_exec_piped_commands(list);
 		return;
 	}
+	ft_gc(0,'p');
 }

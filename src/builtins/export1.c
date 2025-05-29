@@ -68,7 +68,7 @@ int is_valid(char *str)
 void handle_exit_status(int flag)
 {
 	if(flag)
-		g_general.exit_status = 2;
+		g_general.exit_status = 1;
 	else	
 		g_general.exit_status = 0;
 }
@@ -84,8 +84,16 @@ void export(char **list)
         {
             if (!is_valid(list[i]))  // Validate each argument
             {
+                if(ft_strchr(list[i],'!'))
+                {
+                    write(2,"minishel:event not found\n",25);
+                        flag=0;
+                }
+                else
+                {
                 write(2,"export: not a valid identifier\n", 32);
 				flag = 1;
+                }
             }
 			else
             	export_logique(&list[i]);  // Process each variable
