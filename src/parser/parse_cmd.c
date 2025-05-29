@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:43:25 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/05/17 20:29:22 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/05/29 00:54:54 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_list    *parse_cmd(char *input, t_env *env)
     {
 	    printf("exit\n");
 	    free(input);
-	    aghlimi_exit(0);
+	    imane_exit(0);
     }
     // split the cmd to tokens
     tokens = tokenize_input(input);

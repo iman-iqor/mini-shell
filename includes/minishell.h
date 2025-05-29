@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/27 16:23:24 by macbookair       ###   ########.fr       */
+/*   Updated: 2025/05/29 00:53:18 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,17 @@
 # include <time.h>
 # include <unistd.h>
 
-/*           #GARBAGE COLLECTER STRUCT#                      */
-typedef struct s_gc
-{
-	void			*ptr;
-	struct s_gc		*next;
-}					t_gc;
+/*           #GARBAGE COLLECTER LIST#                      */
+typedef enum e_gc_type {
+    GC_MEMORY,
+    GC_TEMPFILE
+} t_gc_type;
+
+typedef struct s_gc {
+    void *ptr;
+    t_gc_type type;  // Add this field to distinguish types
+    struct s_gc *next;
+} t_gc;
 
 /*            #ENVIRONNEMENT#                                            */
 typedef struct s_env
@@ -245,6 +250,6 @@ void				free_tokens(t_token *tokens);
 t_list				*ft_add_file(t_list *cmds, char *new_str, int flag, char c);
 
 // exit with gc
-void aghlimi_exit(int status);
+void imane_exit(int status);
 
 #endif

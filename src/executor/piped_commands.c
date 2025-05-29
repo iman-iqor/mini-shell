@@ -83,19 +83,19 @@ void	input_no_output_of_pipe(t_list *list)
 // 	if (list && list->argument && ft_strlen(list->argument[0]) == 0)
 // 	{
 // 		write(2, "minishell: empty command\n", 26);
-// 		aghlimi_exit(127);
+// 		imane_exit(127);
 // 	}
 // 	if (open(list->argument[0], __O_DIRECTORY) != -1)
 // 	{
 
 // 		write(2, list->argument[0], strlen(list->argument[0]));
 // 		write(2, ": is a directory\n", 17);
-// 		aghlimi_exit(126);
+// 		imane_exit(126);
 // 	}
 // 	if (is_builtin(list->argument[0]))
 // 	{
 // 		exec_builtin(list);
-// 		aghlimi_exit(g_general.exit_status); // Important to exit after builtin
+// 		imane_exit(g_general.exit_status); // Important to exit after builtin
 // 	}
 // 	else
 // 	{

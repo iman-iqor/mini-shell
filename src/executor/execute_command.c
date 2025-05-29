@@ -11,17 +11,17 @@ int ft_execve(char *exact_path, t_list *list)
 		write(2, "minishell: permission denied: ", 30);
 		write(2, exact_path, strlen(exact_path));
 		write(2, "\n", 1);
-		aghlimi_exit(126);
+		imane_exit(126);
 	}
 	else if (access(exact_path, F_OK) != 0)
 	{
 		write(2, "minishell: command not found: ", 30);
 		write(2, exact_path, strlen(exact_path));
 		write(2, "\n", 1);
-		aghlimi_exit(127);
+		imane_exit(127);
 	}
 	perror("minishell");
-	aghlimi_exit(127);
+	imane_exit(127);
 	return 0;
 }
 
@@ -66,7 +66,7 @@ char *check_path(char **env, t_list *list)
 	if (!paths)
 	{
 		write(2, "minishell: PATH not set\n", 25);
-		aghlimi_exit(127);
+		imane_exit(127);
 	}
 	// if (!paths)
 	// 	return (NULL); // DON'T exit, just return NULL
@@ -90,19 +90,19 @@ int execute_command(t_list *list)
 	if (list && list->argument && ft_strlen(list->argument[0]) == 0)
 	{
 		write(2, "minishell: empty command\n", 26);
-		aghlimi_exit(127);
+		imane_exit(127);
 	}
 	if (open(list->argument[0], __O_DIRECTORY) != -1)
 	{
 
 		write(2, list->argument[0], strlen(list->argument[0]));
 		write(2, ": is a directory\n", 17);
-		aghlimi_exit(126);
+		imane_exit(126);
 	}
 	if (is_builtin(list->argument[0]))
 	{
 		exec_builtin(list);
-		aghlimi_exit(g_general.exit_status); // Important to exit after builtin
+		imane_exit(g_general.exit_status); // Important to exit after builtin
 	}
 	else
 	{

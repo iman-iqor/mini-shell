@@ -5,7 +5,7 @@ void sigint_handler(int sig)
 	if (sig == SIGINT)
 	{
 		write(1, "\n", 1);
-		aghlimi_exit(130); // i need here to free the memory and exit not just exit
+		imane_exit(130); // i need here to free the memory and exit not just exit
 	}
 }
 
@@ -17,24 +17,36 @@ void handle_heredoc_signals(void)
 
 char *get_tmp_file(void)
 {
-	static int i = 0;
-	char *num;
-	char *name;
-	char *path;
+    static int i = 0;
+    char *num;
+    char *name;
+    char *path;
+    char *gc_path;
 
-	while (1)
-	{
-		if (i > 1000)
-			return (NULL);
-		num = ft_itoa(i++);
-		name = ft_strjoin("heredoc_", num);
-		// free(num);
-		path = ft_strjoin("/tmp/", name);
-		if (access(path, F_OK) != 0)
-			return (path);
-	}
+    while (1)
+    {
+        if (i > 1000)
+            return (NULL);
+        
+        num = ft_itoa(i++);
+        name = ft_strjoin("heredoc_", num);
+        
+        path = ft_strjoin("/tmp/", name);
+        
+        if (!path) return NULL;
+
+        if (access(path, F_OK) != 0) {
+            // Register with GC and return
+            gc_path = ft_gc(strlen(path) + 1, 't');
+            
+            strcpy(gc_path, path);
+            return gc_path;
+        }
+        
+        
+    }
 }
-void aghlimi_exit(int status)
+void imane_exit(int status)
 {
 	ft_gc(0,'f');
 	exit(status);
@@ -52,7 +64,7 @@ int do_heredoc(t_file *tmp)
 	if (fd == -1)
 	{
 		perror(file);
-		aghlimi_exit(1);
+		imane_exit(1);
 	}
 	pid = fork();
 	if (pid == -1)
@@ -68,19 +80,19 @@ int do_heredoc(t_file *tmp)
 			line = readline(">");
 			if (!line)
 			{
-				aghlimi_exit(0);
+				imane_exit(0);
 			}
 			if (!ft_strcmp(line, tmp->file_name))
 			{
 				free(line);
-				aghlimi_exit(0);
+				imane_exit(0);
 			}
 			write(fd, line, ft_strlen(line));
 			write(fd, "\n", 1);
 			free(line);
 		}
 		// close(fd);
-		// aghlimi_exit(0);
+		// imane_exit(0);
 		ft_gc(0,'f');
 	}
 	waitpid(pid, &status, 0);
@@ -89,9 +101,7 @@ int do_heredoc(t_file *tmp)
 		close(fd);
 		return (-1);
 	}
-	// free(tmp->file_name);
 	tmp->file_name = ft_strdup(file);
-	// unlink(tmp->file_name);
 	return (fd);
 }
 

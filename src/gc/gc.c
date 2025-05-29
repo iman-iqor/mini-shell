@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 21:03:58 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/28 17:51:25 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/05/29 01:20:34 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	fr_ee(t_gc *gc)
 	while (gc)
 	{
 		next = gc->next;
+		if (gc->type == GC_TEMPFILE) 
+			unlink((char *)gc->ptr);  // Delete temp file
 		free(gc->ptr);
 		free(gc);
 		gc = next;
@@ -77,6 +79,7 @@ void	*ft_gc(size_t n, char flag)
 		if (new == NULL)
 		{
 			free(ptr);
+			
 			return (NULL);
 		}
 		add(&gc, new);
@@ -84,6 +87,18 @@ void	*ft_gc(size_t n, char flag)
 	}
 	else if (flag == 'f'){
 		fr_ee(gc);gc=NULL;}
+	else if (flag == 't') {  // Temp file registration
+		char *filename = malloc(n);
+		if (!filename) return NULL;
+		new = create(filename);
+		if (!new) {
+			free(filename);
+			return NULL;
+		}
+		new->type = GC_TEMPFILE;
+		add(&gc, new);
+		return filename;
+	}
 	return (NULL);
 }
 /********************************************
