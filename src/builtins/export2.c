@@ -9,7 +9,6 @@ void export_logique(char **list)
 
     if (!key)
         return;
-
     node = get_envar_with_passing_env_list(g_general.env_list, key);
     if (node)
     {
