@@ -61,11 +61,10 @@ void	input_no_output(t_list *list)
 			close(fd_in);
 		if (tmp->flag)
 		{
-			if (heredoc(list,tmp) == -1 )
-			{
+			if (heredoc(list,tmp) == -1 || heredoc(list,tmp)==-2 || heredoc(list,tmp)==-130 )
 				return ;
-			}
 		}
+		printf("should not be printed\n");
 		fd_in = open(tmp->file_name, O_RDONLY);
 		if (fd_in == -1)
 		{
