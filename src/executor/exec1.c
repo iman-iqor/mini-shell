@@ -63,7 +63,7 @@ void	input_no_output(t_list *list)
 		{
 			if (heredoc(list,tmp) == -1)
 			{
-				g_general.exit_status=130;
+				printf("%d\n",g_general.exit_status);
 				return ;
 			}
 		}

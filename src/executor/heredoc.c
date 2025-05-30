@@ -75,7 +75,8 @@ int do_heredoc(t_file *tmp)
 	}
 	if (pid == 0)
 	{
-		signal(SIGINT, SIG_DFL);
+		set_signals_child();
+
 		handle_heredoc_signals();
 		while (1)
 		{
@@ -93,16 +94,13 @@ int do_heredoc(t_file *tmp)
 			write(fd, "\n", 1);
 			free(line);
 		}
-		// close(fd);
-		// imane_exit(0);
-		// ft_gc(0,'f');
 	}
 	waitpid(pid, &status, 0);
-	if (WEXITSTATUS(status) == 130)
-	{
-		close(fd);
-		return (-1);
-	}
+	// if (WEXITSTATUS(status) == 130)
+	// {
+	// 	close(fd);
+	// 	return (-1);
+	// }
 
 	tmp->file_name = ft_strdup(file);
 	return (fd);

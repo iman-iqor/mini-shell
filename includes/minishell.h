@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/29 00:53:18 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/05/30 16:58:14 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,10 +139,10 @@ void	handle_child_process(t_list *list, t_exec_data *d);
 void	close_unused_fds(t_exec_data *d);
 void	handle_parent_process(t_exec_data *d, t_list *list);
 void	wait_for_all(pid_t *pid, int n);
-void	set_signals_parent(void);
-void	set_signals_child(void);
 // signals
 void				h(int sig);
+void	set_signals_parent(void);
+void	set_signals_child(void);
 // builtins
 void				echo(char **list);
 int					is_flag(char *str);
