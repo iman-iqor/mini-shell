@@ -61,12 +61,19 @@ void	cd(char **path)
 {
 	char	*p;
 	t_env	*home;
-
+	char *cwd ; 
+	
 	home = get_envar("HOME");
 	p = NULL;
 	if (if_else_of_cd(path, home, &p))
-		return;
+	return;
 	update_pwd();
+    g_general.old_pwd = getcwd(NULL, 0);
 	g_general.exit_status = 0;
+
+    cwd = getcwd(NULL, 0);
+
+	if (cwd == NULL)
+		printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory");
 }
 

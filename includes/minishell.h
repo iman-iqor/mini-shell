@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/30 16:58:14 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/05/30 18:57:13 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <sys/wait.h>
 # include <time.h>
 # include <unistd.h>
+#include <errno.h>
+
+
 
 /*           #GARBAGE COLLECTER LIST#                      */
 typedef enum e_gc_type {
@@ -52,6 +55,7 @@ typedef struct s_general
 	int				i;
 	int				in;
 	pid_t			pid;
+	char *old_pwd;
 	int				out;
 	t_env			*env_list;
 	char			**env_array;

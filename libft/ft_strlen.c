@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbookair <macbookair@student.42.fr>      +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 22:27:40 by macbookair        #+#    #+#             */
-/*   Updated: 2025/04/22 21:54:43 by macbookair       ###   ########.fr       */
+/*   Updated: 2025/05/30 17:46:58 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int ft_strlen(const char* str)
 {
     int i;
     i = 0;
-    while(str[i])
+    while(str && str[i])
     {
         i++;
     }

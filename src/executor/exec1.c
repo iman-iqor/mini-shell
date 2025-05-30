@@ -61,16 +61,22 @@ void	input_no_output(t_list *list)
 			close(fd_in);
 		if (tmp->flag)
 		{
-			if (heredoc(list,tmp) == -1)
+			if (heredoc(list,tmp) == -1 )
 			{
-				printf("%d\n",g_general.exit_status);
 				return ;
 			}
 		}
 		fd_in = open(tmp->file_name, O_RDONLY);
 		if (fd_in == -1)
 		{
-			perror(tmp->file_name);
+			if (errno ==ENOENT )
+				ft_putstr_fd("Permission denied: ", 2);
+			else if (errno == EACCES)
+				ft_putstr_fd("No such file or directory: ", 2);
+			else
+				ft_putstr_fd("Error: ", 2);
+			ft_putstr_fd(tmp->file_name, 2);
+			ft_putstr_fd("\n", 2);
 			g_general.exit_status=1;
 			list->error_flag = 1;
 			return ;
@@ -98,7 +104,13 @@ void	output_no_input(t_list *list)
 			fd_out = open(tmp->file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd_out == -1)
 		{
-			perror(tmp->file_name);
+			printf("hi\n");
+			if (errno == ENOENT)
+				ft_putstr_fd("Permission denied: ", 2);
+			else
+				ft_putstr_fd("Error: ", 2);
+			ft_putstr_fd(tmp->file_name, 2);
+			ft_putstr_fd("\n", 2);
 			g_general.exit_status=1;
 			list->error_flag = 1;
 			return ;
