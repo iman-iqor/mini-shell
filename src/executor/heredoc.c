@@ -127,3 +127,4 @@ int heredoc(t_list *list, t_file *tmp)
 	list->fd = fd; // Store the final file descriptor in the list
 	return (0);
 }
+
