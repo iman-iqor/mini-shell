@@ -35,6 +35,7 @@ t_env	*init_env_list(char **env)
 	head = NULL;
 	last = NULL;
 	i = 0;
+
 	while (env[i])
 	{
 		node = ft_create_env_node(env[i]);
@@ -47,6 +48,17 @@ t_env	*init_env_list(char **env)
 		i++;
 	}
 	g_general.env_list = head;
+	// while (head)
+	// {
+	// 	if (head->value)
+	// 	{
+	// 		ft_putstr(head->key);
+	// 		ft_putstr("=");
+	// 		ft_putstr(head->value);
+	// 		ft_putstr("\n");
+	// 	}
+	// 	head = head->next;
+	// }
 	return (head);
 }
 

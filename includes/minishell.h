@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/30 18:57:13 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/05/31 16:28:51 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_general
 	int				in;
 	pid_t			pid;
 	char *old_pwd;
+	char* PATH;
+	t_env* PATH_NODE;
 	int				out;
 	t_env			*env_list;
 	char			**env_array;

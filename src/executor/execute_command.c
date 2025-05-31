@@ -3,6 +3,17 @@
 int ft_execve(char *exact_path, t_list *list)
 {
 	env_list_to_array(g_general.env_list);
+	int i= 0;
+	while(g_general.env_array[i])
+	{
+		if(ft_strncmp(g_general.env_array[i],"PATH=",5)==0)
+		{
+
+			printf("%s\n",g_general.env_array[i]);
+		}
+		i++;
+	}
+	printf("exact path ==>%s\n",exact_path);
 	execve(exact_path, list->argument, g_general.env_array);
 
 	// If execve fails
@@ -106,6 +117,7 @@ int execute_command(t_list *list)
 	}
 	else
 	{
+		env_list_to_array(g_general.env_list);
 		exact_path = check_path(g_general.env_array, list);
 		ft_execve(exact_path, list);
 	}
