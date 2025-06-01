@@ -1,5 +1,3 @@
-#include"../../includes/minishell.h"
-
 #include "../../includes/minishell.h"
 
 t_env	*ft_create_env_node(char *env)
@@ -35,15 +33,21 @@ t_env	*init_env_list(char **env)
 	head = NULL;
 	last = NULL;
 	i = 0;
-
 	while (env[i])
 	{
 		node = ft_create_env_node(env[i]);
-		
+		if (node == NULL)
+			imane_exit(1);
+		node->prev = NULL;
 		if (last == NULL)
+		{
 			head = node;
+		}
 		else
+		{
 			last->next = node;
+			node->prev = last;
+		}
 		last = node;
 		i++;
 	}
@@ -93,9 +97,9 @@ char	**env_list_to_array(t_env *env_list)
 {
 	char	**envp;
 	int		i;
-	int count;
-	count = env_len(env_list);
+	int		count;
 
+	count = env_len(env_list);
 	envp = ft_gc(sizeof(char *) * (count + 1), 'm');
 	i = 0;
 	while (env_list)
@@ -107,8 +111,6 @@ char	**env_list_to_array(t_env *env_list)
 		env_list = env_list->next;
 	}
 	envp[i] = NULL;
-
 	g_general.env_array = envp;
 	return (envp);
 }
-

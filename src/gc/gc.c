@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 21:03:58 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/29 12:00:36 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/01 17:44:25 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	*ft_gc(size_t n, char flag)
 	void		*ptr;
 	t_gc		*new;
 
+	g_general.gc = &gc;
 	if (flag == 'm')
 	{
 		ptr = malloc(n);

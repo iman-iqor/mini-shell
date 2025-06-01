@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/31 16:28:51 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/01 18:44:34 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <time.h>
 # include <unistd.h>
 #include <errno.h>
+#include<limits.h>
 
 
 
@@ -57,6 +58,8 @@ typedef struct s_general
 	pid_t			pid;
 	char *old_pwd;
 	char* PATH;
+	char* PWD;
+	t_env* PWD_NODE;
 	t_env* PATH_NODE;
 	int				out;
 	t_env			*env_list;
@@ -64,6 +67,7 @@ typedef struct s_general
 	t_gc			*garbage;
 	t_gc *files; // i need to create this part
 	int				stop;
+	t_gc ** gc;
 }					t_general;
 
 extern t_general	g_general;

@@ -9,10 +9,11 @@ void	pwd(void)
 	if (cwd == NULL)//in the case where the path could be deleted
 	{
 		printf("%s\n", g_general.old_pwd);
-		g_general.exit_status = 1;
+		g_general.exit_status = 0;
 		return;
 	}
     printf("%s\n", cwd);
     free(cwd);
+	// free(g_general.old_pwd);
 	g_general.exit_status = 0;
 }

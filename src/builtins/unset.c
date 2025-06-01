@@ -20,25 +20,31 @@ int is_valid_unset(char *str)
 }
 void	unset_var(char *key)
 {
-	t_env *curr ;
-    curr = g_general.env_list;
+	t_env *curr;
 
+	curr = g_general.env_list;
 	while (curr)
 	{
 		if (ft_strcmp(curr->key, key) == 0)
 		{
 			if (curr->prev)
+			{
 				curr->prev->next = curr->next;
-			else
-				g_general.env_list = curr->next;
-			if (curr->next)
-				curr->next->prev = curr->prev;
-			// No need to free `curr` or its contents — GC handles it.
-			return;
+				curr->next->prev=curr->prev;
+				
+			}
+			else {
+				curr = curr->next;
+				curr->prev=NULL;
+				g_general.env_list = curr;
+			}
+			
+			break;
 		}
 		curr = curr->next;
 	}
 }
+
 
 void	handle_unset_error(char *arg)
 {

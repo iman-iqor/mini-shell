@@ -1,21 +1,18 @@
 #include "../includes/minishell.h"
 
-int ft_execve(char *exact_path, t_list *list)
+int	ft_execve(char *exact_path, t_list *list)
 {
+	t_env	*curr;
+
 	env_list_to_array(g_general.env_list);
-	int i= 0;
-	while(g_general.env_array[i])
+	curr = g_general.env_list;
+	while (curr)
 	{
-		if(ft_strncmp(g_general.env_array[i],"PATH=",5)==0)
-		{
-
-			printf("%s\n",g_general.env_array[i]);
-		}
-		i++;
+		if (ft_strncmp(curr->key, "PATH", 4) == 0)
+			printf("%s\n", curr->key);
+		curr = curr->next;
 	}
-	printf("exact path ==>%s\n",exact_path);
 	execve(exact_path, list->argument, g_general.env_array);
-
 	// If execve fails
 	if (access(exact_path, F_OK) == 0 && access(exact_path, X_OK) == -1)
 	{
@@ -33,16 +30,17 @@ int ft_execve(char *exact_path, t_list *list)
 	}
 	perror("minishell");
 	imane_exit(127);
-	return 0;
+	return (0);
 }
 
-char **extract_path(char **env)
+char	**extract_path(char **env)
 {
-	int i = 0;
+	int		i;
 
+	i = 0;
 	if (!env)
 		return (NULL);
-
+	
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], "PATH=", 5) == 0)
@@ -52,36 +50,36 @@ char **extract_path(char **env)
 	return (NULL);
 }
 
-char *concatenate_path(char *dir, char *cmd)
+char	*concatenate_path(char *dir, char *cmd)
 {
-	char *tmp = ft_strjoin(dir, "/");
-	char *full_path;
+	char	*tmp;
+	char	*full_path;
 
+	tmp = ft_strjoin(dir, "/");
 	if (!tmp)
 		return (NULL);
-
 	full_path = ft_strjoin(tmp, cmd);
 	return (full_path);
 }
 
-char *check_path(char **env, t_list *list)
+char	*check_path(char **env, t_list *list)
 {
-	char **paths;
-	char *path;
-	int i = 0;
+	char	**paths;
+	char	*path;
+	int		i;
 
+	i = 0;
 	if (ft_strchr(list->argument[0], '/'))
 		return (ft_strdup(list->argument[0]));
-
 	paths = extract_path(env);
 	if (!paths)
 	{
+		printf("i m here\n");
 		write(2, "minishell: PATH not set\n", 25);
 		imane_exit(127);
 	}
 	// if (!paths)
 	// 	return (NULL); // DON'T exit, just return NULL
-
 	while (paths[i])
 	{
 		path = concatenate_path(paths[i], list->argument[0]);
@@ -94,10 +92,10 @@ char *check_path(char **env, t_list *list)
 	return (ft_strdup(list->argument[0]));
 }
 
-int execute_command(t_list *list)
+int	execute_command(t_list *list)
 {
-	char *exact_path;
-	
+	char	*exact_path;
+
 	if (list && list->argument && ft_strlen(list->argument[0]) == 0)
 	{
 		write(2, "minishell: empty command\n", 26);
@@ -105,7 +103,6 @@ int execute_command(t_list *list)
 	}
 	if (open(list->argument[0], __O_DIRECTORY) != -1)
 	{
-
 		write(2, list->argument[0], strlen(list->argument[0]));
 		write(2, ": is a directory\n", 17);
 		imane_exit(126);
@@ -121,7 +118,6 @@ int execute_command(t_list *list)
 		exact_path = check_path(g_general.env_array, list);
 		ft_execve(exact_path, list);
 	}
-
 	// free(exact_path); // Not reached, just in case
 	return (0);
 }
