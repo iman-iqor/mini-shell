@@ -83,15 +83,17 @@ void handle_child_process(t_list *list, t_exec_data *d)
 {
 	set_signals_child();
 
-	if (list->input_file)
-		input_no_output_of_pipe(list);
-	else if (d->prev_fd != -1)
+	
+	if (d->prev_fd != -1)
 		dup2(d->prev_fd, 0);
+	else if (list->input_file)
+		input_no_output_of_pipe(list);
 
-	if (list->output_file)
-		output_no_input(list);
-	else if (list->next)
+	
+	if (list->next)
 		dup2(d->pipe_fd[1], 1);
+	else if (list->output_file)
+		output_no_input(list);
 
 	close_unused_fds(d);
 
