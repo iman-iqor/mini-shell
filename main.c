@@ -66,7 +66,6 @@ t_env *generate_minimal_env(void)
 	char cwd[1024];
 	char *shlvl;
 	
-	// Get current working directory
 	if (getcwd(cwd, sizeof(cwd)))
 	{
 		char *pwd_str = ft_strjoin("PWD=", cwd);
@@ -84,7 +83,7 @@ t_env *generate_minimal_env(void)
 	}
 	
 	// Create PATH with default value (not exported in env output)
-	char *path_str = ft_strdup("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
+	char *path_str = ft_strdup("PATH=/app/bin:/app/bin:/app/bin:/usr/bin:/home/imiqor/.var/app/com.visualstudio.code/data/node_modules/bin");
 	t_env *path_node = ft_create_env_node(path_str);
 	add_back_env(&env_list, path_node);
 	
@@ -104,30 +103,25 @@ int main(int argc, char **argv, char **env)
 	ft_gc(0,'s');
 	if (env && env[0])
 	{
-		printf("there is env\n");
 		my_env_list = init_env_list(env);
 		if (!check_if_there_is_path(env))
 		{
-			printf("a\n");
 			g_general.PATH_NODE = ft_create_env_node(g_general.PATH);;
 			add_back_env(&my_env_list, g_general.PATH_NODE);
 		}
 		if(!check_if_there_is_pwd(env))
 		{
-			printf("b\n");	
 			g_general.PWD_NODE = ft_create_env_node(g_general.PWD);
 			add_back_env(&my_env_list, g_general.PWD_NODE);
 		}
 		else if(check_if_there_is_path(env) &&check_if_there_is_pwd(env))
 		{
-			printf("hiii\n");
 			my_env_list = init_env_list(env);
 		}
 		
 	}
 	else
 	{
-		printf("there is no env\n");
 		g_general.env_list =my_env_list=generate_minimal_env();
 	}
 	

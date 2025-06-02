@@ -99,6 +99,7 @@ int do_heredoc(t_file *tmp)
 	if (WEXITSTATUS(status) == 130)
 	{
 		close(fd);
+		unlink(file);
 		return (-130);
 	}
 
@@ -122,9 +123,8 @@ int heredoc(t_list *list, t_file *tmp)
 	if(fd==-130)
 	{
 		g_general.exit_status=130;
-		return -130;
+		return -1;
 	}
 	list->fd = fd; // Store the final file descriptor in the list
 	return (0);
 }
-

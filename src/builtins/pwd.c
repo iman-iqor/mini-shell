@@ -8,7 +8,8 @@ void	pwd(void)
 
 	if (cwd == NULL)//in the case where the path could be deleted
 	{
-		printf("%s\n", g_general.old_pwd);
+		if(g_general.old_pwd)
+			printf("%s\n", g_general.old_pwd);
 		g_general.exit_status = 0;
 		return;
 	}

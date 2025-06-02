@@ -116,7 +116,6 @@ void ft_exec_piped_commands(t_list *list)
 
 	while (tmp)
 	{
-
 		if (tmp->input_file && tmp->input_file->flag)
 		{
 			if (heredoc(tmp, tmp->input_file) == -1)
