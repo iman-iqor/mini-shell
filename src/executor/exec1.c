@@ -117,9 +117,9 @@ void	output_no_input(t_list *list)
 			output_no_input_error(tmp, list);
 			return ;
 		}
+		dup2(fd_out, STDOUT_FILENO);
 		tmp = tmp->next;
 	}
-	dup2(fd_out, STDOUT_FILENO);
 	close(fd_out);
 }
 

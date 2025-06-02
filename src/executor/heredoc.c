@@ -75,7 +75,7 @@ int do_heredoc(t_file *tmp)
 	}
 	if (pid == 0)
 	{
-		set_signals_child();
+		// set_signals_child();
 
 		handle_heredoc_signals();
 		while (1)
@@ -95,7 +95,9 @@ int do_heredoc(t_file *tmp)
 			free(line);
 		}
 	}
+	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, 0);
+	signal(SIGINT, h);
 	if (WEXITSTATUS(status) == 130)
 	{
 		close(fd);
