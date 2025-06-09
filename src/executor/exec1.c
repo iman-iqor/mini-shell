@@ -1,7 +1,5 @@
 #include "../includes/minishell.h"
 
-// void	pwd(void);
-
 void	exec_builtin(t_list *list)
 {
 	if (!list || !list->argument || !list->argument[0])
@@ -59,6 +57,7 @@ void	input_no_output_error(t_file *tmp, t_list *list)
 	g_general.exit_status = 1;
 	list->error_flag = 1;
 }
+
 void	input_no_output(t_list *list)
 {
 	int		fd_in;
@@ -88,12 +87,6 @@ void	input_no_output(t_list *list)
 }
 void	output_no_input_error(t_file *tmp, t_list *list)
 {
-	// if (errno == ENOENT)
-	// 	ft_putstr_fd("Permission denied: ", 2);
-	// else
-	// 	ft_putstr_fd("Error: ", 2);
-	// ft_putstr_fd(tmp->file_name, 2);
-	// ft_putstr_fd("\n", 2);
 	perror(tmp->file_name);
 	g_general.exit_status = 1;
 	list->error_flag = 1;

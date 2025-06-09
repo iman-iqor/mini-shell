@@ -25,11 +25,9 @@ t_env	*ft_create_env_node(char *env)
 
 t_env	*init_env_list(char **env)
 {
-	t_env	*head;
-	t_env	*node;
-	t_env	*last;
-	int		i;
+	int	i;
 
+	t_env(*head), (*node), (*last);
 	head = NULL;
 	last = NULL;
 	i = 0;
@@ -40,9 +38,7 @@ t_env	*init_env_list(char **env)
 			imane_exit(1);
 		node->prev = NULL;
 		if (last == NULL)
-		{
 			head = node;
-		}
 		else
 		{
 			last->next = node;
@@ -52,17 +48,6 @@ t_env	*init_env_list(char **env)
 		i++;
 	}
 	g_general.env_list = head;
-	// while (head)
-	// {
-	// 	if (head->value)
-	// 	{
-	// 		ft_putstr(head->key);
-	// 		ft_putstr("=");
-	// 		ft_putstr(head->value);
-	// 		ft_putstr("\n");
-	// 	}
-	// 	head = head->next;
-	// }
 	return (head);
 }
 
@@ -93,6 +78,7 @@ char	*ft_join_key_value(char *key, char *value)
 	ft_strcat(joined, value);
 	return (joined);
 }
+
 char	**env_list_to_array(t_env *env_list)
 {
 	char	**envp;
