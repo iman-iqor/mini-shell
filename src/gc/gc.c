@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 21:03:58 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/09 22:21:42 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/09 22:56:54 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	fr_ee(t_gc *gc)
 		gc = next;
 	}
 }
+
 void	ft_unlink(t_gc *gc)
 {
 	t_gc	*next;
@@ -95,6 +96,7 @@ void *handle_m_flag(size_t n, t_gc **gc)
 	add(gc, new);
 	return ptr;
 }
+
 char *handle_t_flag(char *filename, t_gc **gc)
 {
 	t_gc *new;
