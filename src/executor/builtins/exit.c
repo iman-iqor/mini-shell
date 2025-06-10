@@ -1,14 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/10 21:53:05 by imiqor            #+#    #+#             */
+/*   Updated: 2025/06/10 22:00:06 by imiqor           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
- int	is_numeric_argument(const char *arg)
+int	is_numeric_argument(const char *arg)
 {
 	int	i;
 
 	i = 0;
 	if (arg == NULL)
-		return g_general.exit_status;
-	
+		return (g_general.exit_status);
 	while (arg[i] == ' ' || (arg[i] >= 9 && arg[i] <= 13))
 		i++;
 	if (arg[i] == '+' || arg[i] == '-')
@@ -34,31 +44,27 @@ int	is_exit_code_overflow(const char *arg)
 	i = 0;
 	result = 0;
 	sign = 1;
-
 	while (arg[i] == ' ' || (arg[i] >= 9 && arg[i] <= 13))
 		i++;
 	if (arg[i] == '+' || arg[i] == '-')
 	{
-		if (arg[i] == '-')
+		if (arg[i++] == '-')
 			sign = -1;
-		i++;
 	}
 	while (arg[i] == '0')
 		i++;
-
 	while (arg[i] && ft_isdigit(arg[i]))
 	{
 		result = result * 10 + (arg[i] - '0');
-		if ((sign == 1 && result > 9223372036854775807ULL) ||
-			(sign == -1 && result > 9223372036854775808ULL))
+		if ((sign == 1 && result > 9223372036854775807ULL) || (sign == -1
+				&& result > 9223372036854775808ULL))
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-
- void	exit_error_numeric(char *arg)
+void	exit_error_numeric(char *arg)
 {
 	write(2, "exit: ", 7);
 	write(2, arg, ft_strlen(arg));
@@ -66,15 +72,15 @@ int	is_exit_code_overflow(const char *arg)
 	cleanup_and_exit(2);
 }
 
- void	exit_error_too_many_args(void)
+void	exit_error_too_many_args(void)
 {
 	write(2, "exit: too many arguments\n", 26);
 	g_general.exit_status = 1;
 }
 void	cleanup_and_exit(int status)
 {
-	ft_gc(0, 'f'); 
-	ft_gc(0,'p');
+	ft_gc(0, 'f');
+	ft_gc(0, 'p');
 	close(g_general.in);
 	close(g_general.out);
 	// close(STDIN_FILENO);
@@ -83,28 +89,22 @@ void	cleanup_and_exit(int status)
 	exit(status);
 }
 
-
-
 /************************* */
-
 
 typedef struct s_atoa_state
 {
-	int					i;
-	long				result;
-	int					signe;
-}						t_atoa_state;
+	int		i;
+	long	result;
+	int		signe;
+}			t_atoa_state;
 
-
-void	check_int_overflow(long number,char* str)
+void	check_int_overflow(long number, char *str)
 {
-	if (number > 2147483647  || number < -2147483648 )
+	if (number > 2147483647 || number < -2147483648)
 	{
 		exit_error_numeric(str);
 	}
 }
-
-
 
 void	init_vars(t_atoa_state *vars)
 {
@@ -113,7 +113,7 @@ void	init_vars(t_atoa_state *vars)
 	vars->signe = 1;
 }
 
-int	ff_atoi(char* str)
+int	ff_atoi(char *str)
 {
 	t_atoa_state	vars;
 
@@ -121,7 +121,6 @@ int	ff_atoi(char* str)
 	while (str[vars.i] == '\t' || str[vars.i] == '\n' || str[vars.i] == '\v'
 		|| str[vars.i] == '\f' || str[vars.i] == '\r' || str[vars.i] == ' ')
 		vars.i++;
-	
 	if (str[vars.i] == '-' || str[vars.i] == '+')
 	{
 		if (str[vars.i] == '-')
@@ -131,24 +130,18 @@ int	ff_atoi(char* str)
 	while (str[vars.i] >= '0' && str[vars.i] <= '9')
 	{
 		vars.result = vars.result * 10 + str[vars.i] - 48;
-		check_int_overflow(vars.result * vars.signe,str);
+		check_int_overflow(vars.result * vars.signe, str);
 		vars.i++;
 	}
 	return ((int)(vars.result * vars.signe));
 }
-
-
-
-
-
 
 void	ft_exit(char **args)
 {
 	int	exit_code;
 
 	write(2, "exit\n", 5);
-	
-	if(!args || !args[0])
+	if (!args || !args[0])
 	{
 		cleanup_and_exit(g_general.exit_status);
 	}
@@ -160,11 +153,9 @@ void	ft_exit(char **args)
 		g_general.exit_status = 1;
 		return ;
 	}
-	if(args[0]&& args)
+	if (args[0] && args)
 	{
 		exit_code = ff_atoi(args[0]);
 		cleanup_and_exit(exit_code);
 	}
-	
 }
-

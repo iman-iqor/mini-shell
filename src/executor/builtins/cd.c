@@ -1,4 +1,16 @@
-#include "../../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/10 21:52:56 by imiqor            #+#    #+#             */
+/*   Updated: 2025/06/10 21:54:14 by imiqor           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
 
 void	cd_error(int code)
 {
@@ -52,7 +64,6 @@ void	update_pwd(void)
 		pwd->value = ft_gc(ft_strlen(current_directory) + 1, 'm');
 		ft_strcpy(pwd->value, current_directory);
 	}
-	
 	free(current_directory);
 }
 
@@ -61,6 +72,7 @@ void	cd(char **path)
 	char	*p;
 	t_env	*home;
 	char	*cwd;
+	t_gc	*new;
 
 	home = get_envar("HOME");
 	p = NULL;
@@ -68,16 +80,16 @@ void	cd(char **path)
 		return ;
 	update_pwd();
 	g_general.old_pwd = getcwd(NULL, 0);
-	t_gc * new = create(g_general.old_pwd);
+	new = create(g_general.old_pwd);
 	if (new == NULL)
 		imane_exit(1);
-	add(g_general.gc,new);	
+	add(g_general.gc, new);
 	g_general.exit_status = 0;
 	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)
 	{
 		printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
-		g_general.exit_status=0;
+		g_general.exit_status = 0;
 	}
 	free(cwd);
 }

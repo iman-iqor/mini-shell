@@ -6,11 +6,12 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 21:03:58 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/09 22:56:54 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/10 21:53:45 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
+
 
 void	add(t_gc **gc, t_gc *new)
 {

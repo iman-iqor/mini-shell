@@ -7,15 +7,15 @@ RM  = rm -f
 
 
 SRC = main.c\
-src/builtins/echo.c \
-src/builtins/pwd.c \
-src/builtins/cd.c\
-src/builtins/unset.c\
-src/builtins/env.c\
-src/builtins/export1.c\
-src/builtins/export2.c\
-src/builtins/export3.c\
-src/builtins/exit.c\
+src/executor/builtins/echo.c \
+src/executor/builtins/pwd.c \
+src/executor/builtins/cd.c\
+src/executor/builtins/unset.c\
+src/executor/builtins/env.c\
+src/executor/builtins/export1.c\
+src/executor/builtins/export2.c\
+src/executor/builtins/export3.c\
+src/executor/builtins/exit.c\
 src/executor/exec1.c \
 src/executor/heredoc.c \
 src/executor/execute_command.c\
@@ -24,11 +24,11 @@ src/utils/ft_strcmp.c  \
 src/utils/ft_putstr.c  \
 src/utils/list_len.c  \
 src/utils/graceful_exit.c  \
-src/gc/gc.c \
+src/executor/gc/gc.c \
 src/utils/ft_strcpy.c \
 src/utils/ft_strcat.c\
 src/utils/ft_strndup.c \
-src/env/env.c\
+src/executor/env/env.c\
 src/parser/expand_env.c\
 src/parser/expand_1.c\
 src/parser/expand_2.c\

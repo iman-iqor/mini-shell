@@ -1,19 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute_command.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/10 21:53:56 by imiqor            #+#    #+#             */
+/*   Updated: 2025/06/10 21:53:57 by imiqor           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int	ft_execve(char *exact_path, t_list *list)
 {
-	t_env	*curr;
 
 	env_list_to_array(g_general.env_list);
-	curr = g_general.env_list;
-	while (curr)
-	{
-		if (ft_strncmp(curr->key, "PATH", 4) == 0)
-			printf("%s\n", curr->key);
-		curr = curr->next;
-	}
 	execve(exact_path, list->argument, g_general.env_array);
-	// If execve fails
 	if (access(exact_path, F_OK) == 0 && access(exact_path, X_OK) == -1)
 	{
 		write(2, "minishell: permission denied: ", 30);
@@ -35,12 +38,11 @@ int	ft_execve(char *exact_path, t_list *list)
 
 char	**extract_path(char **env)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	if (!env)
 		return (NULL);
-	
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], "PATH=", 5) == 0)
@@ -78,8 +80,6 @@ char	*check_path(char **env, t_list *list)
 		write(2, "minishell: PATH not set\n", 25);
 		imane_exit(127);
 	}
-	// if (!paths)
-	// 	return (NULL); // DON'T exit, just return NULL
 	while (paths[i])
 	{
 		path = concatenate_path(paths[i], list->argument[0]);
@@ -97,11 +97,9 @@ int	execute_command(t_list *list)
 	char	*exact_path;
 
 	if (!list || !list->argument || !list->argument[0])
-	{
-		// write(2, "minishell: command not found\n", 30);
 		imane_exit(127);
-	}
-	if (list && list->argument && list->argument[0] && ft_strlen(list->argument[0]) == 0)
+	if (list && list->argument && list->argument[0]
+		&& ft_strlen(list->argument[0]) == 0)
 	{
 		write(2, "minishell: empty command\n", 26);
 		imane_exit(127);
@@ -117,12 +115,8 @@ int	execute_command(t_list *list)
 		exec_builtin(list);
 		imane_exit(g_general.exit_status); // Important to exit after builtin
 	}
-	else
-	{
-		env_list_to_array(g_general.env_list);
-		exact_path = check_path(g_general.env_array, list);
-		ft_execve(exact_path, list);
-	}
-	// free(exact_path); // Not reached, just in case
+	env_list_to_array(g_general.env_list);
+	exact_path = check_path(g_general.env_array, list);
+	ft_execve(exact_path, list);
 	return (0);
 }
