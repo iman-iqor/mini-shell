@@ -96,7 +96,12 @@ int	execute_command(t_list *list)
 {
 	char	*exact_path;
 
-	if (list && list->argument && ft_strlen(list->argument[0]) == 0)
+	if (!list || !list->argument || !list->argument[0])
+	{
+		// write(2, "minishell: command not found\n", 30);
+		imane_exit(127);
+	}
+	if (list && list->argument && list->argument[0] && ft_strlen(list->argument[0]) == 0)
 	{
 		write(2, "minishell: empty command\n", 26);
 		imane_exit(127);

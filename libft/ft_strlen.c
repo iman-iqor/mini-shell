@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 22:27:40 by macbookair        #+#    #+#             */
-/*   Updated: 2025/05/30 17:46:58 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/10 20:46:34 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int ft_strlen(const char* str)
 {
     int i;
     i = 0;
+    
     while(str && str[i])
     {
         i++;

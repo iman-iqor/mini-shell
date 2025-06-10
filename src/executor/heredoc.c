@@ -1,65 +1,84 @@
 #include "../includes/minishell.h"
 
-void sigint_handler(int sig)
+void	sigint_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
 		write(1, "\n", 1);
 		g_general.exit_status = 130;
-		imane_exit(130); // i need here to free the memory and exit with 130 not just exit
+		imane_exit(130);
+		// i need here to free the memory and exit with 130 not just exit
 	}
 }
 
-void handle_heredoc_signals(void)
+void	handle_heredoc_signals(void)
 {
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
-
-char *get_tmp_file(void)
+typedef struct s_tmp_vars
 {
-	static int i = 0;
-	char *num;
-	char *name;
-	char *path;
-	char *gc_path;
+	char	*num;
+	char	*name;
+	char	*path;
+	char	*gc_path;
+}			t_tmp_vars;
+
+char	*get_tmp_file(void)
+{
+	static int	i;
+	t_tmp_vars	var;
 
 	while (1)
 	{
 		if (i > 1000)
 			return (NULL);
-
-		num = ft_itoa(i++);
-		name = ft_strjoin("heredoc_", num);
-
-		path = ft_strjoin("/tmp/", name);
-
-		if (!path)
-			return NULL;
-
-		if (access(path, F_OK) != 0)
+		var.num = ft_itoa(i++);
+		var.name = ft_strjoin("heredoc_", var.num);
+		var.path = ft_strjoin("/tmp/", var.name);
+		if (!var.num || !var.name || !var.path)
+			return (NULL);
+		if (access(var.path, F_OK) != 0)
 		{
-			// Register with GC and return
-			gc_path = ft_gc(strlen(path) + 1, 't');
-
-			strcpy(gc_path, path);
-			return gc_path;
+			var.gc_path = ft_gc(strlen(var.path) + 1, 't');
+			if (!var.gc_path)
+				return (NULL);
+			strcpy(var.gc_path, var.path);
+			return (var.gc_path);
 		}
 	}
 }
-void imane_exit(int status)
+void	imane_exit(int status)
 {
 	ft_gc(0, 'f');
-
 	exit(status);
 }
-int do_heredoc(t_file *tmp)
+
+void heredoc_child(t_file *tmp, int fd)
 {
-	pid_t pid;
-	int status;
 	char *line;
-	int fd;
-	char *file;
+
+	handle_heredoc_signals();
+	while (1)
+	{
+		line = readline(">");
+		if (!line || !ft_strcmp(line, tmp->file_name))
+		{
+			free(line);
+			imane_exit(0);
+		}
+		write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
+		free(line);
+	}
+}
+
+int	do_heredoc(t_file *tmp)
+{
+	pid_t	pid;
+	int		status;
+	int		fd;
+	char	*file;
 
 	file = get_tmp_file();
 	fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
@@ -70,51 +89,23 @@ int do_heredoc(t_file *tmp)
 	}
 	pid = fork();
 	if (pid == -1)
-	{
 		return (-1);
-	}
 	if (pid == 0)
-	{
-		// set_signals_child();
-
-		handle_heredoc_signals();
-		while (1)
-		{
-			line = readline(">");
-			if (!line)
-			{
-				imane_exit(0);
-			}
-			if (!ft_strcmp(line, tmp->file_name))
-			{
-				free(line);
-				imane_exit(0);
-			}
-			write(fd, line, ft_strlen(line));
-			write(fd, "\n", 1);
-			free(line);
-		}
-	}
+		heredoc_child(tmp, fd);
 	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, 0);
 	signal(SIGINT, h);
 	if (WEXITSTATUS(status) == 130)
-	{
-		close(fd);
-		unlink(file);
-		return (-130);
-	}
-
+		return close(fd), unlink(file), -130;
 	tmp->file_name = ft_strdup(file);
 	return (fd);
 }
 
-int heredoc(t_list *list, t_file *tmp)
+int	heredoc(t_list *list, t_file *tmp)
 {
-	int fd;
+	int	fd;
 
 	fd = -1;
-
 	fd = do_heredoc(tmp);
 	if (fd == -1)
 	{
@@ -122,10 +113,10 @@ int heredoc(t_list *list, t_file *tmp)
 	}
 	if (fd == -2)
 		return (-1);
-	if(fd==-130)
+	if (fd == -130)
 	{
-		g_general.exit_status=130;
-		return -1;
+		g_general.exit_status = 130;
+		return (-1);
 	}
 	list->fd = fd; // Store the final file descriptor in the list
 	return (0);
