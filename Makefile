@@ -15,16 +15,24 @@ src/executor/builtins/env.c\
 src/executor/builtins/export1.c\
 src/executor/builtins/export2.c\
 src/executor/builtins/export3.c\
-src/executor/builtins/exit.c\
+src/executor/builtins/exit1.c\
+src/executor/builtins/exit2.c\
+src/executor/check_generate_env.c \
 src/executor/exec1.c \
-src/executor/heredoc.c \
+src/executor/exec2.c \
+src/executor/exec3.c \
+src/executor/heredoc1.c \
+src/executor/heredoc2.c \
 src/executor/execute_command.c\
-src/executor/piped_commands.c\
+src/executor/piped_commands1.c\
+src/executor/piped_commands2.c\
+src/executor/piped_commands3.c\
 src/utils/ft_strcmp.c  \
 src/utils/ft_putstr.c  \
 src/utils/list_len.c  \
 src/utils/graceful_exit.c  \
-src/executor/gc/gc.c \
+src/executor/gc/gc1.c \
+src/executor/gc/gc2.c \
 src/utils/ft_strcpy.c \
 src/utils/ft_strcat.c\
 src/utils/ft_strndup.c \

@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:56 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/10 21:53:57 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/12 22:25:36 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	ft_execve(char *exact_path, t_list *list)
 {
-
 	env_list_to_array(g_general.env_list);
 	execve(exact_path, list->argument, g_general.env_array);
 	if (access(exact_path, F_OK) == 0 && access(exact_path, X_OK) == -1)

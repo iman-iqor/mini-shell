@@ -1,40 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   heredoc1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:59 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/10 21:54:00 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/12 22:28:14 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	sigint_handler(int sig)
-{
-	if (sig == SIGINT)
-	{
-		write(1, "\n", 1);
-		g_general.exit_status = 130;
-		imane_exit(130);
-		// i need here to free the memory and exit with 130 not just exit
-	}
-}
-
-void	handle_heredoc_signals(void)
-{
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
-}
-typedef struct s_tmp_vars
-{
-	char	*num;
-	char	*name;
-	char	*path;
-	char	*gc_path;
-}			t_tmp_vars;
 
 char	*get_tmp_file(void)
 {
@@ -66,9 +42,9 @@ void	imane_exit(int status)
 	exit(status);
 }
 
-void heredoc_child(t_file *tmp, int fd)
+void	heredoc_child(t_file *tmp, int fd)
 {
-	char *line;
+	char	*line;
 
 	handle_heredoc_signals();
 	while (1)
@@ -108,7 +84,7 @@ int	do_heredoc(t_file *tmp)
 	waitpid(pid, &status, 0);
 	signal(SIGINT, h);
 	if (WEXITSTATUS(status) == 130)
-		return close(fd), unlink(file), -130;
+		return (close(fd), unlink(file), -130);
 	tmp->file_name = ft_strdup(file);
 	return (fd);
 }
