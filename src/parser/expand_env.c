@@ -6,13 +6,13 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 17:18:27 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/05/17 20:25:54 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/14 11:46:47 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*process_of_expanding(char *word, int *i, char *result, t_env *env)
+char	*process_of_expanding(char *word, int *i, char *result, t_env *env)
 {
 	if (word[*i] == '\'')
 		result = case_of_squote(word, i, result);

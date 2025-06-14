@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/12 22:42:09 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/14 11:47:07 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,7 +279,6 @@ typedef struct s_token
 // This the parser functions declarations
 
 t_list				*parse_cmd(char *input, t_env *env);
-t_env				*init_env(char **env);
 t_token				*tokenize_input(char *input);
 char				*process_input(char *input, int *i,
 						t_quote_type *quote_type);
@@ -307,6 +306,8 @@ t_list				*parse_tokens(t_token *tokens);
 char				**ft_realloc_array(char **arr, char *new_str);
 void				free_tokens(t_token *tokens);
 t_list				*ft_add_file(t_list *cmds, char *new_str, int flag, char c);
+void				print_error(char *msg);
+char				*process_of_expanding(char *word, int *i, char *result, t_env *env);
 
 // exit with gc
 void imane_exit(int status);

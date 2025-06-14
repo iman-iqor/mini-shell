@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:41 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/10 21:53:42 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/13 18:53:37 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,5 @@ char	**env_list_to_array(t_env *env_list)
 		env_list = env_list->next;
 	}
 	envp[i] = NULL;
-	g_general.env_array = envp;
 	return (envp);
 }

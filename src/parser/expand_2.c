@@ -35,7 +35,7 @@ char	*case_of_var_with_next_char_digit(char *word, int *i, char *result)
 char	*case_of_var_with_exit_status(int *i, char *result)
 {
 	(*i) += 2;
-	// result = ft_strjoin(result, ft_itoa(g_exit_status));
+	result = ft_strjoin(result, ft_itoa(g_general.exit_status));
 	return (result);
 }
 

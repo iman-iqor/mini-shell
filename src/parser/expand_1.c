@@ -24,7 +24,7 @@ char	*case_of_dquote(char *word, int *i, char *result, t_env *env)
 		else if (word[*i] == '$' && word[*i + 1] && word[*i + 1] == '?')
 		{
 			(*i) += 2;
-			// result = ft_strjoin(result, ft_itoa(g_exit_status));
+			result = ft_strjoin(result, ft_itoa(g_general.exit_status));
 		}
 		else
 		{
