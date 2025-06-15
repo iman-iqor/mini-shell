@@ -79,7 +79,6 @@ void	check_env(char **env, t_env **my_env_list)
 		if (!check_if_there_is_path(env))
 		{
 			g_general.PATH_NODE = ft_create_env_node(g_general.PATH);
-			;
 			add_back_env(my_env_list, g_general.PATH_NODE);
 		}
 		if (!check_if_there_is_pwd(env))

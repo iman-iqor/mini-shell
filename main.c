@@ -4,6 +4,31 @@
 
 t_general	g_general;
 
+static void	update_shlvl(t_env **env)
+{
+	t_env	*tmp;
+	int		new_level;
+
+	tmp = *env;
+	while (tmp && ft_strcmp(tmp->key, "SHLVL"))
+		tmp = tmp->next;
+	if (tmp)
+	{
+		new_level = ft_atoi(tmp->value) + 1;
+		if (new_level < 0)
+			new_level = 0;
+		if (new_level > 999)
+		{
+			printf("%s%d%s", "minishell: warning: shell level(",
+				new_level, ") too high, resetting to 1\n");
+			new_level = 1;
+		}
+		tmp->value = ft_itoa(new_level);
+	}
+	else
+		add_back_env(env, ft_create_env_node("SHLVL=1"));
+}
+
 static int	is_only_spaces(char *input)
 {
 	int	i;
@@ -40,6 +65,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	ft_gc(0, 's');
 	check_env(env, &my_env_list);
+	update_shlvl(&my_env_list);
 	signal(SIGINT, h);
 	signal(SIGQUIT, SIG_IGN);
 	g_general.env_array = env_list_to_array(my_env_list);
@@ -49,7 +75,7 @@ int	main(int argc, char **argv, char **env)
 		if (input == NULL)
 		{
 			printf("exit\n");
-			break ;
+			break;
 		}
 			if (ft_strlen(input) > 0)
 			add_history(input);
