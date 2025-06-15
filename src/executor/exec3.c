@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/12 22:23:35 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/15 10:12:31 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	output_no_input(t_list *list)
 	close(fd_out);
 }
 
-void	input_output(t_list *list)
+void	input_output(t_list *list, t_env *env)
 {
-	input_no_output(list);
+	input_no_output(list, env);
 	output_no_input(list);
 }
 
@@ -94,14 +94,14 @@ void	exec_externals(t_list *list)
 	}
 }
 
-void	ft_redirect_and_execute(t_list *list)
+void	ft_redirect_and_execute(t_list *list, t_env *env)
 {
 	if (list->input_file && !list->output_file)
-		input_no_output(list);
+		input_no_output(list, env);
 	else if (!list->input_file && list->output_file)
 		output_no_input(list);
 	else if (list->input_file && list->output_file)
-		input_output(list);
+		input_output(list, env);
 	if (list->error_flag)
 		return ; // Skip execution due to redirection error
 	if (list->argument)

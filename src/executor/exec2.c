@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/12 22:21:56 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/15 10:10:25 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	input_no_output_error(t_file *tmp, t_list *list)
 	list->error_flag = 1;
 }
 
-void	input_no_output(t_list *list)
+void	input_no_output(t_list *list, t_env *env)
 {
 	int		fd_in;
 	t_file	*tmp;
@@ -83,7 +83,7 @@ void	input_no_output(t_list *list)
 			close(fd_in);
 		if (tmp->flag)
 		{
-			if (heredoc(list, tmp) == -1)
+			if (heredoc(list, tmp, env) == -1)
 				return ;
 		}
 		fd_in = open(tmp->file_name, O_RDONLY);

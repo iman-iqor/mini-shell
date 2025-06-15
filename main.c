@@ -62,7 +62,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		list = parse_cmd(input, my_env_list);
 		if (list != NULL)
-			ft_exec(list);
+			ft_exec(list, my_env_list);
 		// printf("%d\n", g_general.exit_status);
 		free(input);
 	}

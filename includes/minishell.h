@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/14 11:47:07 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/15 10:14:56 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,19 +119,19 @@ void				graceful_exit(void);
 int list_len(t_list *list);
 /***************************************************************************************************************************************************************** */
 //                        #EXECUTION#
-void exec_builtin(t_list *list);
-int	is_builtin(char *cmd);
+void 	exec_builtin(t_list *list);
+int		is_builtin(char *cmd);
 void	input_no_output_error(t_file *tmp, t_list *list);
-void	input_no_output(t_list *list);
+void	input_no_output(t_list *list, t_env *env);
 void	output_no_input_error(t_file *tmp, t_list *list);
 void	output_no_input(t_list *list);
-void	input_output(t_list *list);
+void	input_output(t_list *list, t_env *env);
 void	wait_and_update_status(pid_t pid);
-void exec_externals(t_list *list);
-void	ft_redirect_and_execute(t_list *list);
+void	exec_externals(t_list *list);
+void	ft_redirect_and_execute(t_list *list, t_env *env);
 void	execute_builtins_and_externals(t_list *list);
-int	ft_exec_single_command(t_list *list);
-void	ft_exec(t_list *list);
+int		ft_exec_single_command(t_list *list, t_env *env);
+void	ft_exec(t_list *list, t_env *env);
 // heredoc
 typedef struct s_tmp_vars
 {
@@ -140,9 +140,9 @@ typedef struct s_tmp_vars
 	char	*path;
 	char	*gc_path;
 }			t_tmp_vars;
-int					heredoc(t_list *list,t_file *tmp);
-int					do_heredoc(t_file *tmp);
-void heredoc_child(t_file *tmp, int fd);
+int					heredoc(t_list *list,t_file *tmp, t_env *env);
+int					do_heredoc(t_file *tmp, t_env *env);
+void heredoc_child(t_file *tmp, int fd, t_env *env);
 void	imane_exit(int status);
 char				*get_tmp_file(void);
 void				handle_heredoc_signals(void);
@@ -157,12 +157,12 @@ char	*concatenate_path(char *dir, char *cmd);
 //piped commands
 void	set_signals_child(void);
 void	set_signals_parent(void);
-void	ft_exec_piped_commands(t_list *list);
+void	ft_exec_piped_commands(t_list *list, t_env *env);
 void	execute_piped_loop(t_list *list, t_exec_data *d);
 int	handle_fork_and_process(t_list *list, t_exec_data *d);
 int	handle_pipe_error(t_exec_data *d);
 int	heredoc_error_found(t_list *list);
-int	handle_all_heredocs(t_list *list);
+int	handle_all_heredocs(t_list *list, t_env *env);
 void	init_exec_data(t_exec_data *d,t_list *list);
 void	handle_child_process(t_list *list, t_exec_data *d);
 void	input_no_output_of_pipe(t_list *list);

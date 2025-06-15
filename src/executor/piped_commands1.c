@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   piped_commands1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:54:01 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/12 22:34:35 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/15 10:14:19 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ void	execute_piped_loop(t_list *list, t_exec_data *d)
 	}
 }
 
-void	ft_exec_piped_commands(t_list *list)
+void	ft_exec_piped_commands(t_list *list, t_env *env)
 {
 	t_exec_data	d;
 
 	set_signals_parent();
 	init_exec_data(&d, list);
-	if (handle_all_heredocs(list) == -1)
+	if (handle_all_heredocs(list, env) == -1)
 		return ;
 	if (heredoc_error_found(list))
 	{
