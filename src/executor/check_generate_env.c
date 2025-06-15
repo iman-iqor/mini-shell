@@ -86,10 +86,10 @@ void	check_env(char **env, t_env **my_env_list)
 			g_general.PWD_NODE = ft_create_env_node(g_general.PWD);
 			add_back_env(my_env_list, g_general.PWD_NODE);
 		}
-		else if (check_if_there_is_path(env) && check_if_there_is_pwd(env))
-		{
-			*my_env_list = init_env_list(env);
-		}
+		// else if (check_if_there_is_path(env) && check_if_there_is_pwd(env))
+		// {
+		// 	*my_env_list = init_env_list(env);
+		// }
 	}
 	else
 	{

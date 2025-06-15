@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:37 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/10 21:53:38 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/15 17:49:13 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	unset_var(char *key)
 			if (curr->prev)
 			{
 				curr->prev->next = curr->next;
-				curr->next->prev=curr->prev;
+				if (curr->next)
+					curr->next->prev=curr->prev;
 				
 			}
 			else {
@@ -94,4 +95,3 @@ void	unset(char **list)
 	}
 	g_general.exit_status = (flag ? 2 : 0);
 }
-
