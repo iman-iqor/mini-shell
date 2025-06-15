@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:37 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/15 17:49:13 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/15 18:33:33 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	unset_var(char *key)
 				curr->prev->next = curr->next;
 				if (curr->next)
 					curr->next->prev=curr->prev;
-				
 			}
 			else {
 				curr = curr->next;

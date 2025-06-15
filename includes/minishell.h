@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/15 16:13:55 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/15 18:08:25 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,8 @@ typedef struct  s_generate_minimal_env
 	t_env	*shlvl_node;
 	char	*path_str;
 	t_env	*path_node;
+	char	*_;
+	t_env	*_node;
 } t_generate_minimal_env;
 void	check_env(char **env, t_env **my_env_list);
 t_env	*generate_minimal_env(void);

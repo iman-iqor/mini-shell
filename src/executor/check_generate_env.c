@@ -14,6 +14,7 @@ void	add_back_env(t_env **head, t_env *new_node)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new_node;
+	new_node->prev = tmp;
 }
 
 int	check_if_there_is_path(char **env)
@@ -69,6 +70,9 @@ t_env	*generate_minimal_env(void)
 	var.path_str = ft_strdup("PATH=/app/bin:/app/bin:/app/bin:/usr/bin:/home/imiqor/.var/app/com.visualstudio.code/data/node_modules/bin");
 	var.path_node = ft_create_env_node(var.path_str);
 	add_back_env(&var.env_list, var.path_node);
+	var._ = ft_strdup("_=./minishell");
+	var._node = ft_create_env_node(var._);
+	add_back_env(&var.env_list, var._node);
 	return (var.env_list);
 }
 void	check_env(char **env, t_env **my_env_list)
@@ -86,14 +90,9 @@ void	check_env(char **env, t_env **my_env_list)
 			g_general.PWD_NODE = ft_create_env_node(g_general.PWD);
 			add_back_env(my_env_list, g_general.PWD_NODE);
 		}
-		// else if (check_if_there_is_path(env) && check_if_there_is_pwd(env))
-		// {
-		// 	*my_env_list = init_env_list(env);
-		// }
 	}
 	else
 	{
-		printf("there is no env a bro\n");
         *my_env_list = generate_minimal_env();
         g_general.env_list = *my_env_list;
 	}

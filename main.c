@@ -68,6 +68,7 @@ int	main(int argc, char **argv, char **env)
 	update_shlvl(&my_env_list);
 	signal(SIGINT, h);
 	signal(SIGQUIT, SIG_IGN);
+	g_general.env_list = my_env_list;
 	g_general.env_array = env_list_to_array(my_env_list);
 	while (1)
 	{
