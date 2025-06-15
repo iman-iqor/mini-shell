@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/15 10:14:56 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/15 16:13:55 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,7 +304,6 @@ char				*case_of_word(char *word, int *i, char *result);
 char				*ft_strjoin_char(char *str, char c);
 t_list				*parse_tokens(t_token *tokens);
 char				**ft_realloc_array(char **arr, char *new_str);
-void				free_tokens(t_token *tokens);
 t_list				*ft_add_file(t_list *cmds, char *new_str, int flag, char c);
 void				print_error(char *msg);
 char				*process_of_expanding(char *word, int *i, char *result, t_env *env);

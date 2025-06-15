@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:43:25 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/06/14 17:00:31 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/15 16:13:41 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,5 @@ t_list    *parse_cmd(char *input, t_env *env)
 		print_error("minishell: syntax error\n");
 		return NULL;
 	}
-    free_tokens(tokens);
     return (cmds);
 }

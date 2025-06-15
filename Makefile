@@ -45,7 +45,6 @@ src/parser/tokenize_help.c\
 src/parser/parse_cmd.c\
 src/parser/generate_cmds.c\
 src/parser/ft_realloc_array.c\
-src/parser/free_tokens.c\
 src/parser/t_file.c\
 src/parser/print_error.c\
 src/parser/get_env_value.c\
