@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:59 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/15 10:31:27 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/15 15:06:02 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	heredoc_child(t_file *tmp, int fd, t_env *env)
 	int		i;
 	char	*line2;
 
-	i = 0;
 	handle_heredoc_signals();
 	while (1)
 	{
@@ -59,6 +58,7 @@ void	heredoc_child(t_file *tmp, int fd, t_env *env)
 			imane_exit(0);
 		}
 		line2 = ft_strdup("");
+		i = 0;
 		while (line[i])
 			line2 = process_of_expanding(line, &i, line2, env);
 		free(line);
