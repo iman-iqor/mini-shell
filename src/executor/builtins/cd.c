@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:52:56 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/10 21:54:14 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/16 16:37:04 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	cd_error(int code)
 	if (code == 1)
 		write(2, "cd: HOME not set\n", 18);
 	else if (code == 0)
-		write(2, "cd :too many arguments\n", 23);
+		write(2, "cd : too many arguments\n", 24);
 	else if (code == 2)
 		perror("cd");
 	g_general.exit_status = 1;

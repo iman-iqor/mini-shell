@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:54:01 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/15 10:14:19 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:21:56 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ void	ft_exec_piped_commands(t_list *list, t_env *env)
 		return ;
 	}
 	execute_piped_loop(list, &d);
+	
 	wait_for_all(d.pid, d.n_cmd);
 }

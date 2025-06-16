@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:09 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/10 22:26:51 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/16 16:34:39 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ int invalid_identifier_error(char* list)
 			}
             else
             {
-			write(2, "export: not a valid identifier\n", 32);
+			write(2, "export: `", 9);
+			write(2, list, ft_strlen(list));
+			write (2, "': not a valid identifier\n", 27);
 			flag = 1;
             }
     return flag;

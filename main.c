@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **env)
 	g_general.env_array = env_list_to_array(my_env_list);
 	while (1)
 	{
-		input = readline("\033[1;92m➜  \033[1;36mminishell\033[0m ");
+		input = readline("minishell::::");
 		if (input == NULL)
 		{
 			printf("exit\n");

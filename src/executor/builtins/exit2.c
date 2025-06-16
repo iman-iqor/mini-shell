@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:05 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/12 22:08:36 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/16 16:46:26 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	exit_error_numeric(char *arg)
 {
 	write(2, "exit: ", 7);
 	write(2, arg, ft_strlen(arg));
-	write(2, ":numeric argument required\n", 28);
+	write(2, ": numeric argument required\n", 29);
 	cleanup_and_exit(2);
 }
 

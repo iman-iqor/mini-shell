@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/15 10:10:25 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:53:21 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,15 @@ int	is_builtin(char *cmd)
 
 void	input_no_output_error(t_file *tmp, t_list *list)
 {
-	if (errno == ENOENT)
-		ft_putstr_fd("Permission denied: ", 2);
-	else if (errno == EACCES)
-		ft_putstr_fd("No such file or directory: ", 2);
-	else
-		ft_putstr_fd("Error: ", 2);
-	ft_putstr_fd(tmp->file_name, 2);
-	ft_putstr_fd("\n", 2);
+	// ft_putstr_fd(tmp->file_name, 2);
+	// if (errno == EACCES)
+	// 	ft_putstr_fd(": Permission denied", 2);
+	// else if (errno == ENOENT)
+	// 	ft_putstr_fd(": No such file or directory", 2);
+	// else
+	// 	ft_putstr_fd("Error: ", 2);
+	// ft_putstr_fd("\n", 2);
+	perror(tmp->file_name);
 	g_general.exit_status = 1;
 	list->error_flag = 1;
 }
