@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/15 10:12:31 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/16 21:48:48 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	output_no_input(t_list *list)
 		if (fd_out == -1)
 		{
 			output_no_input_error(tmp, list);
-			return ;
+			exit(1) ;
 		}
 		dup2(fd_out, STDOUT_FILENO);
 		tmp = tmp->next;
@@ -41,7 +41,8 @@ void	output_no_input(t_list *list)
 void	input_output(t_list *list, t_env *env)
 {
 	input_no_output(list, env);
-	output_no_input(list);
+	if (!list->error_flag)
+		output_no_input(list);
 }
 
 void	wait_and_update_status(pid_t pid)

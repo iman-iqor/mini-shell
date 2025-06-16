@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/16 17:53:21 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/16 21:25:49 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	input_no_output(t_list *list, t_env *env)
 		if (fd_in == -1)
 		{
 			input_no_output_error(tmp, list);
+			list->error_flag = 1;
 			return ;
 		}
 		tmp = tmp->next;

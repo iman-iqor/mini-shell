@@ -6,7 +6,7 @@
 /*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:54:01 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/16 18:39:07 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/16 21:12:16 by mbenjbar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ void handle_child_process(t_list *list, t_exec_data *d)
 	set_signals_child();
 
 	if (list->input_file)
-	{
 		input_no_output_of_pipe(list);
-		
-	}
 	else if (d->prev_fd != -1)
 		dup2(d->prev_fd, 0);
 	if (list->output_file)
