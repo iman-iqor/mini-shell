@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   piped_commands3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:54:01 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/16 21:12:16 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/19 16:13:42 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void init_exec_data(t_exec_data *d, t_list *list)
 	d->i = 0;
 	d->n_cmd = list_len(list);
 	d->prev_fd = -1;
-	d->pid = ft_gc(d->n_cmd * sizeof(pid_t), 'm');
+	d->pid = ft_gc(d->n_cmd * sizeof(pid_t), 'm');//creeet wah arr dyal pids b len dyal list lifiha cmds
 }
 
 int handle_all_heredocs(t_list *list, t_env *env)

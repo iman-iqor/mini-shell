@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:59 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/15 15:06:02 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/19 16:50:13 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_tmp_file(void)
 			var.gc_path = ft_gc(strlen(var.path) + 1, 't');
 			if (!var.gc_path)
 				return (NULL);
-			strcpy(var.gc_path, var.path);
+			ft_strcpy(var.gc_path, var.path);
 			return (var.gc_path);
 		}
 	}
@@ -79,7 +79,8 @@ int	do_heredoc(t_file *tmp, t_env *env)
 	if (fd == -1)
 	{
 		perror(file);
-		imane_exit(1);
+		g_general.exit_status = 1;
+		return (-1);
 	}
 	pid = fork();
 	if (pid == -1)
