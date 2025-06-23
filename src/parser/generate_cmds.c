@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generate_cmds.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 21:58:06 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/06/14 16:29:11 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:20:52 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,26 @@ static int redirections(t_list *current_cmd, t_token **tokens)
 	(*tokens) = (*tokens)->next;
 	return 1;
 }
+static char	**ft_handle_word(t_list *current_cmd, t_token *tokens)
+{
+	char	**args;
+	int		i;
+
+	if (tokens->quote_type == NONE)
+	{
+		args = ft_split(tokens->value, ' ');
+		i = 0;
+		while (args[i])
+		{
+			current_cmd->argument = ft_realloc_array(current_cmd->argument, args[i]);
+			i++;
+		}
+	}
+	else
+		current_cmd->argument = ft_realloc_array(current_cmd->argument, tokens->value);
+	return (current_cmd->argument);
+}
+
 t_list	*parse_tokens(t_token *tokens)
 {
 	t_list		*cmd_list;
@@ -68,8 +88,7 @@ t_list	*parse_tokens(t_token *tokens)
 				return (NULL);
 		}
 		if (tokens->type == TOKEN_WORD)
-			current_cmd->argument = ft_realloc_array(current_cmd->argument,
-					tokens->value);
+			current_cmd->argument = ft_handle_word(current_cmd, tokens);
 		else if (tokens->type == TOKEN_REDIRECT_IN
 			|| tokens->type == TOKEN_REDIRECT_OUT
 			|| tokens->type == TOKEN_APPEND || tokens->type == TOKEN_HEREDOC)
