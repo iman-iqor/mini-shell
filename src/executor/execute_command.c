@@ -83,11 +83,17 @@ char    *check_path(char **env, t_list *list)
 }
 int	handle_directory_or_path_errors(t_list *list)
 {
-	if (open(list->argument[0], __O_DIRECTORY) != -1)
+	if(ft_strchr(list->argument[0],'/') &&open(list->argument[0], __O_DIRECTORY) != -1 )
 	{
 		write(2, list->argument[0], ft_strlen(list->argument[0]));
 		write(2, ": is a directory\n", 17);
 		imane_exit(126);
+	}
+	else if (open(list->argument[0], __O_DIRECTORY) != -1)
+	{
+		write(2, list->argument[0], ft_strlen(list->argument[0]));
+		write(2, ":command not found\n", 20);
+		imane_exit(127);
 	}
 	if (!get_envar("PATH"))
 	{
