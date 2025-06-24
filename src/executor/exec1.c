@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 18:38:13 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 20:05:14 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ void	execute_builtins_and_externals(t_list *list)
 
 int	ft_exec_single_command(t_list *list, t_env *env)
 {
+	int	saved_stdout;
+	int	saved_stdin;
+
 	if (!list || list->next)
 		return (0);
 	if (list && list->next == NULL)
 	{
-		int(saved_stdout), (saved_stdin);
 		saved_stdout = dup(1);
 		saved_stdin = dup(0);
 		if (list->input_file || list->output_file)

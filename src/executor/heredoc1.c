@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:59 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 18:40:25 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 21:30:18 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	heredoc_child(t_file *tmp, int fd, t_env *env)
 		line2 = ft_strdup("");
 		i = 0;
 		while (line[i])
-			line2 = process_of_expanding(line, &i, line2, env);
+			line2 = process_of_expanding(line, &i, line2, env, 0);
 		free(line);
 		write(fd, line2, ft_strlen(line2));
 		write(fd, "\n", 1);

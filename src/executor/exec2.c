@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 18:38:33 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 20:35:36 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	exec_builtin(t_list *list)
 int	is_builtin(char *cmd)
 {
 	char const	*builtins[] = {"echo", "cd", "env", "exit", "export", "pwd",
-			"unset", NULL};
+		"unset", NULL};
 	int			i;
 
 	i = 0;
@@ -95,6 +95,6 @@ void	input_no_output(t_list *list, t_env *env)
 void	output_no_input_error(t_file *tmp, t_list *list)
 {
 	perror(tmp->file_name);
-	g_general.exit_status = 1;
+	g_general.exit_status = 126;
 	list->error_flag = 1;
 }

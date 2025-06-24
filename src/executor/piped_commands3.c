@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:54:01 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 18:41:27 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 20:34:11 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	handle_child_process(t_list *list, t_exec_data *d)
 	else if (d->prev_fd != -1)
 		dup2(d->prev_fd, 0);
 	if (list->output_file)
-		output_no_input(list);
+		output_no_input_pipe(list);
 	else if (list->next)
 		dup2(d->pipe_fd[1], 1);
 	close_unused_fds(d);

@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 18:37:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 18:37:50 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 19:56:03 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void	check_env(char **env, t_env **my_env_list)
 		*my_env_list = init_env_list(env);
 		if (!check_if_there_is_pwd(env))
 		{
-			g_general.PWD_NODE = ft_create_env_node(g_general.PWD);
-			add_back_env(my_env_list, g_general.PWD_NODE);
+			g_general.pwd_node = ft_create_env_node(g_general.pwdd);
+			add_back_env(my_env_list, g_general.pwd_node);
 		}
 	}
 	else

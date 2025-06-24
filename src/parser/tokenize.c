@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:11:48 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/06/24 18:43:24 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 21:08:51 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static t_token	*new_token(char *value, t_token_type type,
 	new_token->type = type;
 	new_token->quote_type = quote_type;
 	new_token->next = NULL;
+	new_token->prev = NULL;
 	return (new_token);
 }
 
@@ -92,6 +93,7 @@ static void	add_token(t_token **head, t_token *new_token)
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new_token;
+		new_token->prev = tmp;
 	}
 }
 

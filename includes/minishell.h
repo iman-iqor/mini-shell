@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 18:33:41 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 21:29:49 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ typedef struct s_general
 	int				in;
 	pid_t			pid;
 	char			*old_pwd;
-	char			*PWD;
-	t_env			*PWD_NODE;
+	char			*pwdd;
+	t_env			*pwd_node;
 	int				out;
 	t_env			*env_list;
 	char			**env_array;
@@ -95,7 +95,7 @@ typedef struct s_list
 	int				error_flag;
 	struct s_list	*next;
 }					t_list;
-//**************************************************************************************************************************************************** */
+//******************************************************************/
 
 typedef struct s_exec_data
 {
@@ -105,7 +105,7 @@ typedef struct s_exec_data
 	int				pipe_fd[2];
 	pid_t			*pid;
 }					t_exec_data;
-/******************************************************************************************************************************************************* */
+/*********************************************************************/
 //                          #UTILS#
 int					ft_strcmp(char *s1, char *s2);
 char				*ft_strcat(char *dest, char *src);
@@ -115,7 +115,7 @@ char				*ft_strndup(char *str, int n);
 void				ft_putstr(char *text);
 void				graceful_exit(void);
 int					list_len(t_list *list);
-/***************************************************************************************************************************************************************** */
+/*******************************************************************/
 //                        #EXECUTION#
 void				exec_builtin(t_list *list);
 int					is_builtin(char *cmd);
@@ -236,24 +236,24 @@ void				exit_error_numeric(char *arg);
 void				exit_error_too_many_args(void);
 void				cleanup_and_exit(int status);
 void				ft_exit(char **args);
-/************************************************************************************************************************************************************************ */
+/*************************************************************/
 // env ==> my_env
 t_env				*ft_create_env_node(char *env);
 t_env				*init_env_list(char **env);
 int					env_len(t_env *env);
 char				*ft_join_key_value(char *key, char *value);
 char				**env_list_to_array(t_env *env_list);
-/************************************************************************************************************************************************************************ */
+/*************************************************************/
 // garbage collector
 void				*ft_gc(size_t n, char flag);
 void				fr_ee(t_gc *gc);
 t_gc				*create(void *ptr);
 void				add(t_gc **gc, t_gc *new);
-//*********************************************************************************************************************************************************************** */
+//************************************************************/
 /*                   #PARSSING#                                              */
 // this one is for the type of quote, whether it is '' or "" or none
 
-// after tokenizing we should know what is the type of each token we have these are the types
+// after tokenizing we should know what is the type of each 
 typedef enum s_token_type
 {
 	TOKEN_WORD,
@@ -273,11 +273,13 @@ typedef struct s_token
 	char			*value;
 	t_quote_type	quote_type;
 	struct s_token	*next;
+	struct s_token	*prev;
 }					t_token;
 
 // This the parser functions declarations
 
 // This the parser functions declarations
+void	output_no_input_pipe(t_list *list);
 
 t_list				*parse_cmd(char *input, t_env *env);
 t_token				*tokenize_input(char *input);
@@ -291,7 +293,7 @@ char				*get_env_value(t_env *env, char *key);
 void				expand_variables(t_token *tokens, t_env *env);
 char				*case_of_squote(char *word, int *i, char *result);
 char				*case_of_dquote(char *word, int *i, char *result,
-						t_env *env);
+						t_env *env, int flag);
 char				*case_of_normal_var(char *word, int *i, char *result,
 						t_env *env);
 char				*case_of_var_with_next_char_squote(char *word, int *i,
@@ -308,7 +310,7 @@ char				**ft_realloc_array(char **arr, char *new_str);
 t_list				*ft_add_file(t_list *cmds, char *new_str, int flag, char c);
 void				print_error(char *msg);
 char				*process_of_expanding(char *word, int *i, char *result,
-						t_env *env);
+						t_env *env, int flag);
 
 // exit with gc
 void				imane_exit(int status);

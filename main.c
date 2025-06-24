@@ -63,7 +63,7 @@ int	main(int argc, char **argv, char **env)
 	if (argc != 1)
 		exit(printf("Error: try only 1 argument"));
 	p = getcwd(NULL, 0);
-	g_general.PWD = ft_strjoin("PWD=", p);
+	g_general.pwdd = ft_strjoin("PWD=", p);
 	free(p);
 	ft_gc(0, 's');
 	check_env(env, &my_env_list);

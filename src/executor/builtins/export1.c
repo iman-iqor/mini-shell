@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:09 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 18:35:59 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 20:12:33 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	**get_env_keys(t_env *env_list)
 	int		size;
 	t_env	*tmp;
 	char	**keys;
+	int		i;
 
 	size = 0;
 	tmp = env_list;
@@ -29,10 +30,12 @@ char	**get_env_keys(t_env *env_list)
 	if (!keys)
 		return (NULL);
 	tmp = env_list;
-	for (int i = 0; tmp; i++)
+	i = 0;
+	while (tmp)
 	{
 		keys[i] = ft_strdup(tmp->key);
 		tmp = tmp->next;
+		i++;
 	}
 	keys[size] = NULL;
 	return (keys);
@@ -95,7 +98,9 @@ int	invalid_identifier_error(char *list)
 
 void	export(char **list)
 {
-	int(i), (flag);
+	int	i;
+	int	flag;
+
 	if (!list || !list[0])
 	{
 		export_no_args();

@@ -24,6 +24,7 @@ src/executor/exec3.c \
 src/executor/heredoc1.c \
 src/executor/heredoc2.c \
 src/executor/execute_command.c\
+src/executor/execute_command2.c\
 src/executor/piped_commands1.c\
 src/executor/piped_commands2.c\
 src/executor/piped_commands3.c\

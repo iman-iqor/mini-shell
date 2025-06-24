@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:52:56 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 18:34:14 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 20:46:52 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ t_env	*get_envar(char *key)
 
 int	if_else_of_cd(char **path, t_env *home, char **p)
 {
-	if (path && path[0] && path[1])
+	if (path && path[0] && path[0][0] == 0)
+		return ( g_general.exit_status = 0 , 1);
+	else if (path && path[0] && path[1])
 		return (cd_error(0), 1);
+	
 	if ((!path || !path[0]) && home)
 		*p = home->value;
 	else if (path)
@@ -62,7 +65,8 @@ void	update_pwd(void)
 	current_directory = getcwd(NULL, 0);
 	if (current_directory == NULL)
 	{
-		printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
+		write(2, "cd: error retrieving current directory: getcwd: cannot ", 56);
+		write(2, "access parent directories: No such file or directory\n", 54);
 		g_general.exit_status = 0;
 		return ;
 	}
@@ -77,9 +81,8 @@ void	update_pwd(void)
 
 void	cd(char **path)
 {
-	char	*p;
+	char(*p),(*cwd);
 	t_env	*home;
-	char	*cwd;
 	t_gc	*new;
 
 	home = get_envar("HOME");
@@ -98,7 +101,8 @@ void	cd(char **path)
 	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)
 	{
-		printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
+		write(2, "cd: error retrieving current directory: getcwd: cannot ", 56);
+		write(2, "access parent directories: No such file or directory\n", 54);
 		g_general.exit_status = 0;
 	}
 	free(cwd);
