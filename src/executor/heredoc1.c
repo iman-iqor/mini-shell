@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:59 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 21:30:18 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:07:30 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	imane_exit(int status)
 	exit(status);
 }
 
-void	heredoc_child(t_file *tmp, int fd, t_env *env)
+void	heredoc_child(t_file *tmp, int fd)
 {
 	char	*line;
 	int		i;
@@ -61,14 +61,14 @@ void	heredoc_child(t_file *tmp, int fd, t_env *env)
 		line2 = ft_strdup("");
 		i = 0;
 		while (line[i])
-			line2 = process_of_expanding(line, &i, line2, env, 0);
+			line2 = process_of_expanding(line, &i, line2, 0);
 		free(line);
 		write(fd, line2, ft_strlen(line2));
 		write(fd, "\n", 1);
 	}
 }
 
-int	do_heredoc(t_file *tmp, t_env *env)
+int	do_heredoc(t_file *tmp)
 {
 	pid_t	pid;
 	int		status;
@@ -87,7 +87,7 @@ int	do_heredoc(t_file *tmp, t_env *env)
 	if (pid == -1)
 		return (-1);
 	if (pid == 0)
-		heredoc_child(tmp, fd, env);
+		heredoc_child(tmp, fd);
 	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, 0);
 	signal(SIGINT, h);
@@ -97,12 +97,12 @@ int	do_heredoc(t_file *tmp, t_env *env)
 	return (fd);
 }
 
-int	heredoc(t_list *list, t_file *tmp, t_env *env)
+int	heredoc(t_list *list, t_file *tmp)
 {
 	int	fd;
 
 	fd = -1;
-	fd = do_heredoc(tmp, env);
+	fd = do_heredoc(tmp);
 	if (fd == -1)
 	{
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:14 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 18:36:27 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:40:44 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	addback(t_env *new_node)
 		tmp->next = new_node;
 	}
 }
+
 t_env	*get_envar_with_passing_env_list(t_env *env, char *key)
 {
 	while (env)

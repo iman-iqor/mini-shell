@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:43:25 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/06/24 18:42:36 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:19:16 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	check_cmds(t_token *tokens)
 	return (1);
 }
 
-t_list	*parse_cmd(char *input, t_env *env)
+t_list	*parse_cmd(char *input)
 {
 	t_token	*tokens;
 	t_list	*cmds;
@@ -44,7 +44,7 @@ t_list	*parse_cmd(char *input, t_env *env)
 		print_error("minishell: syntax error\n");
 		return (NULL);
 	}
-	expand_variables(tokens, env);
+	expand_variables(tokens);
 	cmds = parse_tokens(tokens);
 	if (!cmds)
 	{

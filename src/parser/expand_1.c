@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 18:41:35 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 21:20:45 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:54:48 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,19 @@ char	*case_of_squote(char *word, int *i, char *result)
 	return (result);
 }
 
-char	*case_of_dquote(char *word, int *i, char *result, t_env *env, int flag)
+char	*case_of_dquote(char *word, int *i, char *result, int flag)
 {
+	t_env	*env;
+
+	env = g_general.env_list;
 	(*i)++;
 	while (word[*i] && word[*i] != '"')
 	{
 		if (word[*i] == '$' && word[*i + 1] && (ft_isalnum(word[*i + 1])
 				|| word[*i + 1] == '_') && flag == 0)
 			result = case_of_normal_var(word, i, result, env);
-		else if (word[*i] == '$' && word[*i + 1] && word[*i + 1] == '?' && flag == 0)
+		else if (word[*i] == '$' && word[*i + 1]
+			&& word[*i + 1] == '?' && flag == 0)
 		{
 			(*i) += 2;
 			result = ft_strjoin(result, ft_itoa(g_general.exit_status));
@@ -51,7 +55,7 @@ char	*case_of_dquote(char *word, int *i, char *result, t_env *env, int flag)
 
 char	*case_of_normal_var(char *word, int *i, char *result, t_env *env)
 {
-	int(start), (j);
+	int (start), (j);
 	char *(key), *(value);
 	(*i)++;
 	start = (*i);

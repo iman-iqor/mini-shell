@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:17 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 19:57:44 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:44:35 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	pwd(void)
 {
 	char	*pwd;
+	char	*cwd;
 
-	char *cwd;
 	pwd = get_env_value(g_general.env_list, "PWD");
 	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)

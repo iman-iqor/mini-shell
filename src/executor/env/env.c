@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:41 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 18:37:23 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:52:11 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ t_env	*ft_create_env_node(char *env)
 
 t_env	*init_env_list(char **env)
 {
-	int	i;
+	int		i;
+	t_env	*head;
+	t_env	*node;
+	t_env	*last;
 
-	t_env(*head), (*node), (*last);
 	head = NULL;
 	last = NULL;
 	i = 0;
@@ -59,8 +61,7 @@ t_env	*init_env_list(char **env)
 		last = node;
 		i++;
 	}
-	g_general.env_list = head;
-	return (head);
+	return (g_general.env_list = head, head);
 }
 
 int	env_len(t_env *env)

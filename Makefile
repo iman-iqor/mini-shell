@@ -6,6 +6,7 @@ RM  = rm -f
 
 
 SRC = main.c\
+main2.c\
 src/executor/builtins/echo.c \
 src/executor/builtins/pwd.c \
 src/executor/builtins/cd.c\
@@ -21,6 +22,7 @@ src/executor/check_generate_env.c \
 src/executor/exec1.c \
 src/executor/exec2.c \
 src/executor/exec3.c \
+src/executor/exec4.c \
 src/executor/heredoc1.c \
 src/executor/heredoc2.c \
 src/executor/execute_command.c\

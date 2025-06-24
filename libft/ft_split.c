@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 18:54:40 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 17:22:56 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:58:02 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char	*ft_free(char **arr)
 char	**ft_split(char *s, char c)
 {
 	char		**arr;
-	char	*start;
+	char		*start;
 	int			i;
 
 	if (!s)

@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 21:29:49 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 23:20:26 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,13 @@ typedef struct s_list
 	int				error_flag;
 	struct s_list	*next;
 }					t_list;
+
+/**main */
+void				handle_input_loop(void);
+void				setup_env(char **env, t_env **my_env_list);
+int					check_args(int argc, char **argv);
+int					is_only_spaces(char *input);
+void				update_shlvl(t_env **env);
 //******************************************************************/
 
 typedef struct s_exec_data
@@ -120,16 +127,16 @@ int					list_len(t_list *list);
 void				exec_builtin(t_list *list);
 int					is_builtin(char *cmd);
 void				input_no_output_error(t_file *tmp, t_list *list);
-void				input_no_output(t_list *list, t_env *env);
+void				input_no_output(t_list *list);
 void				output_no_input_error(t_file *tmp, t_list *list);
 void				output_no_input(t_list *list);
-void				input_output(t_list *list, t_env *env);
+void				input_output(t_list *list);
 void				wait_and_update_status(pid_t pid);
 void				exec_externals(t_list *list);
-void				ft_redirect_and_execute(t_list *list, t_env *env);
+void				ft_redirect_and_execute(t_list *list);
+int					ft_exec_single_command(t_list *list);
 void				execute_builtins_and_externals(t_list *list);
-int					ft_exec_single_command(t_list *list, t_env *env);
-void				ft_exec(t_list *list, t_env *env);
+void				ft_exec(t_list *list);
 // heredoc
 typedef struct s_tmp_vars
 {
@@ -138,9 +145,9 @@ typedef struct s_tmp_vars
 	char			*path;
 	char			*gc_path;
 }					t_tmp_vars;
-int					heredoc(t_list *list, t_file *tmp, t_env *env);
-int					do_heredoc(t_file *tmp, t_env *env);
-void				heredoc_child(t_file *tmp, int fd, t_env *env);
+int					heredoc(t_list *list, t_file *tmp);
+int					do_heredoc(t_file *tmp);
+void				heredoc_child(t_file *tmp, int fd);
 void				imane_exit(int status);
 char				*get_tmp_file(void);
 void				handle_heredoc_signals(void);
@@ -155,15 +162,16 @@ char				*concatenate_path(char *dir, char *cmd);
 // piped commands
 void				set_signals_child(void);
 void				set_signals_parent(void);
-void				ft_exec_piped_commands(t_list *list, t_env *env);
+void				ft_exec_piped_commands(t_list *list);
 void				execute_piped_loop(t_list *list, t_exec_data *d);
 int					handle_fork_and_process(t_list *list, t_exec_data *d);
 int					handle_pipe_error(t_exec_data *d);
 int					heredoc_error_found(t_list *list);
-int					handle_all_heredocs(t_list *list, t_env *env);
+int					handle_all_heredocs(t_list *list);
 void				init_exec_data(t_exec_data *d, t_list *list);
 void				handle_child_process(t_list *list, t_exec_data *d);
 void				input_no_output_of_pipe(t_list *list);
+void				output_no_input_pipe(t_list *list);
 void				close_unused_fds(t_exec_data *d);
 void				handle_parent_process(t_exec_data *d, t_list *list);
 void				wait_for_all(pid_t *pid, int n);
@@ -253,7 +261,7 @@ void				add(t_gc **gc, t_gc *new);
 /*                   #PARSSING#                                              */
 // this one is for the type of quote, whether it is '' or "" or none
 
-// after tokenizing we should know what is the type of each 
+// after tokenizing we should know what is the type of each
 typedef enum s_token_type
 {
 	TOKEN_WORD,
@@ -279,9 +287,8 @@ typedef struct s_token
 // This the parser functions declarations
 
 // This the parser functions declarations
-void	output_no_input_pipe(t_list *list);
 
-t_list				*parse_cmd(char *input, t_env *env);
+t_list				*parse_cmd(char *input);
 t_token				*tokenize_input(char *input);
 char				*process_input(char *input, int *i,
 						t_quote_type *quote_type);
@@ -290,10 +297,9 @@ char				*get_operator(char *input, int *i,
 char				*get_word(char *input, int *i, t_quote_type *quote_type);
 t_token_type		get_token_type(char *value);
 char				*get_env_value(t_env *env, char *key);
-void				expand_variables(t_token *tokens, t_env *env);
+void				expand_variables(t_token *tokens);
 char				*case_of_squote(char *word, int *i, char *result);
-char				*case_of_dquote(char *word, int *i, char *result,
-						t_env *env, int flag);
+char				*case_of_dquote(char *word, int *i, char *result, int flag);
 char				*case_of_normal_var(char *word, int *i, char *result,
 						t_env *env);
 char				*case_of_var_with_next_char_squote(char *word, int *i,
@@ -310,7 +316,7 @@ char				**ft_realloc_array(char **arr, char *new_str);
 t_list				*ft_add_file(t_list *cmds, char *new_str, int flag, char c);
 void				print_error(char *msg);
 char				*process_of_expanding(char *word, int *i, char *result,
-						t_env *env, int flag);
+						int flag);
 
 // exit with gc
 void				imane_exit(int status);

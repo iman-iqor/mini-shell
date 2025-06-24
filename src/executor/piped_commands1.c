@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:54:01 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 18:40:55 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:18:45 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ void	execute_piped_loop(t_list *list, t_exec_data *d)
 	}
 }
 
-void	ft_exec_piped_commands(t_list *list, t_env *env)
+void	ft_exec_piped_commands(t_list *list)
 {
 	t_exec_data	d;
 
 	set_signals_parent();
 	init_exec_data(&d, list);
-	if (handle_all_heredocs(list, env) == -1)
+	if (handle_all_heredocs(list) == -1)
 		return ;
 	if (heredoc_error_found(list))
 	{

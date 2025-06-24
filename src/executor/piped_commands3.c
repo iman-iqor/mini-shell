@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:54:01 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 20:34:11 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:10:27 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	init_exec_data(t_exec_data *d, t_list *list)
 	d->pid = ft_gc(d->n_cmd * sizeof(pid_t), 'm');
 }
 
-int	handle_all_heredocs(t_list *list, t_env *env)
+int	handle_all_heredocs(t_list *list)
 {
 	t_list	*tmp;
 
@@ -68,7 +68,7 @@ int	handle_all_heredocs(t_list *list, t_env *env)
 	{
 		if (tmp->input_file && tmp->input_file->flag)
 		{
-			if (heredoc(tmp, tmp->input_file, env) == -1)
+			if (heredoc(tmp, tmp->input_file) == -1)
 				return (-1);
 		}
 		tmp = tmp->next;

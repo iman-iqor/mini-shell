@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 21:43:18 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:22:30 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,7 @@ void	output_no_input(t_list *list)
 		if (fd_out == -1)
 		{
 			output_no_input_error(tmp, list);
-			return;
-		}
-		dup2(fd_out, STDOUT_FILENO);
-		tmp = tmp->next;
-	}
-	close(fd_out);
-}
-void	output_no_input_pipe(t_list *list)
-{
-	int		fd_out;
-	t_file	*tmp;
-
-	fd_out = -1;
-	tmp = list->output_file;
-	while (tmp)
-	{
-		if (fd_out != -1)
-			close(fd_out);
-		if (tmp->flag)
-			fd_out = open(tmp->file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
-		else
-			fd_out = open(tmp->file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		if (fd_out == -1)
-		{
-			output_no_input_error(tmp, list);
-			exit(1);
+			return ;
 		}
 		dup2(fd_out, STDOUT_FILENO);
 		tmp = tmp->next;
@@ -63,9 +38,9 @@ void	output_no_input_pipe(t_list *list)
 	close(fd_out);
 }
 
-void	input_output(t_list *list, t_env *env)
+void	input_output(t_list *list)
 {
-	input_no_output(list, env);
+	input_no_output(list);
 	if (!list->error_flag)
 		output_no_input(list);
 }
@@ -120,14 +95,14 @@ void	exec_externals(t_list *list)
 	}
 }
 
-void	ft_redirect_and_execute(t_list *list, t_env *env)
+void	ft_redirect_and_execute(t_list *list)
 {
 	if (list->input_file && !list->output_file)
-		input_no_output(list, env);
+		input_no_output(list);
 	else if (!list->input_file && list->output_file)
 		output_no_input(list);
 	else if (list->input_file && list->output_file)
-		input_output(list, env);
+		input_output(list);
 	if (list->error_flag)
 		return ;
 	if (list->argument)

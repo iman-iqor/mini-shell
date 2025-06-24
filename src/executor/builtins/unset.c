@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:37 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 18:37:11 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:33:55 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@ void	handle_unset_error(char *arg)
 	write(2, "': not a valid identifier\n", 27);
 }
 
+void	print_unset_error(char *arg)
+{
+	if (ft_strchr(arg, '!'))
+		write(2, "minishel:event not found\n", 25);
+}
+
 void	unset(char **list)
 {
 	int	i;
@@ -83,13 +89,15 @@ void	unset(char **list)
 	{
 		if (!is_valid_unset(list[i]))
 		{
-			if (ft_strchr(list[i], '!'))
-				write(2, "minishel:event not found\n", 25);
+			print_unset_error(list[i]);
 			flag = 0;
 		}
 		else
 			unset_var(list[i]);
 		i++;
 	}
-	g_general.exit_status = (flag ? 2 : 0);
+	if (flag)
+		g_general.exit_status = 2;
+	else
+		g_general.exit_status = 0;
 }

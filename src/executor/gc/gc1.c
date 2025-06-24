@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 21:03:58 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 16:12:48 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:46:23 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_unlink(t_gc *gc)
 	{
 		next = gc->next;
 		if (gc->type == GC_TEMPFILE)
-			unlink((char *)gc->ptr); // Delete temp file
+			unlink((char *)gc->ptr);
 		gc = next;
 	}
 }
@@ -81,7 +81,7 @@ void	*ft_gc(size_t n, char flag)
 		ft_unlink(gc);
 	}
 	else if (flag == 't')
-	{ // Temp file registration
+	{
 		filename = malloc(n);
 		return (handle_t_flag(filename, &gc));
 	}

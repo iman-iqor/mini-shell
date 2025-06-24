@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 21:03:58 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/12 22:14:29 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:46:01 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	fr_ee(t_gc *gc)
 	while (gc)
 	{
 		next = gc->next;
-		
 		free(gc->ptr);
 		free(gc);
 		gc = next;

@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 17:11:48 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/06/24 21:08:51 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:53:21 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ char	*get_operator(char *input, int *i, t_quote_type *quote_type)
 
 	if (!ft_strncmp(input + *i, ">>", 2) || !ft_strncmp(input + *i, "<<", 2))
 	{
-		operator= ft_substr(input, *i, 2);
+		operator = ft_substr(input, *i, 2);
 		*i += 2;
 		if (input[*i] == '>' || input[*i] == '<')
 			return (NULL);
 	}
 	else
 	{
-		operator= ft_substr(input, *i, 1);
+		operator = ft_substr(input, *i, 1);
 		*i += 1;
 		if (input[*i] == '|' || input[0] == '|' || input[*i] == '>'
 			|| input[*i] == '<')

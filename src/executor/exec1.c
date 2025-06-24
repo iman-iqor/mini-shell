@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 20:05:14 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:17:28 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	execute_builtins_and_externals(t_list *list)
 		exec_externals(list);
 }
 
-int	ft_exec_single_command(t_list *list, t_env *env)
+int	ft_exec_single_command(t_list *list)
 {
 	int	saved_stdout;
 	int	saved_stdin;
@@ -34,7 +34,7 @@ int	ft_exec_single_command(t_list *list, t_env *env)
 		saved_stdout = dup(1);
 		saved_stdin = dup(0);
 		if (list->input_file || list->output_file)
-			ft_redirect_and_execute(list, env);
+			ft_redirect_and_execute(list);
 		else
 			execute_builtins_and_externals(list);
 		dup2(saved_stdin, STDIN_FILENO);
@@ -46,16 +46,16 @@ int	ft_exec_single_command(t_list *list, t_env *env)
 	return (0);
 }
 
-void	ft_exec(t_list *list, t_env *env)
+void	ft_exec(t_list *list)
 {
 	if (list && !list->next)
 	{
-		ft_exec_single_command(list, env);
+		ft_exec_single_command(list);
 		return ;
 	}
 	else if (list && list->next)
 	{
-		ft_exec_piped_commands(list, env);
+		ft_exec_piped_commands(list);
 		return ;
 	}
 	ft_gc(0, 'p');

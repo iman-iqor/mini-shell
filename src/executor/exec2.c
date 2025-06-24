@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 21:46:13 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:10:52 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	input_no_output_error(t_file *tmp, t_list *list)
 	list->error_flag = 1;
 }
 
-void	input_no_output(t_list *list, t_env *env)
+void	input_no_output(t_list *list)
 {
 	int		fd_in;
 	t_file	*tmp;
@@ -76,7 +76,7 @@ void	input_no_output(t_list *list, t_env *env)
 			close(fd_in);
 		if (tmp->flag)
 		{
-			if (heredoc(list, tmp, env) == -1)
+			if (heredoc(list, tmp) == -1)
 				return ;
 		}
 		fd_in = open(tmp->file_name, O_RDONLY);
@@ -94,7 +94,6 @@ void	input_no_output(t_list *list, t_env *env)
 
 void	output_no_input_error(t_file *tmp, t_list *list)
 {
-	
 	perror(tmp->file_name);
 	g_general.exit_status = 1;
 	list->error_flag = 1;

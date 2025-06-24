@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 14:34:04 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 17:16:47 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 23:03:26 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_substr(char *s, int start, int len)
 {
 	char	*str;
-	int	i;
+	int		i;
 
 	if (!s)
 		return (NULL);
@@ -23,7 +23,7 @@ char	*ft_substr(char *s, int start, int len)
 		return (ft_strdup(""));
 	if (ft_strlen(s + start) < len)
 		len = ft_strlen(s + start);
-	str = ft_gc(len + 1,'m');
+	str = ft_gc(len + 1, 'm');
 	if (!str)
 		return (NULL);
 	i = 0;
