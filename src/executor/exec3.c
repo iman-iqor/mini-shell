@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 20:37:06 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 21:43:18 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	output_no_input_pipe(t_list *list)
 		if (fd_out == -1)
 		{
 			output_no_input_error(tmp, list);
-			exit(126);
+			exit(1);
 		}
 		dup2(fd_out, STDOUT_FILENO);
 		tmp = tmp->next;
