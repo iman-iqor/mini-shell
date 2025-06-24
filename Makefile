@@ -15,6 +15,7 @@ src/executor/builtins/env.c\
 src/executor/builtins/export1.c\
 src/executor/builtins/export2.c\
 src/executor/builtins/export3.c\
+src/executor/builtins/export4.c\
 src/executor/builtins/exit1.c\
 src/executor/builtins/exit2.c\
 src/executor/check_generate_env.c \

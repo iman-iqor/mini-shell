@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/15 18:08:25 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/24 14:40:17 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ t_env				*get_envar_with_passing_env_list(t_env *env, char *key);
 int					get_key_and_value(char *str, char **key, char **value);
 t_env				*add_env_var(char *key, char *value, t_env *prev);
 void				export_logique(char **list);
+void	update_existing_var(t_env *node, char *value, int mode);
 void				print_env_var(t_env *env);
 void				sort_ascii(char **arr);
 void				print_export_sorted(char **keys, t_env *env_list);

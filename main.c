@@ -57,11 +57,14 @@ int	main(int argc, char **argv, char **env)
 	t_list	*list;
 	t_env	*my_env_list;
 	char	*input;
+	char *p;
 
 	if (argc != 1)
 		exit(printf("Error: try only 1 argument"));
 	g_general.PATH = "PATH=/app/bin:/app/bin:/app/bin:/usr/bin:/home/imiqor/.var/app/com.visualstudio.code/data/node_modules/bin";
-	g_general.PWD = "PWD=/home/imiqor/Desktop/minishell";
+	p = getcwd(NULL,0);
+	g_general.PWD = ft_strjoin("PWD=",p);
+	free(p);
 	(void)argv;
 	ft_gc(0, 's');
 	check_env(env, &my_env_list);
