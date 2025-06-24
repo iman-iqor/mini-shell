@@ -6,14 +6,11 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 21:03:58 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/12 22:14:23 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 16:12:48 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
-
 
 void	ft_unlink(t_gc *gc)
 {
@@ -23,68 +20,70 @@ void	ft_unlink(t_gc *gc)
 	while (gc)
 	{
 		next = gc->next;
-		if (gc->type == GC_TEMPFILE) 
-			unlink((char *)gc->ptr);  // Delete temp file
-		
+		if (gc->type == GC_TEMPFILE)
+			unlink((char *)gc->ptr); // Delete temp file
 		gc = next;
 	}
 }
 
-void *handle_m_flag(size_t n, t_gc **gc)
+void	*handle_m_flag(size_t n, t_gc **gc)
 {
-	void *ptr;
-	t_gc *new;
+	void	*ptr;
+	t_gc	*new;
 
 	ptr = malloc(n);
 	if (!ptr)
-		return NULL;
+		return (NULL);
 	new = create(ptr);
 	if (!new)
 	{
 		free(ptr);
-		return NULL;
+		return (NULL);
 	}
 	add(gc, new);
-	return ptr;
+	return (ptr);
 }
 
-char *handle_t_flag(char *filename, t_gc **gc)
+char	*handle_t_flag(char *filename, t_gc **gc)
 {
-	t_gc *new;
+	t_gc	*new;
 
 	if (!filename)
-		return NULL;
+		return (NULL);
 	new = create(filename);
 	if (!new)
 	{
 		free(filename);
-		return NULL;
+		return (NULL);
 	}
 	new->type = GC_TEMPFILE;
 	add(gc, new);
-	return filename;
+	return (filename);
 }
 
 void	*ft_gc(size_t n, char flag)
 {
 	static t_gc	*gc;
-	char *filename;
+	char		*filename;
 
 	g_general.gc = &gc;
 	if (flag == 'm')
 	{
-		
-		return handle_m_flag(n, &gc);
+		return (handle_m_flag(n, &gc));
 	}
-	else if (flag == 'f'){
-		fr_ee(gc);gc=NULL;}
-	else if(flag=='p')
+	else if (flag == 'f')
+	{
+		fr_ee(gc);
+		gc = NULL;
+	}
+	else if (flag == 'p')
 	{
 		ft_unlink(gc);
 	}
-	else if (flag == 't') {  // Temp file registration
+	else if (flag == 't')
+	{ // Temp file registration
 		filename = malloc(n);
-		return handle_t_flag(filename, &gc);
+		return (handle_t_flag(filename, &gc));
 	}
 	return (NULL);
 }

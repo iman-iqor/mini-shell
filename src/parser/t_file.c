@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   t_file.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/24 18:42:51 by imiqor            #+#    #+#             */
+/*   Updated: 2025/06/24 18:42:58 by imiqor           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-// func to add element to array and return the array
 t_list	*ft_add_file(t_list *cmds, char *new_str, int flag, char c)
 {
 	t_file	*new;
@@ -22,7 +33,7 @@ t_list	*ft_add_file(t_list *cmds, char *new_str, int flag, char c)
 			cmds->output_file = new;
 		return (cmds);
 	}
-	while(tmp->next)
+	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
 	return (cmds);

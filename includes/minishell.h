@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 14:40:17 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 18:33:41 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
+# include <errno.h>
 # include <fcntl.h>
+# include <limits.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
@@ -23,22 +25,20 @@
 # include <sys/wait.h>
 # include <time.h>
 # include <unistd.h>
-#include <errno.h>
-#include<limits.h>
-
-
 
 /*           #GARBAGE COLLECTER LIST#                      */
-typedef enum e_gc_type {
-    GC_MEMORY,
-    GC_TEMPFILE
-} t_gc_type;
+typedef enum e_gc_type
+{
+	GC_MEMORY,
+	GC_TEMPFILE
+}					t_gc_type;
 
-typedef struct s_gc {
-    void *ptr;
-    t_gc_type type;  // Add this field to distinguish types
-    struct s_gc *next;
-} t_gc;
+typedef struct s_gc
+{
+	void			*ptr;
+	t_gc_type		type;
+	struct s_gc		*next;
+}					t_gc;
 
 /*            #ENVIRONNEMENT#                                            */
 typedef struct s_env
@@ -52,22 +52,20 @@ typedef struct s_env
 /*B               #GENERAL DATA                                     */
 typedef struct s_general
 {
-	int exit_status; // need to create this part
+	int				exit_status;
 	int				i;
 	int				in;
 	pid_t			pid;
-	char *old_pwd;
-	char* PATH;
-	char* PWD;
-	t_env* PWD_NODE;
-	t_env* PATH_NODE;
+	char			*old_pwd;
+	char			*PWD;
+	t_env			*PWD_NODE;
 	int				out;
 	t_env			*env_list;
 	char			**env_array;
 	t_gc			*garbage;
-	t_gc *files; // i need to create this part
+	t_gc			*files;
 	int				stop;
-	t_gc ** gc;
+	t_gc			**gc;
 }					t_general;
 
 extern t_general	g_general;
@@ -94,19 +92,19 @@ typedef struct s_list
 	t_file			*output_file;
 	t_quote_type	quote_type;
 	int				fd;
-	int error_flag;
+	int				error_flag;
 	struct s_list	*next;
 }					t_list;
 //**************************************************************************************************************************************************** */
 
 typedef struct s_exec_data
 {
-	int		i;
-	int		n_cmd;
-	int		prev_fd;
-	int		pipe_fd[2];
-	pid_t	*pid;
-}	t_exec_data;
+	int				i;
+	int				n_cmd;
+	int				prev_fd;
+	int				pipe_fd[2];
+	pid_t			*pid;
+}					t_exec_data;
 /******************************************************************************************************************************************************* */
 //                          #UTILS#
 int					ft_strcmp(char *s1, char *s2);
@@ -116,83 +114,83 @@ int					ft_strlen(const char *s);
 char				*ft_strndup(char *str, int n);
 void				ft_putstr(char *text);
 void				graceful_exit(void);
-int list_len(t_list *list);
+int					list_len(t_list *list);
 /***************************************************************************************************************************************************************** */
 //                        #EXECUTION#
-void 	exec_builtin(t_list *list);
-int		is_builtin(char *cmd);
-void	input_no_output_error(t_file *tmp, t_list *list);
-void	input_no_output(t_list *list, t_env *env);
-void	output_no_input_error(t_file *tmp, t_list *list);
-void	output_no_input(t_list *list);
-void	input_output(t_list *list, t_env *env);
-void	wait_and_update_status(pid_t pid);
-void	exec_externals(t_list *list);
-void	ft_redirect_and_execute(t_list *list, t_env *env);
-void	execute_builtins_and_externals(t_list *list);
-int		ft_exec_single_command(t_list *list, t_env *env);
-void	ft_exec(t_list *list, t_env *env);
+void				exec_builtin(t_list *list);
+int					is_builtin(char *cmd);
+void				input_no_output_error(t_file *tmp, t_list *list);
+void				input_no_output(t_list *list, t_env *env);
+void				output_no_input_error(t_file *tmp, t_list *list);
+void				output_no_input(t_list *list);
+void				input_output(t_list *list, t_env *env);
+void				wait_and_update_status(pid_t pid);
+void				exec_externals(t_list *list);
+void				ft_redirect_and_execute(t_list *list, t_env *env);
+void				execute_builtins_and_externals(t_list *list);
+int					ft_exec_single_command(t_list *list, t_env *env);
+void				ft_exec(t_list *list, t_env *env);
 // heredoc
 typedef struct s_tmp_vars
 {
-	char	*num;
-	char	*name;
-	char	*path;
-	char	*gc_path;
-}			t_tmp_vars;
-int					heredoc(t_list *list,t_file *tmp, t_env *env);
+	char			*num;
+	char			*name;
+	char			*path;
+	char			*gc_path;
+}					t_tmp_vars;
+int					heredoc(t_list *list, t_file *tmp, t_env *env);
 int					do_heredoc(t_file *tmp, t_env *env);
-void heredoc_child(t_file *tmp, int fd, t_env *env);
-void	imane_exit(int status);
+void				heredoc_child(t_file *tmp, int fd, t_env *env);
+void				imane_exit(int status);
 char				*get_tmp_file(void);
 void				handle_heredoc_signals(void);
 void				sigint_handler(int sig);
 
-//execute command
-int	execute_command(t_list *list);
-char	*check_path(char **env, t_list *list);
-int	ft_execve(char *exact_path, t_list *list);
-char	**extract_path(char **env);
-char	*concatenate_path(char *dir, char *cmd);
-//piped commands
-void	set_signals_child(void);
-void	set_signals_parent(void);
-void	ft_exec_piped_commands(t_list *list, t_env *env);
-void	execute_piped_loop(t_list *list, t_exec_data *d);
-int	handle_fork_and_process(t_list *list, t_exec_data *d);
-int	handle_pipe_error(t_exec_data *d);
-int	heredoc_error_found(t_list *list);
-int	handle_all_heredocs(t_list *list, t_env *env);
-void	init_exec_data(t_exec_data *d,t_list *list);
-void	handle_child_process(t_list *list, t_exec_data *d);
-void	input_no_output_of_pipe(t_list *list);
-void	close_unused_fds(t_exec_data *d);
-void	handle_parent_process(t_exec_data *d, t_list *list);
-void	wait_for_all(pid_t *pid, int n);
+// execute command
+int					execute_command(t_list *list);
+char				*check_path(char **env, t_list *list);
+int					ft_execve(char *exact_path, t_list *list);
+char				**extract_path(char **env);
+char				*concatenate_path(char *dir, char *cmd);
+// piped commands
+void				set_signals_child(void);
+void				set_signals_parent(void);
+void				ft_exec_piped_commands(t_list *list, t_env *env);
+void				execute_piped_loop(t_list *list, t_exec_data *d);
+int					handle_fork_and_process(t_list *list, t_exec_data *d);
+int					handle_pipe_error(t_exec_data *d);
+int					heredoc_error_found(t_list *list);
+int					handle_all_heredocs(t_list *list, t_env *env);
+void				init_exec_data(t_exec_data *d, t_list *list);
+void				handle_child_process(t_list *list, t_exec_data *d);
+void				input_no_output_of_pipe(t_list *list);
+void				close_unused_fds(t_exec_data *d);
+void				handle_parent_process(t_exec_data *d, t_list *list);
+void				wait_for_all(pid_t *pid, int n);
 // signals
 void				h(int sig);
-void	set_signals_parent(void);
-void	set_signals_child(void);
-//check_generate_env
-typedef struct  s_generate_minimal_env
+void				set_signals_parent(void);
+void				set_signals_child(void);
+// check_generate_env
+typedef struct s_generate_minimal_env
 {
-	t_env	*env_list;
-	char	cwd[1024];
-	char	*shlvl;
-	char	*pwd_str;
-	t_env	*pwd_node;
-	char	*shlvl_str;
-	t_env	*shlvl_node;
-	char	*path_str;
-	t_env	*path_node;
-	char	*_;
-	t_env	*_node;
-} t_generate_minimal_env;
-void	check_env(char **env, t_env **my_env_list);
-t_env	*generate_minimal_env(void);
-int	check_if_there_is_pwd(char **env);
-int	check_if_there_is_path(char **env);
-void	add_back_env(t_env **head, t_env *new_node);
+	t_env			*env_list;
+	char			cwd[1024];
+	char			*shlvl;
+	char			*pwd_str;
+	t_env			*pwd_node;
+	char			*shlvl_str;
+	t_env			*shlvl_node;
+	char			*path_str;
+	t_env			*path_node;
+	char			*_;
+	t_env			*_node;
+}					t_generate_minimal_env;
+void				check_env(char **env, t_env **my_env_list);
+t_env				*generate_minimal_env(void);
+int					check_if_there_is_pwd(char **env);
+int					check_if_there_is_path(char **env);
+void				add_back_env(t_env **head, t_env *new_node);
 // builtins
 void				echo(char **list);
 int					is_flag(char *str);
@@ -211,7 +209,7 @@ t_env				*get_envar_with_passing_env_list(t_env *env, char *key);
 int					get_key_and_value(char *str, char **key, char **value);
 t_env				*add_env_var(char *key, char *value, t_env *prev);
 void				export_logique(char **list);
-void	update_existing_var(t_env *node, char *value, int mode);
+void				update_existing_var(t_env *node, char *value, int mode);
 void				print_env_var(t_env *env);
 void				sort_ascii(char **arr);
 void				print_export_sorted(char **keys, t_env *env_list);
@@ -222,18 +220,18 @@ int					is_valid_unset(char *str);
 void				unset_var(char *key);
 void				handle_unset_error(char *arg);
 void				unset(char **list);
-//exit
+// exit
 typedef struct s_atoa_state
 {
-	int		i;
-	long	result;
-	int		signe;
-}			t_atoa_state;
+	int				i;
+	long			result;
+	int				signe;
+}					t_atoa_state;
 int					is_numeric_argument(const char *arg);
-int	is_exit_code_overflow(const char *arg);
-void	check_int_overflow(long number, char *str);
-void	init_vars(t_atoa_state *vars);
-int	ff_atoi(char *str);
+int					is_exit_code_overflow(const char *arg);
+void				check_int_overflow(long number, char *str);
+void				init_vars(t_atoa_state *vars);
+int					ff_atoi(char *str);
 void				exit_error_numeric(char *arg);
 void				exit_error_too_many_args(void);
 void				cleanup_and_exit(int status);
@@ -309,9 +307,10 @@ t_list				*parse_tokens(t_token *tokens);
 char				**ft_realloc_array(char **arr, char *new_str);
 t_list				*ft_add_file(t_list *cmds, char *new_str, int flag, char c);
 void				print_error(char *msg);
-char				*process_of_expanding(char *word, int *i, char *result, t_env *env);
+char				*process_of_expanding(char *word, int *i, char *result,
+						t_env *env);
 
 // exit with gc
-void imane_exit(int status);
+void				imane_exit(int status);
 
 #endif

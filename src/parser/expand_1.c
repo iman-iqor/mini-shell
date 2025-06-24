@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_1.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/24 18:41:35 by imiqor            #+#    #+#             */
+/*   Updated: 2025/06/24 18:41:41 by imiqor           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 char	*case_of_squote(char *word, int *i, char *result)
@@ -39,7 +51,7 @@ char	*case_of_dquote(char *word, int *i, char *result, t_env *env)
 
 char	*case_of_normal_var(char *word, int *i, char *result, t_env *env)
 {
-	int (start), (j);
+	int(start), (j);
 	char *(key), *(value);
 	(*i)++;
 	start = (*i);

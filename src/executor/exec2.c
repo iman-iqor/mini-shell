@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/16 21:25:49 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/24 18:38:33 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,6 @@ int	is_builtin(char *cmd)
 
 void	input_no_output_error(t_file *tmp, t_list *list)
 {
-	// ft_putstr_fd(tmp->file_name, 2);
-	// if (errno == EACCES)
-	// 	ft_putstr_fd(": Permission denied", 2);
-	// else if (errno == ENOENT)
-	// 	ft_putstr_fd(": No such file or directory", 2);
-	// else
-	// 	ft_putstr_fd("Error: ", 2);
-	// ft_putstr_fd("\n", 2);
 	perror(tmp->file_name);
 	g_general.exit_status = 1;
 	list->error_flag = 1;
@@ -99,6 +91,7 @@ void	input_no_output(t_list *list, t_env *env)
 	dup2(fd_in, STDIN_FILENO);
 	close(fd_in);
 }
+
 void	output_no_input_error(t_file *tmp, t_list *list)
 {
 	perror(tmp->file_name);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:05 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/16 16:46:26 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/24 18:35:08 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,12 @@ void	exit_error_too_many_args(void)
 	write(2, "exit: too many arguments\n", 26);
 	g_general.exit_status = 1;
 }
+
 void	cleanup_and_exit(int status)
 {
 	ft_gc(0, 'f');
 	ft_gc(0, 'p');
 	close(g_general.in);
 	close(g_general.out);
-	// close(STDIN_FILENO);
-	// close(STDOUT_FILENO);
-	// close(STDERR_FILENO);
 	exit(status);
 }

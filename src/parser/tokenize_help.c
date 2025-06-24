@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenize_help.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/24 18:43:06 by imiqor            #+#    #+#             */
+/*   Updated: 2025/06/24 18:43:07 by imiqor           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 char	*process_input(char *input, int *i, t_quote_type *quote_type)
@@ -25,4 +37,3 @@ t_token_type	get_token_type(char *value)
 		return (TOKEN_REDIRECT_IN);
 	return (TOKEN_WORD);
 }
-

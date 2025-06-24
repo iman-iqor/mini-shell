@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 21:07:52 by macbookair        #+#    #+#             */
-/*   Updated: 2025/05/02 15:22:14 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 17:22:06 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ char	*ft_strdup(const char *s1);
 
 /* Additional funcitons */
 
-char	*ft_substr(char const *s, int start, int len);
+char	*ft_substr(char *s, int start, int len);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strtrim(char const *s1, char const *set);
-char	**ft_split(char const *s, char c);
+char	*ft_strtrim(char *s1, char *set);
+char	**ft_split(char *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));

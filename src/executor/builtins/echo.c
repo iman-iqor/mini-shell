@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:00 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/10 21:54:39 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 18:34:29 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	is_flag(char *str)
 
 void	echo(char **list)
 {
-	int i;
-	int flag;
+	int	i;
+	int	flag;
 
 	i = 0;
 	flag = 0;

@@ -19,8 +19,8 @@ static void	update_shlvl(t_env **env)
 			new_level = 0;
 		if (new_level > 999)
 		{
-			printf("%s%d%s", "minishell: warning: shell level(",
-				new_level, ") too high, resetting to 1\n");
+			printf("%s%d%s", "minishell: warning: shell level(", new_level,
+				") too high, resetting to 1\n");
 			new_level = 1;
 		}
 		tmp->value = ft_itoa(new_level);
@@ -57,15 +57,14 @@ int	main(int argc, char **argv, char **env)
 	t_list	*list;
 	t_env	*my_env_list;
 	char	*input;
-	char *p;
+	char	*p;
 
+	(void)argv;
 	if (argc != 1)
 		exit(printf("Error: try only 1 argument"));
-	g_general.PATH = "PATH=/app/bin:/app/bin:/app/bin:/usr/bin:/home/imiqor/.var/app/com.visualstudio.code/data/node_modules/bin";
-	p = getcwd(NULL,0);
-	g_general.PWD = ft_strjoin("PWD=",p);
+	p = getcwd(NULL, 0);
+	g_general.PWD = ft_strjoin("PWD=", p);
 	free(p);
-	(void)argv;
 	ft_gc(0, 's');
 	check_env(env, &my_env_list);
 	update_shlvl(&my_env_list);
@@ -79,9 +78,9 @@ int	main(int argc, char **argv, char **env)
 		if (input == NULL)
 		{
 			printf("exit\n");
-			break;
+			break ;
 		}
-			if (ft_strlen(input) > 0)
+		if (ft_strlen(input) > 0)
 			add_history(input);
 		if (is_only_spaces(input) == 0)
 		{
@@ -91,7 +90,6 @@ int	main(int argc, char **argv, char **env)
 		list = parse_cmd(input, my_env_list);
 		if (list != NULL)
 			ft_exec(list, my_env_list);
-		// printf("%d\n", g_general.exit_status);
 		free(input);
 	}
 	clear_history();

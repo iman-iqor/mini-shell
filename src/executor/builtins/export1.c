@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:09 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/16 16:34:39 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/24 18:35:59 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**get_env_keys(t_env *env_list)
 		keys[i] = ft_strdup(tmp->key);
 		tmp = tmp->next;
 	}
-	keys[size] = NULL; // NULL-terminated
+	keys[size] = NULL;
 	return (keys);
 }
 
@@ -72,24 +72,27 @@ void	handle_exit_status(int flag)
 	else
 		g_general.exit_status = 0;
 }
-int invalid_identifier_error(char* list)
+
+int	invalid_identifier_error(char *list)
 {
-    int flag;
-    flag =0;
-    if (ft_strchr(list, '!'))
-			{
-				write(2, "minishel:event not found\n", 25);
-				flag = 0;
-			}
-            else
-            {
-			write(2, "export: `", 9);
-			write(2, list, ft_strlen(list));
-			write (2, "': not a valid identifier\n", 27);
-			flag = 1;
-            }
-    return flag;
+	int	flag;
+
+	flag = 0;
+	if (ft_strchr(list, '!'))
+	{
+		write(2, "minishel:event not found\n", 25);
+		flag = 0;
+	}
+	else
+	{
+		write(2, "export: `", 9);
+		write(2, list, ft_strlen(list));
+		write(2, "': not a valid identifier\n", 27);
+		flag = 1;
+	}
+	return (flag);
 }
+
 void	export(char **list)
 {
 	int(i), (flag);
@@ -104,9 +107,9 @@ void	export(char **list)
 	while (list[i])
 	{
 		if (!is_valid(list[i]))
-            flag=invalid_identifier_error(list[i]);
-        else
-		    export_logique(&list[i]);
+			flag = invalid_identifier_error(list[i]);
+		else
+			export_logique(&list[i]);
 		i++;
 	}
 	handle_exit_status(flag);

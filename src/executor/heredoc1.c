@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:59 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/19 16:50:13 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 18:40:25 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	*get_tmp_file(void)
 		}
 	}
 }
+
 void	imane_exit(int status)
 {
 	ft_gc(0, 'f');
@@ -113,6 +114,6 @@ int	heredoc(t_list *list, t_file *tmp, t_env *env)
 		g_general.exit_status = 130;
 		return (-1);
 	}
-	list->fd = fd; // Store the final file descriptor in the list
+	list->fd = fd;
 	return (0);
 }

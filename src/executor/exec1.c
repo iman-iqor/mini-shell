@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/17 17:27:48 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 18:38:13 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	execute_builtins_and_externals(t_list *list)
 	else
 		exec_externals(list);
 }
+
 int	ft_exec_single_command(t_list *list, t_env *env)
 {
 	if (!list || list->next)
@@ -45,7 +46,6 @@ int	ft_exec_single_command(t_list *list, t_env *env)
 
 void	ft_exec(t_list *list, t_env *env)
 {
-	
 	if (list && !list->next)
 	{
 		ft_exec_single_command(list, env);

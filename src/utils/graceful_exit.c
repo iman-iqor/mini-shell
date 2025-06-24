@@ -1,12 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   graceful_exit.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/24 18:44:22 by imiqor            #+#    #+#             */
+/*   Updated: 2025/06/24 18:47:19 by imiqor           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 void	graceful_exit(void)
 {
-	ft_gc(0, 'f');  
-	ft_gc(0,'p'); 
-	if (g_general.in > 2)
-		close(g_general.in);
-	if (g_general.out > 2)
-		close(g_general.out);
+	ft_gc(0, 'f');
+	ft_gc(0, 'p');
 }

@@ -3,37 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:37 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/15 18:33:33 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/24 18:37:11 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int is_valid_unset(char *str)
+int	is_valid_unset(char *str)
 {
-    int i = 0;
+	int	i;
 
-    while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
-        i++;
-    if (!((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || str[i] == '_'))
-        return (0);
-    while (str[i])
-    {
-        if (!((str[i] >= 'a' && str[i] <= 'z') ||
-              (str[i] >= 'A' && str[i] <= 'Z') ||
-              (str[i] >= '0' && str[i] <= '9') ||
-              str[i] == '_'))
-            return (0);
-        i++;
-    }
-    return (1);
+	i = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
+		i++;
+	if (!((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z')
+			|| str[i] == '_'))
+		return (0);
+	while (str[i])
+	{
+		if (!((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A'
+					&& str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9')
+				|| str[i] == '_'))
+			return (0);
+		i++;
+	}
+	return (1);
 }
+
 void	unset_var(char *key)
 {
-	t_env *curr;
+	t_env	*curr;
 
 	curr = g_general.env_list;
 	while (curr)
@@ -44,20 +46,19 @@ void	unset_var(char *key)
 			{
 				curr->prev->next = curr->next;
 				if (curr->next)
-					curr->next->prev=curr->prev;
+					curr->next->prev = curr->prev;
 			}
-			else {
+			else
+			{
 				curr = curr->next;
-				curr->prev=NULL;
+				curr->prev = NULL;
 				g_general.env_list = curr;
 			}
-			
-			break;
+			break ;
 		}
 		curr = curr->next;
 	}
 }
-
 
 void	handle_unset_error(char *arg)
 {
@@ -73,7 +74,7 @@ void	unset(char **list)
 
 	if (!list || !list[0])
 	{
-		g_general.exit_status = 0;//that s how the bash treats this case 
+		g_general.exit_status = 0;
 		return ;
 	}
 	i = 0;
@@ -82,10 +83,8 @@ void	unset(char **list)
 	{
 		if (!is_valid_unset(list[i]))
 		{
-			if(ft_strchr(list[i],'!'))
-                write(2,"minishel:event not found\n",25);
-                
-			// handle_unset_error(list[i]);//this is how bash behave exit with 0 in this case and does not complain
+			if (ft_strchr(list[i], '!'))
+				write(2, "minishel:event not found\n", 25);
 			flag = 0;
 		}
 		else

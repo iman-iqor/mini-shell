@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbenjbar <mbenjbar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:52:56 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/16 16:37:04 by mbenjbar         ###   ########.fr       */
+/*   Updated: 2025/06/24 18:34:14 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_env	*get_envar(char *key)
 	}
 	return (NULL);
 }
+
 int	if_else_of_cd(char **path, t_env *home, char **p)
 {
 	if (path && path[0] && path[1])
@@ -52,12 +53,19 @@ int	if_else_of_cd(char **path, t_env *home, char **p)
 		return (cd_error(1), 1);
 	return (0);
 }
+
 void	update_pwd(void)
 {
 	char	*current_directory;
 	t_env	*pwd;
 
 	current_directory = getcwd(NULL, 0);
+	if (current_directory == NULL)
+	{
+		printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
+		g_general.exit_status = 0;
+		return ;
+	}
 	pwd = get_envar("PWD");
 	if (pwd)
 	{
@@ -79,6 +87,8 @@ void	cd(char **path)
 	if (if_else_of_cd(path, home, &p))
 		return ;
 	update_pwd();
+	if (g_general.exit_status == 0)
+		return ;
 	g_general.old_pwd = getcwd(NULL, 0);
 	new = create(g_general.old_pwd);
 	if (new == NULL)

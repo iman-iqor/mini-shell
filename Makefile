@@ -1,8 +1,7 @@
 NAME = minishell
 CC = gcc
-# CFLAGS = -Wall -Wextra -Werro -fPIC
-CFLAGS = -Wall -Wextra -Werror  -fsanitize=address -g3
-LFLAGS = -lreadline #-lhistory
+CFLAGS = -Wall -Wextra -Werror  #-fsanitize=address -g3
+LFLAGS = -lreadline
 RM  = rm -f
 
 
@@ -55,7 +54,7 @@ all: ${NAME}
 
 ${NAME}: ${SRC}
 	make -C ./libft/
-	${CC} ${CFLAGS}  ${SRC}  -I./includes .//libft/libft.a ${LFLAGS} -o ${NAME}
+	${CC} ${CFLAGS}  ${SRC}  -I./includes ${LFLAGS} ./libft/libft.a -o ${NAME}
 
 val:${NAME}
 	valgrind --leak-check=full --show-leak-kinds=all --suppressions=ll.sup ./minishell
@@ -63,7 +62,7 @@ val:${NAME}
 clean:
 	make -C ./libft/ clean
 
-fclean: clean
+fclean:
 	${RM} $(NAME)
 	make -C ./libft/ fclean
 

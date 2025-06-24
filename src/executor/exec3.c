@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/17 18:22:05 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 18:39:00 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	output_no_input(t_list *list)
 		if (fd_out == -1)
 		{
 			output_no_input_error(tmp, list);
-			exit(1) ;
+			exit(1);
 		}
 		dup2(fd_out, STDOUT_FILENO);
 		tmp = tmp->next;
@@ -86,7 +86,7 @@ void	exec_externals(t_list *list)
 	{
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGINT, SIG_DFL);
-		if(!execute_command(list))
+		if (!execute_command(list))
 			ft_gc(0, 'f');
 	}
 	else
@@ -104,7 +104,7 @@ void	ft_redirect_and_execute(t_list *list, t_env *env)
 	else if (list->input_file && list->output_file)
 		input_output(list, env);
 	if (list->error_flag)
-		return ; // Skip execution due to redirection error
+		return ;
 	if (list->argument)
 	{
 		if (is_builtin(list->argument[0]))

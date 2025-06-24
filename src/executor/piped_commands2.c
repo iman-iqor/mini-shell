@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:54:01 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/12 22:34:49 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 18:41:10 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,10 @@ void	handle_parent_process(t_exec_data *d, t_list *list)
 	}
 	else
 	{
-		// Last command - close both ends
 		close(d->pipe_fd[0]);
 		close(d->pipe_fd[1]);
 		d->prev_fd = -1;
-	};
+	}
 }
 
 void	close_unused_fds(t_exec_data *d)

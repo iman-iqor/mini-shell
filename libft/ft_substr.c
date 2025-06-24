@@ -6,13 +6,13 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 14:34:04 by imiqor            #+#    #+#             */
-/*   Updated: 2025/05/02 15:21:28 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 17:16:47 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, int start, int len)
+char	*ft_substr(char *s, int start, int len)
 {
 	char	*str;
 	int	i;

@@ -6,13 +6,12 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 19:13:27 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/05/28 17:13:58 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/24 18:42:05 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// func to add element to array and return the array
 char	**ft_realloc_array(char **arr, char *new_str)
 {
 	int		len;
@@ -34,6 +33,5 @@ char	**ft_realloc_array(char **arr, char *new_str)
 	}
 	new_arr[len] = ft_strdup(new_str);
 	new_arr[len + 1] = NULL;
-	// free(arr);
 	return (new_arr);
 }
