@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 23:05:22 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/25 21:34:34 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 21:47:39 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	handle_input_loop(void)
 	}
 }
 
-void	aghlimi(void)
+void	imiqor(void)
 {
 	printf("[H[2J[3J\033[95m██╗███╗   ███╗██╗ ██████╗  ██████╗ ██████╗ "
 		"        ██████╗ ███████╗███╗   ██╗   "
@@ -63,7 +63,7 @@ int	main(int argc, char **argv, char **env)
 {
 	t_env	*my_env_list;
 
-	aghlimi();
+	imiqor();
 	check_args(argc, argv);
 	setup_env(env, &my_env_list);
 	signal(SIGINT, h);
