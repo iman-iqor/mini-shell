@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/25 16:55:11 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 21:35:09 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,10 @@ void	exec_externals(t_list *list)
 	}
 	else if (pid == 0)
 	{
+		if (g_general.in > 2)
+			close(g_general.in);
+		if (g_general.out > 2)
+			close(g_general.out);
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGINT, SIG_DFL);
 		if (!execute_command(list))

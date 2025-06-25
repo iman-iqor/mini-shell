@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 21:03:58 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 22:46:23 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 19:03:55 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ char	*handle_t_flag(char *filename, t_gc **gc)
 	return (filename);
 }
 
+/*
+ptr: the pointer to free or unlink.
+type: if it's a temp file or regular malloc.
+next: points to the next GC node.
+*/
 void	*ft_gc(size_t n, char flag)
 {
 	static t_gc	*gc;

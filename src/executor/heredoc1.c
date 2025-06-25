@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:59 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/25 18:10:45 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 21:35:29 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ char	*get_tmp_file(void)
 void	imane_exit(int status)
 {
 	ft_gc(0, 'f');
+	close(1);
+	close(0);
+	close(2);
 	exit(status);
 }
 
@@ -106,14 +109,13 @@ int	heredoc(t_list *list, t_file *tmp)
 	fd = do_heredoc(tmp);
 	if (fd == -1)
 	{
-		g_general.exit_status=1;
+		g_general.exit_status = 1;
 		return (-1);
 	}
 	if (fd == -2)
 	{
-		g_general.exit_status=1;
+		g_general.exit_status = 1;
 		return (-1);
-	
 	}
 	if (fd == -130)
 	{

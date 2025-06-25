@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:41 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 22:52:11 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 19:01:44 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ t_env	*ft_create_env_node(char *env)
 	return (node);
 }
 
+/*
+Loops over all strings in env
+
+Uses	ft_create_env_node(void) to convert each
+
+Links them as prev / next in the list
+
+Sets g_general.env_list to the head
+*/
 t_env	*init_env_list(char **env)
 {
 	int		i;
@@ -77,6 +86,13 @@ int	env_len(t_env *env)
 	return (i);
 }
 
+/*
+Purpose:
+Combines key and value into a "key=value" string.
+
+Used in:
+When creating char **envp array for execution (execve).
+*/
 char	*ft_join_key_value(char *key, char *value)
 {
 	int		len;
@@ -92,6 +108,19 @@ char	*ft_join_key_value(char *key, char *value)
 	return (joined);
 }
 
+/*
+Calls	env_len(void) to know how much space to allocate
+
+Loops through the list
+
+If node has a value → uses ft_join_key_value()
+
+If no value → copies only the key
+
+Adds NULL terminator at the end
+
+Saves the array in g_general.env_array
+*/
 char	**env_list_to_array(t_env *env_list)
 {
 	char	**envp;

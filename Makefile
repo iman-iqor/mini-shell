@@ -60,7 +60,7 @@ ${NAME}: ${SRC}
 	${CC} ${CFLAGS}  ${SRC}  -I./includes ${LFLAGS} ./libft/libft.a -o ${NAME}
 
 val:${NAME}
-	valgrind --leak-check=full --show-leak-kinds=all --suppressions=ll.sup ./minishell
+	valgrind --leak-check=full --show-leak-kinds=all --track-fds=all --suppressions=ll.sup ./minishell
 
 clean:
 	make -C ./libft/ clean
