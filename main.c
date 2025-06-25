@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 23:05:22 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 23:18:09 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 16:09:46 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	handle_input_loop(void)
 			continue ;
 		}
 		list = parse_cmd(input);
+		(void)list;
 		if (list)
 			ft_exec(list);
 		free(input);

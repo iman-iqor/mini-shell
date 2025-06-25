@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 18:41:35 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 22:54:48 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 16:09:27 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,8 @@ char	*case_of_normal_var(char *word, int *i, char *result, t_env *env)
 	j = 0;
 	while (value[j])
 	{
-		while (value[j] && value[j] <= 32 && value[j + 1] <= 32)
-			j++;
-		if (value[j])
-		{
-			result = ft_strjoin_char(result, value[j]);
-			j++;
-		}
+		result = ft_strjoin_char(result, value[j]);
+		j++;
 	}
 	return (result);
 }
