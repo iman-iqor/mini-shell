@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 23:20:26 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 16:54:32 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_general
 	t_gc			*files;
 	int				stop;
 	t_gc			**gc;
+	int				heredoc_interupt;
 }					t_general;
 
 extern t_general	g_general;

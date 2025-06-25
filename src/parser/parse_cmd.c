@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 10:43:25 by mbenjbar          #+#    #+#             */
-/*   Updated: 2025/06/25 16:11:08 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 16:54:54 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_list	*parse_cmd(char *input)
 	t_list	*cmds;
 
 	tokens = tokenize_input(input);
-	if (!tokens || !check_cmds(tokens))
+	if (!tokens)
 	{
 		g_general.exit_status = 2;
 		print_error("minishell: syntax error\n");
@@ -46,7 +46,7 @@ t_list	*parse_cmd(char *input)
 	}
 	expand_variables(tokens);
 	cmds = parse_tokens(tokens);
-	if (!cmds)
+	if (!cmds || !check_cmds(tokens))
 	{
 		g_general.exit_status = 2;
 		print_error("minishell: syntax error\n");

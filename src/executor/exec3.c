@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 22:22:30 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 16:55:11 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void	ft_redirect_and_execute(t_list *list)
 	else if (list->input_file && list->output_file)
 		input_output(list);
 	if (list->error_flag)
+		return ;
+	if (g_general.heredoc_interupt == 1)
 		return ;
 	if (list->argument)
 	{

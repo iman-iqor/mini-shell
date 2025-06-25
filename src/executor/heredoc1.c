@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:59 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 22:07:30 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 16:55:29 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int	heredoc(t_list *list, t_file *tmp)
 {
 	int	fd;
 
+	g_general.heredoc_interupt = 0;
 	fd = -1;
 	fd = do_heredoc(tmp);
 	if (fd == -1)
@@ -111,6 +112,7 @@ int	heredoc(t_list *list, t_file *tmp)
 		return (-1);
 	if (fd == -130)
 	{
+		g_general.heredoc_interupt = 1;
 		g_general.exit_status = 130;
 		return (-1);
 	}
