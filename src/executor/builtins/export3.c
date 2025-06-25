@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:14 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 22:40:44 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 17:58:30 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ int	get_key_and_value(char *str, char **key, char **value)
 	}
 }
 
+/*
+Creates a new environment variable node with given key, value, 
+and previous node pointer.
+*/
 t_env	*add_env_var(char *key, char *value, t_env *prev)
 {
 	t_env	*env;

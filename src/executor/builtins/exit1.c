@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:05 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/12 22:08:47 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 17:09:35 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_int_overflow(long number, char *str)
 {
-	if (number > 2147483647 || number < -2147483648)
+	if (number > 9223372036854775807 || number < -9223372036854775807)
 	{
 		exit_error_numeric(str);
 	}

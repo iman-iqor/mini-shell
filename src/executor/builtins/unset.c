@@ -6,12 +6,19 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:37 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 22:33:55 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 18:04:42 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+First character must be a letter or underscore _.
+
+Following characters must be alphanumeric or _.
+
+Ignores leading whitespace.
+*/
 int	is_valid_unset(char *str)
 {
 	int	i;
@@ -33,6 +40,15 @@ int	is_valid_unset(char *str)
 	return (1);
 }
 
+/*
+Traverses the linked list.
+
+If it finds a node matching the key, it adjusts pointers to unlink it:
+
+If it's not the first node: connect prev and next.
+
+If it's the first node: update g_general.env_list
+*/
 void	unset_var(char *key)
 {
 	t_env	*curr;
@@ -73,6 +89,15 @@ void	print_unset_error(char *arg)
 		write(2, "minishel:event not found\n", 25);
 }
 
+/*
+Checks if variable names are valid.
+
+Skips invalid ones and prints an error.
+
+Deletes the node from the linked list if valid.
+
+Sets the proper g_general.exit_status.
+*/
 void	unset(char **list)
 {
 	int	i;

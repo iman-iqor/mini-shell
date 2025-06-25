@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:54:01 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 22:18:45 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 18:30:04 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ void	ft_exec_piped_commands(t_list *list)
 	set_signals_parent();
 	init_exec_data(&d, list);
 	if (handle_all_heredocs(list) == -1)
+	{
+		g_general.exit_status = 1;	
 		return ;
+	}
 	if (heredoc_error_found(list))
 	{
 		g_general.exit_status = 1;

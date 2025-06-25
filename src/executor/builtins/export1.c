@@ -6,12 +6,17 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:09 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 20:12:33 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 17:54:44 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+Collects all environment variable keys from the linked list into a
+NULL-terminated array of strings.
+Used for sorting and printing.
+*/
 char	**get_env_keys(t_env *env_list)
 {
 	int		size;
@@ -41,6 +46,11 @@ char	**get_env_keys(t_env *env_list)
 	return (keys);
 }
 
+/*
+Checks if the input string is a valid environment variable identifier for export.
+Valid keys start with a letter or _, and may contain letters, digits, _.
+ Handles += syntax.
+*/
 int	is_valid(char *str)
 {
 	int	i;
@@ -96,6 +106,13 @@ int	invalid_identifier_error(char *list)
 	return (flag);
 }
 
+/*
+If no arguments, prints current env variables sorted.
+
+Otherwise, validates each argument and calls export logic or prints errors.
+
+Sets exit status accordingly.
+*/
 void	export(char **list)
 {
 	int	i;

@@ -6,12 +6,17 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:12 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 18:36:09 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/25 17:56:46 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+Parses the key and value from the input string (key=value or key+=value).
+
+Checks if variable already exists; updates if yes, creates new otherwise.
+*/
 void	export_logique(char **list)
 {
 	t_env	*node;
