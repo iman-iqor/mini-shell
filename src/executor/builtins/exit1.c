@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:05 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/25 17:09:35 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/26 13:50:30 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_exit(char **args)
 		g_general.exit_status = 1;
 		return ;
 	}
-	if (args[0] && args)
+	if (args && args[0])
 	{
 		exit_code = ff_atoi(args[0]);
 		cleanup_and_exit(exit_code);

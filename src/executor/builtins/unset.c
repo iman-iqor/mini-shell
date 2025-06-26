@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:37 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/25 18:04:42 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/26 13:43:54 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void	handle_unset_error(char *arg)
 
 void	print_unset_error(char *arg)
 {
-	if (ft_strchr(arg, '!'))
-		write(2, "minishel:event not found\n", 25);
+	if (ft_strchr(arg, '!') && *(ft_strchr(arg, '!') + 1) != '\0')
+		write(2, "minishel: event not found\n", 26);
 }
 
 /*
@@ -101,7 +101,6 @@ Sets the proper g_general.exit_status.
 void	unset(char **list)
 {
 	int	i;
-	int	flag;
 
 	if (!list || !list[0])
 	{
@@ -109,20 +108,15 @@ void	unset(char **list)
 		return ;
 	}
 	i = 0;
-	flag = 0;
 	while (list[i])
 	{
 		if (!is_valid_unset(list[i]))
 		{
 			print_unset_error(list[i]);
-			flag = 0;
 		}
 		else
 			unset_var(list[i]);
 		i++;
 	}
-	if (flag)
-		g_general.exit_status = 2;
-	else
-		g_general.exit_status = 0;
+	g_general.exit_status = 0;
 }

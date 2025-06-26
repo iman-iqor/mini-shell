@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:54:01 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/26 11:39:09 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/26 15:52:22 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	handle_all_heredocs(t_list *list)
 				if (tmp2->flag)
 				{
 					if (heredoc(tmp, tmp2) == -1)
-						return (-1);	
+						return (-1);
 				}
 				tmp2 = tmp2->next;
 			}

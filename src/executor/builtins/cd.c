@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:52:56 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/26 12:30:02 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/26 13:28:04 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	update_pwd(void)
 void	cd(char **path)
 {
 	t_env	*home;
-	t_gc	*new;
 	char	*p;
 	char	*cwd;
 
@@ -100,10 +99,6 @@ void	cd(char **path)
 	if (g_general.exit_status == 0)
 		return ;
 	g_general.old_pwd = getcwd(NULL, 0);
-	new = create(g_general.old_pwd);
-	if (new == NULL)
-		imane_exit(1);
-	add(g_general.gc, new);
 	g_general.exit_status = 0;
 	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)

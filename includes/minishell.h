@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/26 11:33:12 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/26 15:52:39 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ void				handle_parent_process(t_exec_data *d, t_list *list);
 void				wait_for_all(pid_t *pid, int n);
 // signals
 void				h(int sig);
+void				hh(int status);
 void				hhh(int status);
 void				set_signals_parent(void);
 void				set_signals_child(void);
@@ -233,7 +234,7 @@ void				unset(char **list);
 typedef struct s_atoa_state
 {
 	int				i;
-	long			result;
+	long long		result;
 	int				signe;
 }					t_atoa_state;
 int					is_numeric_argument(const char *arg);

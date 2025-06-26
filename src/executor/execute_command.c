@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 18:40:05 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/25 15:44:33 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/26 15:03:21 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,6 @@ int	handle_directory_or_path_errors(t_list *list)
 		write(2, list->argument[0], ft_strlen(list->argument[0]));
 		write(2, ": is a directory\n", 17);
 		imane_exit(126);
-	}
-	else if (open(list->argument[0], __O_DIRECTORY) != -1)
-	{
-		write(2, list->argument[0], ft_strlen(list->argument[0]));
-		write(2, ":command not found\n", 20);
-		imane_exit(127);
 	}
 	if (!get_envar("PATH") && !ft_strchr(list->argument[0], '/'))
 	{

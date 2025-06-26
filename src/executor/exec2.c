@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:48 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 22:10:52 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/26 13:59:20 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	exec_builtin(t_list *list)
 	{
 		if (list->argument[1])
 		{
-			write(2, "Minishell:options are not supported\n", 37);
+			write(2, "env: No such file or directory\n", 32);
 			g_general.exit_status = 127;
 			return ;
 		}

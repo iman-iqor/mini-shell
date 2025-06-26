@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:54:01 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/24 18:41:10 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/26 15:42:54 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	set_signals_child(void)
 
 void	set_signals_parent(void)
 {
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, hh);
+	signal(SIGQUIT, hhh);
 }
 
 void	wait_for_all(pid_t *pid, int n)

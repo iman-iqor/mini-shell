@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:09 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/25 17:54:44 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/26 14:16:48 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	invalid_identifier_error(char *list)
 	int	flag;
 
 	flag = 0;
-	if (ft_strchr(list, '!'))
+	if (ft_strchr(list, '!') && *(ft_strchr(list, '!') + 1) != '\0')
 	{
 		write(2, "minishel:event not found\n", 25);
 		flag = 0;
