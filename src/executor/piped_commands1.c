@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:54:01 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/25 21:36:19 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/26 11:31:21 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,23 @@ void	execute_piped_loop(t_list *list, t_exec_data *d)
 	}
 }
 
+void hh(int status)
+{
+	if (status == SIGINT)
+	{
+		
+		write(1, "\n", 1);
+	}
+}
+void hhh(int status)
+{
+	if (status == SIGQUIT)
+	{
+		
+		write(1, "Quit (core dumped)\n", 20);
+	}
+}
+
 void	ft_exec_piped_commands(t_list *list)
 {
 	t_exec_data	d;
@@ -69,14 +86,14 @@ void	ft_exec_piped_commands(t_list *list)
 	init_exec_data(&d, list);
 	if (handle_all_heredocs(list) == -1)
 	{
-		g_general.exit_status = 1;
-		return ;
-	}
-	if (heredoc_error_found(list))
-	{
-		g_general.exit_status = 1;
+		if (g_general.heredoc_interupt == 1)
+			g_general.exit_status = 130;
+		else
+			g_general.exit_status = 1;
 		return ;
 	}
 	execute_piped_loop(list, &d);
+	signal(SIGINT,hh);
+	signal(SIGQUIT,hhh);
 	wait_for_all(d.pid, d.n_cmd);
 }

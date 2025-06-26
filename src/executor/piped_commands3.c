@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:54:01 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/25 21:36:02 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/26 11:39:09 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	input_no_output_of_pipe(t_list *list)
 		if (fd_in == -1)
 		{
 			perror(tmp->file_name);
-			list->error_flag = 1;
 			exit(1);
 		}
 		tmp = tmp->next;
@@ -62,29 +61,24 @@ void	init_exec_data(t_exec_data *d, t_list *list)
 int	handle_all_heredocs(t_list *list)
 {
 	t_list	*tmp;
+	t_file	*tmp2;
 
 	tmp = list;
 	while (tmp)
 	{
-		if (tmp->input_file && tmp->input_file->flag)
+		if (tmp->input_file)
 		{
-			if (heredoc(tmp, tmp->input_file) == -1)
-				return (-1);
+			tmp2 = tmp->input_file;
+			while (tmp2)
+			{
+				if (tmp2->flag)
+				{
+					if (heredoc(tmp, tmp2) == -1)
+						return (-1);	
+				}
+				tmp2 = tmp2->next;
+			}
 		}
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-int	heredoc_error_found(t_list *list)
-{
-	t_list	*tmp;
-
-	tmp = list;
-	while (tmp)
-	{
-		if (tmp->error_flag)
-			return (1);
 		tmp = tmp->next;
 	}
 	return (0);

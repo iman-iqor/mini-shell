@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 17:23:31 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/25 20:11:20 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/26 11:33:12 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,6 @@ void				ft_exec_piped_commands(t_list *list);
 void				execute_piped_loop(t_list *list, t_exec_data *d);
 int					handle_fork_and_process(t_list *list, t_exec_data *d);
 int					handle_pipe_error(t_exec_data *d);
-int					heredoc_error_found(t_list *list);
 int					handle_all_heredocs(t_list *list);
 void				init_exec_data(t_exec_data *d, t_list *list);
 void				handle_child_process(t_list *list, t_exec_data *d);
@@ -178,6 +177,7 @@ void				handle_parent_process(t_exec_data *d, t_list *list);
 void				wait_for_all(pid_t *pid, int n);
 // signals
 void				h(int sig);
+void				hhh(int status);
 void				set_signals_parent(void);
 void				set_signals_child(void);
 // check_generate_env

@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:53:59 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/25 22:38:47 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/26 11:01:52 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	do_heredoc(t_file *tmp)
 	if (WEXITSTATUS(status) == 130)
 		return (close(fd), unlink(file), -130);
 	tmp->file_name = ft_strdup(file);
-	return (fd);
+	return (close(fd), 0);
 }
 
 int	heredoc(t_list *list, t_file *tmp)
@@ -112,17 +112,12 @@ int	heredoc(t_list *list, t_file *tmp)
 		g_general.exit_status = 1;
 		return (-1);
 	}
-	if (fd == -2)
-	{
-		g_general.exit_status = 1;
-		return (-1);
-	}
 	if (fd == -130)
 	{
 		g_general.heredoc_interupt = 1;
 		g_general.exit_status = 130;
 		return (-1);
 	}
-	list->fd = fd;
+	list->fd = 0;
 	return (0);
 }
