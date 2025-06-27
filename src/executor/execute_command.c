@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 18:40:05 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/26 15:03:21 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/27 15:30:26 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,11 @@ int	execute_command(t_list *list)
 	if (!list || !list->argument || !list->argument[0])
 		imane_exit(127);
 	if (ft_strlen(list->argument[0]) == 0)
-		return (g_general.exit_status = 0, 1);
+	{
+		printf("command not found\n");
+		imane_exit(127);
+		return (1);
+	}
 	if (is_builtin(list->argument[0]))
 	{
 		exec_builtin(list);

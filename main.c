@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 23:05:22 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/25 21:50:23 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/27 15:41:05 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,3 +73,4 @@ int	main(int argc, char **argv, char **env)
 	graceful_exit();
 	return (0);
 }
+

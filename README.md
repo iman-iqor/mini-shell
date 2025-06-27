@@ -91,6 +91,7 @@ This compiles the shell and its dependencies (including libft).
     ./minishell
 
 
+
 You'll see your custom prompt appear. From here, you can start typing commands like ls, pwd, or built-ins like export VAR=value.
 
 **************************************************************************************************************************************************************************************************************************************

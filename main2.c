@@ -6,7 +6,7 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 23:05:22 by imiqor            #+#    #+#             */
-/*   Updated: 2025/06/25 22:05:41 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/27 15:41:11 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,3 +81,4 @@ void	setup_env(char **env, t_env **my_env_list)
 	g_general.env_list = *my_env_list;
 	g_general.env_array = env_list_to_array(*my_env_list);
 }
+

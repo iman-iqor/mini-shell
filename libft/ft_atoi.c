@@ -6,11 +6,12 @@
 /*   By: imiqor <imiqor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 00:39:27 by imiqor            #+#    #+#             */
-/*   Updated: 2024/11/14 18:02:27 by imiqor           ###   ########.fr       */
+/*   Updated: 2025/06/27 15:32:50 by imiqor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 
 int	ft_atoi(const char *str)
 {
